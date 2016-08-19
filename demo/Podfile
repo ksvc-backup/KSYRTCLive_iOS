@@ -1,0 +1,3 @@
+#use_frameworks!
+pod 'bugly'
+pod 'KSYRTCLive_iOS', :path => '../framework'

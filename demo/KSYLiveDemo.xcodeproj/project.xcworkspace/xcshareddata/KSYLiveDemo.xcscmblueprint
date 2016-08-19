@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5F80F88490BD9C1963793C74EA979B472EBDFFF2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB" : 0,
+    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FE88AB5D-BBA0-4C50-B99D-A37FB490654D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB" : "libksylive\/build\/",
+    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : "libksylive\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KSYLiveDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KSYLive\/KSYLiveDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libksylive.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F80F88490BD9C1963793C74EA979B472EBDFFF2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libksylivedep.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB"
+    }
+  ]
+}
