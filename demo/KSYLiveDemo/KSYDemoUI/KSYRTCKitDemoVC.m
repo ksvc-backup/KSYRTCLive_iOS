@@ -51,7 +51,6 @@
     [self.ksyMenuView.rtcBtn setHidden:NO];
     if (_kit) {
         // init with default filter
-        self.filter =self.ksyFilterView.curFilter;
         [_kit setupFilter:self.ksyFilterView.curFilter];
         [_kit startPreview:self.view];
     }
@@ -175,7 +174,6 @@
 - (void) onFilterChange:(id)sender{
     if (self.ksyFilterView.curFilter != _kit.filter){
         // use a new filter
-        self.filter = self.ksyFilterView.curFilter;
         [_kit setupFilter:self.ksyFilterView.curFilter];
     }
 }

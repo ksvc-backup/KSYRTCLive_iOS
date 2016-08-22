@@ -11,6 +11,7 @@
 		060277CD1BE995E500DD6A2D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 060277CC1BE995E500DD6A2D /* libz.dylib */; };
 		060277E01BE9FF7F00DD6A2D /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 060277DF1BE9FF7F00DD6A2D /* VideoToolbox.framework */; };
 		060AE9C51D4653010064DD65 /* KSYFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 060AE9C41D4653010064DD65 /* KSYFileSelector.m */; };
+		065E7CF51D66E60F00EC8D45 /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 065E7CF31D66E60F00EC8D45 /* KSYReachability.m */; };
 		0671DC5E1C0D5439000EE969 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0671DC5D1C0D5439000EE969 /* libbz2.dylib */; };
 		069E428A1C10357D00392B5E /* KSYLiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 069E42881C10357D00392B5E /* KSYLiveVC.m */; };
 		06B2B1A91BE8F0D900E0CC85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B2B1A81BE8F0D900E0CC85 /* main.m */; };
@@ -118,6 +119,8 @@
 		060277DF1BE9FF7F00DD6A2D /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		060AE9C31D4653010064DD65 /* KSYFileSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYFileSelector.h; sourceTree = "<group>"; };
 		060AE9C41D4653010064DD65 /* KSYFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYFileSelector.m; sourceTree = "<group>"; };
+		065E7CF31D66E60F00EC8D45 /* KSYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYReachability.m; sourceTree = "<group>"; };
+		065E7CF41D66E60F00EC8D45 /* KSYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYReachability.h; sourceTree = "<group>"; };
 		0671DC5D1C0D5439000EE969 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		067EB3EA1CD998A800CE13AE /* libksygpulive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpulive.framework; path = ../build/libksygpulive.framework; sourceTree = "<group>"; };
 		069E42881C10357D00392B5E /* KSYLiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYLiveVC.m; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 		06FBBD441D2E17E00065ED55 /* KSYUIUtils */ = {
 			isa = PBXGroup;
 			children = (
+				065E7CF41D66E60F00EC8D45 /* KSYReachability.h */,
+				065E7CF31D66E60F00EC8D45 /* KSYReachability.m */,
 				060AE9C31D4653010064DD65 /* KSYFileSelector.h */,
 				060AE9C41D4653010064DD65 /* KSYFileSelector.m */,
 				06FBBD451D2E17E00065ED55 /* KSYNameSlider.h */,
@@ -511,6 +516,7 @@
 				06FBBD591D2E17E00065ED55 /* KSYMenuView.m in Sources */,
 				06FBBD4B1D2E17E00065ED55 /* KSYAudioMixerView.m in Sources */,
 				06FBBD611D2E17E00065ED55 /* KSYReverbView.m in Sources */,
+				065E7CF51D66E60F00EC8D45 /* KSYReachability.m in Sources */,
 				06FBBD5D1D2E17E00065ED55 /* KSYPresetCfgVC.m in Sources */,
 				060AE9C51D4653010064DD65 /* KSYFileSelector.m in Sources */,
 				F20D5A2D1D5A0738000DBA0C /* KSYRtcView.m in Sources */,

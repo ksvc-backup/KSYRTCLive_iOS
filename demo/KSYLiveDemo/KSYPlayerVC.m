@@ -572,7 +572,7 @@ dispatch_sync(dispatch_get_main_queue(), block);\
               _player.bufferEmptyDuration);
         
         if(YES == switchOneInstance.on)
-            [_player reset];
+            [_player reset:NO];
         else
         {
             [_player stop];
@@ -638,7 +638,7 @@ dispatch_sync(dispatch_get_main_queue(), block);\
                  "videoTotalDataSize:%lld\n"
                  "totalDataSize:%lld\n",
                  [_player getVersion],
-                 _url,
+                 _player.contentURL,
                  serverIp,
                  _player.clientIP,
                  _player.localDNSIP,
@@ -666,7 +666,17 @@ dispatch_sync(dispatch_get_main_queue(), block);\
 }
 
 - (IBAction)onQuit:(id)sender {
-    [self onStopVideo:nil];
+    if(_player)
+    {
+        [_player stop];
+        
+        [_player removeObserver:self forKeyPath:@"currentPlaybackTime" context:nil];
+        [_player removeObserver:self forKeyPath:@"clientIP" context:nil];
+        [_player removeObserver:self forKeyPath:@"localDNSIP" context:nil];
+        
+        [_player.view removeFromSuperview];
+        _player = nil;
+    }
     //[self.navigationController popToRootViewControllerAnimated:FALSE];
     [self dismissViewControllerAnimated:FALSE completion:nil];
 }

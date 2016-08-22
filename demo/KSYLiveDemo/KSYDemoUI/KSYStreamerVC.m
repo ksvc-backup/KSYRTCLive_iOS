@@ -102,7 +102,7 @@
 //        [weakself onBgmCtrSle:sender];
 //    };
     // 滤镜相关参数改变
-    _ksyFilterView.onBtnBlock=^(id sender) {
+    _ksyFilterView.onSegCtrlBlock=^(id sender) {
         [weakself onFilterChange:sender];
     };
     // 混音相关参数改变
@@ -145,6 +145,9 @@
     };
     _rtcView.onBtnBlock= ^(id sender){
         [weakself onRtcBtnPress:sender];
+    };
+    self.onNetworkChange = ^(NSString * msg){
+        weakself.ctrlView.lblNetwork.text = msg;
     };
 }
 
@@ -491,6 +494,7 @@
 //bgmView Control
 - (void)onBgmBtnPress:(UIButton *)btn{
     if (btn == _ksyBgmView.previousBtn) {
+        _bgmPlayNext = YES;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.playBtn){
@@ -505,9 +509,11 @@
         }
     }
     else if (btn == _ksyBgmView.stopBtn){
+        _bgmPlayNext = NO;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.nextBtn){
+        _bgmPlayNext = YES;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.muteBtn){
@@ -601,9 +607,7 @@
 }
 
 #pragma mark - UI respond : gpu filters
-- (void) onFilterChange:(id)sender{
-    // see kit or block
-    self.filter = self.ksyFilterView.curFilter;
+- (void) onFilterChange:(id)sender{ // see kit or block
 }
 
 #pragma mark - UI respond : audio mixer
@@ -646,10 +650,15 @@
 
 #pragma mark - misc features
 - (void)onMiscBtns:(id)sender {
+    // 截图的三种方法:
     if (sender == _miscView.btn0){
-        [self onSnapshot:sender];
+        // 方法1: 开始预览后, 从streamer 直接将待编码的图片存为本地的文件
+        NSString* path =@"snapshot/c.jpg";
+        [_streamerBase takePhotoWithQuality:1 fileName:path];
+        NSLog(@"Snapshot save to %@", path);
     }
     else if (sender == _miscView.btn1){
+        // 方法2: 开始预览后, 从streamer获取UIImage对象
         __weak KSYStreamerVC *weakself = self;
         [_streamerBase getSnapshotWithCompletion:^(UIImage * img){
             [weakself saveImage: img
@@ -657,9 +666,12 @@
         }];
     }
     else if (sender == _miscView.btn2) {
-        [_filter useNextFrameForImageCapture];
-        [self saveImage: _filter.imageFromCurrentFramebuffer
-                     to: @"snap2.png" ];
+        // 方法3: 如果有美颜滤镜, 可以从滤镜上获取截图(UIImage)
+        if (self.ksyFilterView.curFilter){
+            [self.ksyFilterView.curFilter useNextFrameForImageCapture];
+            [self saveImage: self.ksyFilterView.curFilter.imageFromCurrentFramebuffer
+                         to: @"snap2.png" ];
+        }
     }
 }
 #pragma mark - rtc
@@ -737,12 +749,6 @@
 - (void)onRtcAdjustWindow{ // see kit & block
 }
 
-- (void)onSnapshot:(id)sender {
-    NSString* path =@"snapshot/c.jpg";
-    [_streamerBase takePhotoWithQuality:1 fileName:path];
-    NSLog(@"Snapshot save to %@", path);
-}
-
 - (void)saveImage: (UIImage *)image
                to: (NSString*)path {
     NSString * dir = [NSHomeDirectory() stringByAppendingString:@"/Documents/"];
@@ -761,6 +767,7 @@
         }else{
             _streamerBase.bWithVideo = YES;
         }
+        // 如果修改bWithVideo属性失败, 开关状态恢复真实结果
         sw.on = !_streamerBase.bWithVideo;
     }
 }

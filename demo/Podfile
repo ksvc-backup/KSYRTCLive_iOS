@@ -1,3 +1,4 @@
 #use_frameworks!
-pod 'bugly'
-pod 'KSYRTCLive_iOS', :path => '../framework'
+pod 'KSYGPULive_iOS', :git => 'https://github.com/ksvc/KSYLive_iOS.git',:tag=>'v1.6.2'
+pod 'GPUImage'
+pod 'Bugly'

@@ -49,12 +49,9 @@
 - (void) initMicmOutput {
     if([KSYMicMonitor isHeadsetPluggedIn]){
         _micmVol.slider.enabled = YES;
-        [_micmMix setEnabled:YES];
     }
     else{
         _micmVol.slider.enabled = NO;
-        [_micmMix setEnabled:NO];
     }
 }
-
 @end
