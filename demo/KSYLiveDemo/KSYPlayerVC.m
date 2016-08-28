@@ -572,7 +572,9 @@ dispatch_sync(dispatch_get_main_queue(), block);\
               _player.bufferEmptyDuration);
         
         if(YES == switchOneInstance.on)
-            [_player reset:NO];
+        {
+            //[_player reset];
+        }
         else
         {
             [_player stop];
@@ -638,7 +640,7 @@ dispatch_sync(dispatch_get_main_queue(), block);\
                  "videoTotalDataSize:%lld\n"
                  "totalDataSize:%lld\n",
                  [_player getVersion],
-                 _player.contentURL,
+                 _url,
                  serverIp,
                  _player.clientIP,
                  _player.localDNSIP,

@@ -22,7 +22,6 @@
     _btn0  = [self addButton:@"str截图为文件"];
     _btn1  = [self addButton:@"str截图为UIImage"];
     _btn2  = [self addButton:@"filter截图"];
-    _btn3  = [self addButton:@"rtc"];
     _micmVol = [self addSliderName:@"耳返音量" From:0.0 To:1.0 Init:1.0];
     _micmMix = [self addSwitch:NO]; // default to NO
     _audioLabel = [self addLable:@"纯音频推流"];
@@ -49,9 +48,12 @@
 - (void) initMicmOutput {
     if([KSYMicMonitor isHeadsetPluggedIn]){
         _micmVol.slider.enabled = YES;
+        [_micmMix setEnabled:YES];
     }
     else{
         _micmVol.slider.enabled = NO;
+        [_micmMix setEnabled:NO];
     }
 }
+
 @end

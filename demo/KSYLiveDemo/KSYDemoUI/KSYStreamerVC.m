@@ -55,7 +55,6 @@
     _notGoodCnt = 0;
     _raiseCnt   = 0;
     _dropCnt    = 0;
-    
 }
 
 #pragma mark - UIViewController
@@ -83,9 +82,6 @@
     _audioMixerView = [[KSYAudioMixerView alloc]initWithParent:_ksyMenuView];
     _reverbView     = [[KSYReverbView alloc]initWithParent:_ksyMenuView];
     _miscView       = [[KSYMiscView alloc]initWithParent:_ksyMenuView];
-    _rtcView        = [[KSYRtcView alloc]initWithParent:_ksyMenuView];
-    _rtcSlaveView   = [[KSYRtcSlaveView alloc]initWithParent:_rtcView];
-    _rtcMasterView = [[KSYRtcMasterView alloc]initWithParent:_rtcView];
     
     __weak KSYStreamerVC *weakself = self;
     _ksyMenuView.onBtnBlock=^(id sender){
@@ -102,7 +98,7 @@
 //        [weakself onBgmCtrSle:sender];
 //    };
     // 滤镜相关参数改变
-    _ksyFilterView.onSegCtrlBlock=^(id sender) {
+    _ksyFilterView.onBtnBlock=^(id sender) {
         [weakself onFilterChange:sender];
     };
     // 混音相关参数改变
@@ -136,18 +132,6 @@
     };
     _miscView.onSliderBlock = ^(id sender) {
         [weakself onMiscSlider: sender];
-    };
-    _rtcMasterView.onBtnBlock = ^(id sender){
-        [weakself onRtcMasterBtn:sender];
-    };
-    _rtcSlaveView.onBtnBlock = ^(id sender){
-        [weakself onRtcSlaveBtn:sender];
-    };
-    _rtcView.onBtnBlock= ^(id sender){
-        [weakself onRtcBtnPress:sender];
-    };
-    self.onNetworkChange = ^(NSString * msg){
-        weakself.ctrlView.lblNetwork.text = msg;
     };
 }
 
@@ -441,10 +425,6 @@
     else if (btn == _ksyMenuView.reverbBtn ){
         view = _reverbView;
     }
-    else if (btn == _ksyMenuView.rtcBtn){
-        view = _rtcView;
-    }
-    
     // 将菜单的按钮隐藏, 将触发二级菜单的view显示
     if (view){
         [_ksyMenuView hideAllBtn:YES];
@@ -453,7 +433,6 @@
         [view     layoutUI];
     }
 }
-
 
 - (void)swipeController:(UISwipeGestureRecognizer *)swipGestRec{
     if (swipGestRec == _swipeGest){
@@ -466,35 +445,10 @@
         }];
     }
 }
-- (void)onRtcBtnPress:(UIButton *)btn{
-    KSYUIView * view = nil;
-    if (btn == _rtcView.masterBtn)
-    {
-        view =_rtcMasterView;
-        if(_rtcSlaveView)
-            _rtcSlaveView.hidden = YES;
-        [self onMasterChoosed:YES];
-    }
-    else if (btn == _rtcView.slaveBtn)
-    {
-        view = _rtcSlaveView;
-        if(_rtcMasterView)
-            _rtcMasterView.hidden = YES;
-        [self onMasterChoosed:NO];
-    }
-    
-    if (view){
-        [_ksyMenuView hideAllBtn:YES];
-        view.hidden = NO;
-        view.frame = _ksyMenuView.frame;
-        [view     layoutUI];
-    }
-}
 #pragma mark - subviews: bgmview
 //bgmView Control
 - (void)onBgmBtnPress:(UIButton *)btn{
     if (btn == _ksyBgmView.previousBtn) {
-        _bgmPlayNext = YES;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.playBtn){
@@ -509,11 +463,9 @@
         }
     }
     else if (btn == _ksyBgmView.stopBtn){
-        _bgmPlayNext = NO;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.nextBtn){
-        _bgmPlayNext = YES;
         [self onBgmStop];
     }
     else if (btn == _ksyBgmView.muteBtn){
@@ -607,7 +559,9 @@
 }
 
 #pragma mark - UI respond : gpu filters
-- (void) onFilterChange:(id)sender{ // see kit or block
+- (void) onFilterChange:(id)sender{
+    // see kit or block
+    self.filter = self.ksyFilterView.curFilter;
 }
 
 #pragma mark - UI respond : audio mixer
@@ -650,15 +604,10 @@
 
 #pragma mark - misc features
 - (void)onMiscBtns:(id)sender {
-    // 截图的三种方法:
     if (sender == _miscView.btn0){
-        // 方法1: 开始预览后, 从streamer 直接将待编码的图片存为本地的文件
-        NSString* path =@"snapshot/c.jpg";
-        [_streamerBase takePhotoWithQuality:1 fileName:path];
-        NSLog(@"Snapshot save to %@", path);
+        [self onSnapshot:sender];
     }
     else if (sender == _miscView.btn1){
-        // 方法2: 开始预览后, 从streamer获取UIImage对象
         __weak KSYStreamerVC *weakself = self;
         [_streamerBase getSnapshotWithCompletion:^(UIImage * img){
             [weakself saveImage: img
@@ -666,87 +615,16 @@
         }];
     }
     else if (sender == _miscView.btn2) {
-        // 方法3: 如果有美颜滤镜, 可以从滤镜上获取截图(UIImage)
-        if (self.ksyFilterView.curFilter){
-            [self.ksyFilterView.curFilter useNextFrameForImageCapture];
-            [self saveImage: self.ksyFilterView.curFilter.imageFromCurrentFramebuffer
-                         to: @"snap2.png" ];
-        }
-    }
-}
-#pragma mark - rtc
-- (void)onRtcMasterBtn:(id)sender{
-    if (sender == _rtcMasterView.registerBtn) {
-        NSString * localId = _rtcMasterView.localid.text;
-        [self onRtcRegister:localId];
-    }
-    else if (sender == _rtcMasterView.startCallBtn){
-        NSString * remoteId = _rtcMasterView.remoteid.text;
-        [self onRtcStartCall:remoteId];
-    }
-    else if (sender == _rtcMasterView.answerCallBtn){
-        [self onRtcAnswerCall];
-    }
-    else if (sender == _rtcMasterView.unregisterBtn){
-        [self onRtcUnregister];
-    }
-    else if (sender == _rtcMasterView.stopCallBtn){
-        [self onRtcStopCall];
-    }
-    else if(sender == _rtcMasterView.rejectCallBtn){
-        [self onRtcRejectCall];
-    }
-    else if (sender == _rtcMasterView.uninitBtn){
-        [self onRtcunInitCall];
-    }
-    else if (sender == _rtcMasterView.adjustWindowBtn){
-        [self onRtcAdjustWindow];
+        [_filter useNextFrameForImageCapture];
+        [self saveImage: _filter.imageFromCurrentFramebuffer
+                     to: @"snap2.png" ];
     }
 }
 
-- (void)onRtcSlaveBtn:(id)sender{
-    if (sender == _rtcSlaveView.registerBtn) {
-        NSString * localId = _rtcSlaveView.localid.text;
-        [self onRtcRegister:localId];
-    }
-    else if (sender == _rtcSlaveView.startCallBtn){
-        NSString * remoteId = _rtcSlaveView.remoteid.text;
-        [self onRtcStartCall:remoteId];
-    }
-    else if (sender == _rtcSlaveView.answerCallBtn){
-        [self onRtcAnswerCall];
-    }
-    else if (sender == _rtcSlaveView.unregisterBtn){
-        [self onRtcUnregister];
-    }
-    else if (sender == _rtcSlaveView.stopCallBtn){
-        [self onRtcStopCall];
-    }
-    else if(sender == _rtcSlaveView.rejectCallBtn){
-        [self onRtcRejectCall];
-    }
-    else if (sender == _rtcSlaveView.uninitBtn){
-        [self onRtcunInitCall];
-    }
-}
-
--(void)onMasterChoosed:(BOOL)isMaster{// see kit & block
-}
-- (void)onRtcRegister:(NSString *)localid{// see kit & block
-}
-- (void)onRtcStartCall:(NSString *)remoteid{ // see kit & block
-}
-- (void)onRtcAnswerCall{ // see kit & block
-}
-- (void)onRtcUnregister{ // see kit & block
-}
-- (void)onRtcStopCall{ // see kit & block
-}
-- (void)onRtcunInitCall{ // see kit & block
-}
-- (void)onRtcRejectCall{ // see kit & block
-}
-- (void)onRtcAdjustWindow{ // see kit & block
+- (void)onSnapshot:(id)sender {
+    NSString* path =@"snapshot/c.jpg";
+    [_streamerBase takePhotoWithQuality:1 fileName:path];
+    NSLog(@"Snapshot save to %@", path);
 }
 
 - (void)saveImage: (UIImage *)image
@@ -767,26 +645,9 @@
         }else{
             _streamerBase.bWithVideo = YES;
         }
-        // 如果修改bWithVideo属性失败, 开关状态恢复真实结果
         sw.on = !_streamerBase.bWithVideo;
     }
 }
-
-// 调节耳返音量
--(void) onMiscSlider:(KSYNameSlider *)slider
-{
-    if (slider == _miscView.micmVol){
-        [self.micMonitor setVolume:_miscView.micmVol.normalValue];
-    }
-}
-- (void)keyboardWillShow:(NSNotification *)not{
-    [_ksyMenuView hideAllBtn:YES];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [_rtcMasterView.localid resignFirstResponder];
-    [_rtcMasterView.remoteid resignFirstResponder];
-    [_rtcSlaveView.localid resignFirstResponder];
-    [_rtcSlaveView.remoteid resignFirstResponder];
+- (void)onMiscSlider:(KSYNameSlider *)slider {  // see kit & block
 }
 @end

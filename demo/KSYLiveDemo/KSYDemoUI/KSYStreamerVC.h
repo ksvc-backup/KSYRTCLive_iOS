@@ -19,10 +19,6 @@
 #import "KSYAudioMixerView.h"
 #import "KSYReverbView.h"
 #import "KSYMiscView.h"
-#import "KSYRtcView.h"
-#import "KSYRtcMasterView.h"
-#import "KSYRtcSlaveView.h"
-
 #if USING_DYNAMIC_FRAMEWORK
 #import <libksygpulivedylib/libksygpulivedylib.h>
 #import <libksygpulivedylib/libksygpuimage.h>
@@ -55,12 +51,11 @@ typedef struct _StreamState {
 @property (nonatomic, readonly) KSYAudioMixerView * audioMixerView;
 @property (nonatomic, readonly) KSYReverbView *reverbView;
 @property (nonatomic, readonly) KSYMiscView   *miscView;
-@property (nonatomic, readonly) KSYRtcView    *rtcView;
-@property (nonatomic, readonly) KSYRtcSlaveView   *rtcSlaveView;
-@property (nonatomic, readonly) KSYRtcMasterView   *rtcMasterView;
+
 // submodules
 @property (nonatomic, retain) KSYStreamerBase*   streamerBase;
 @property (nonatomic, retain) KSYGPUCamera*      capDev;
+@property (nonatomic, retain) GPUImageFilter*    filter;
 @property (nonatomic, retain) KSYBgmPlayer*      bgmPlayer;
 @property (nonatomic, retain) KSYAudioReverb*    reverb;
 @property (nonatomic, retain) KSYMicMonitor*     micMonitor;

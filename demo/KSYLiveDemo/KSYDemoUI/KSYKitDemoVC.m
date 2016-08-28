@@ -48,6 +48,7 @@
                            forState: UIControlStateNormal];
     if (_kit) {
         // init with default filter
+        self.filter =self.ksyFilterView.curFilter;
         [_kit setupFilter:self.ksyFilterView.curFilter];
         [_kit startPreview:self.view];
     }
@@ -164,6 +165,7 @@
 - (void) onFilterChange:(id)sender{
     if (self.ksyFilterView.curFilter != _kit.filter){
         // use a new filter
+        self.filter = self.ksyFilterView.curFilter;
         [_kit setupFilter:self.ksyFilterView.curFilter];
     }
 }
@@ -233,12 +235,10 @@
 // 是否开启耳返
 - (void)onMiscSwitch:(UISwitch *)sw{
     if (sw == self.miscView.micmMix){
+        if ( [KSYMicMonitor isHeadsetPluggedIn] == NO ){
+            return;
+        }
         if (sw.isOn){
-            if ( [KSYMicMonitor isHeadsetPluggedIn] == NO ){
-                [self toast:@"没有耳机, 开启耳返会有刺耳的声音"];
-                sw.on = NO;
-                return;
-            }
             [_kit.micMonitor start];
         }
         else{

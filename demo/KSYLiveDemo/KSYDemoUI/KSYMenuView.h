@@ -24,8 +24,6 @@
 @property UIButton *reverbBtn;
 //返回
 @property UIButton *backBtn;
-//连麦
-@property UIButton *rtcBtn;
 
 - (void)hideAllBtn: (BOOL) bHide;
 

@@ -67,6 +67,7 @@
     [self.ctrlView.btnQuit setTitle: @"退出block"
                            forState: UIControlStateNormal];
     if (self.capDev) {
+        self.filter = self.ksyFilterView.curFilter;
         [self setupVideoPath];
         [self.capDev startCameraCapture];
     }
@@ -163,10 +164,10 @@
         [src addTarget:_cropfilter];
         src = _cropfilter;
     }
-    if (self.ksyFilterView.curFilter){
-        [self.ksyFilterView.curFilter removeAllTargets];
-        [src addTarget:self.ksyFilterView.curFilter];
-        src = self.ksyFilterView.curFilter;
+    if (self.filter){
+        [self.filter removeAllTargets];
+        [src addTarget:self.filter];
+        src = self.filter;
     }
     if (self.pipFilter){
         [self.pipFilter removeAllTargets]; // 1st (top) layer: camera input
@@ -279,7 +280,10 @@
     [super onQuit];
 }
 - (void) onFilterChange:(id)sender{
-    [self setupVideoPath];
+    if (self.ksyFilterView.curFilter != self.filter) {
+        self.filter = self.ksyFilterView.curFilter;
+        [self setupVideoPath];
+    }
 }
 
 // volume change
@@ -385,14 +389,12 @@
 
 #pragma mark - micMonitor
 // 是否开启耳返
-- (void)onMiscSwitch:(UISwitch *)sw {
-    if (sw == self.miscView.micmMix) {
+- (void)onMiscSwitch:(UISwitch *)sw{
+    if (sw == self.miscView.micmMix){
+        if ( [KSYMicMonitor isHeadsetPluggedIn] == NO ){
+            return;
+        }
         if (sw.isOn){
-            if ( [KSYMicMonitor isHeadsetPluggedIn] == NO ){
-                [self toast:@"没有耳机, 开启耳返会有刺耳的声音"];
-                sw.on = NO;
-                return;
-            }
             if (self.micMonitor == nil){
                 self.micMonitor = [[KSYMicMonitor alloc] init];
             }

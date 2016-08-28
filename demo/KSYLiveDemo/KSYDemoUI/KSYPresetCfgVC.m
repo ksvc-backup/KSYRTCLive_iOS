@@ -11,7 +11,6 @@
 #import "KSYPresetCfgView.h"
 #import "KSYBlockDemoVC.h"
 #import "KSYKitDemoVC.h"
-#import "KSYRTCKitDemoVC.h"
 
 
 #ifdef KSYSTREAMER_DEMO
@@ -103,9 +102,6 @@
                                  completion:nil];
         return;
 #endif
-    }
-    else if( sender == _cfgView.btn3){
-        vc = [[KSYRTCKitDemoVC alloc] initWithCfg:_cfgView];
     }
     if (vc){
         [self presentViewController:vc animated:true completion:nil];

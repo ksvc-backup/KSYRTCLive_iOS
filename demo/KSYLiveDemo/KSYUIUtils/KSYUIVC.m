@@ -8,11 +8,9 @@
 
 #import "KSYUIVC.h"
 #import <mach/mach.h>
-#import "KSYReachability.h"
 
 @interface KSYUIVC() {
-    KSYReachability *_reach;
-    NetworkStatus   _preStatue;
+    
 }
 
 @end
@@ -23,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addObservers];
-    _networkStatus = @" ";
 }
 
 - (void) addObservers {
@@ -33,37 +30,8 @@
                                              selector:@selector(onTimer:)
                                              userInfo:nil
                                               repeats:YES];
-    NSNotificationCenter * dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self
-           selector:@selector(netWorkChange)
-               name:kReachabilityChangedNotification
-             object:nil];
-    _reach = [KSYReachability reachabilityWithHostName:@"http://www.kingsoft.com"];
-    [_reach startNotifier];
 }
-- (void)netWorkChange{
-    NetworkStatus currentStatus = [_reach currentReachabilityStatus];
-    if (currentStatus == _preStatue) {
-        return;
-    }
-    _preStatue = currentStatus;
-    switch (currentStatus) {
-        case NotReachable:
-            _networkStatus = @"无网络";
-            break;
-        case ReachableViaWWAN:
-            _networkStatus = @"移动网络";
-            break;
-        case ReachableViaWiFi:
-            _networkStatus = @"WIFI";
-            break;
-        default:
-            return;
-    }
-    if( _onNetworkChange ){
-        _onNetworkChange(_networkStatus);
-    }
-}
+
 - (void) rmObservers {
     if (_timer) {
         [_timer invalidate];
@@ -83,8 +51,6 @@
     if (_timer) {
         [self rmObservers];
     }
-    _reach = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) layoutUI {

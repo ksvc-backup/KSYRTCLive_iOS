@@ -19,7 +19,7 @@
         _miscBtn   = [self addButton:@"其他"];
         _mixBtn    = [self addButton:@"混音"];
         _reverbBtn = [self addButton:@"混响"];
-        _rtcBtn    = [self addButton:@"连麦"];
+        
         _backBtn   = [self addButton:@"返回菜单"
                               action:@selector(onBack:)];
     }
@@ -30,9 +30,7 @@
     
     [self putRow: @[_bgmBtn, _pipBtn, _mixBtn,_backBtn] ];
     [self putRow: @[_filterBtn, _reverbBtn, _miscBtn, [NSNull null] ] ];
-    [self putRow: @[_rtcBtn, [NSNull null], [NSNull null], [NSNull null] ] ];
     [self hideAllBtn:NO];
-    // _rtcBtn.hidden = YES;
 }
 - (void)hideAllBtn: (BOOL) bHide {
     _backBtn.hidden   = !bHide; // 返回
@@ -43,7 +41,6 @@
     _miscBtn.hidden   = bHide;
     _mixBtn.hidden    = bHide;
     _reverbBtn.hidden = bHide;
-    _rtcBtn.hidden    = bHide;
 }
 - (IBAction)onBack:(id)sender {
     for (UIView * v in self.subviews){

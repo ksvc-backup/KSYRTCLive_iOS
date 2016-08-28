@@ -25,8 +25,7 @@
     _configLable =[self addLable:@"settings"];
     _configLable.textAlignment = NSTextAlignmentCenter;
     // hostURL = rtmpSrv + streamName(随机数,避免多个demo推向同一个流
-//    NSString *rtmpSrv = @"rtmp://test.uplive.ksyun.com/live";
-    NSString *rtmpSrv = @"rtmp://test.uplive.ks-cdn.com/live";
+    NSString *rtmpSrv = @"rtmp://test.uplive.ksyun.com/live";
     NSString *devCode = [ [KSYUIView getUuid] substringToIndex:3];
     NSString *url     = [  NSString stringWithFormat:@"%@/%@", rtmpSrv, devCode];
     _hostUrlUI = [self addTextField:url ];
@@ -38,7 +37,6 @@
 #else
     _btn2 =  [self addButton:@"返回"  ];
 #endif
-    _btn3 =  [self addButton:@"rtcKitDemo"];
     
     CGRect screenRect = [[UIScreen mainScreen]bounds];
     CGFloat ratio = screenRect.size.width / screenRect.size.height;
@@ -61,7 +59,6 @@
     _frameRateUI  = [self addSliderName:@"视频帧率fps" From:1.0 To:30.0 Init:15.0];
     _lblVideoCodecUI = [self addLable:@"视频编码器"];
     _videoCodecUI = [self addSegCtrlWithItems:@[@"自动",@"软264",@"硬264",@"软265"]];
-    _videoCodecUI.selectedSegmentIndex = 1;
     _lblAudioCodecUI = [self addLable:@"音频编码器"];
     _audioCodecUI = [self addSegCtrlWithItems:@[@"AAC-HE",@"AAC-LC"]];
     _videoKbpsUI  = [self addSliderName:@"视频码率kbps" From:100.0 To:1500.0 Init:800.0];
@@ -97,8 +94,7 @@
     //剩余空间全部用来放按钮
     CGFloat yPos = self.yPos > self.height ? self.yPos - self.height : self.yPos;
     self.btnH = (self.height - yPos - self.gap*2);
-    [self putRow:@[_btn0,_btn1,_btn3]];
-    [self putRow1:_btn2];
+    [self putRow3:_btn0 and:_btn1 and:_btn2];
     //[self putRow2:_btn3 and:_btn4];
 }
 
