@@ -14,17 +14,16 @@
 #import "KSYStreamerVC.h"
 #import "KSYMenuView.h"
 #import "KSYFilterView.h"
-#import "KSYBgmView.h"
-#import "KSYPipView.h"
-#import "KSYAudioMixerView.h"
-#import "KSYReverbView.h"
-#import "KSYMiscView.h"
+#import "KSYRtcView.h"
+#import "KSYRtcMasterView.h"
+#import "KSYRtcSlaveView.h"
+
 #if USING_DYNAMIC_FRAMEWORK
 #import <libksygpulivedylib/libksygpulivedylib.h>
 #import <libksygpulivedylib/libksygpuimage.h>
 #else
 #import <libksygpulive/libksygpulive.h>
-#import <libksygpulive/libksygpuimage.h>
+#import "libksygpulive/KSYMoviePlayerController.h"
 #endif
 
 typedef struct _StreamState {
@@ -46,31 +45,14 @@ typedef struct _StreamState {
 @property (nonatomic, readonly) KSYCtrlView   * ctrlView;
 @property (nonatomic, readonly) KSYMenuView   * ksyMenuView;
 @property (nonatomic, readonly) KSYFilterView * ksyFilterView;
-@property (nonatomic, readonly) KSYBgmView    * ksyBgmView;
-@property (nonatomic, readonly) KSYPipView    * ksyPipView;
-@property (nonatomic, readonly) KSYAudioMixerView * audioMixerView;
-@property (nonatomic, readonly) KSYReverbView *reverbView;
-@property (nonatomic, readonly) KSYMiscView   *miscView;
-
+@property (nonatomic, readonly) KSYRtcView    *rtcView;
+@property (nonatomic, readonly) KSYRtcSlaveView   *rtcSlaveView;
+@property (nonatomic, readonly) KSYRtcMasterView   *rtcMasterView;
 // submodules
 @property (nonatomic, retain) KSYStreamerBase*   streamerBase;
 @property (nonatomic, retain) KSYGPUCamera*      capDev;
-@property (nonatomic, retain) GPUImageFilter*    filter;
-@property (nonatomic, retain) KSYBgmPlayer*      bgmPlayer;
-@property (nonatomic, retain) KSYAudioReverb*    reverb;
-@property (nonatomic, retain) KSYMicMonitor*     micMonitor;
-
-// 画中画
-@property (nonatomic, retain) KSYGPUYUVInput           *yuvInput;
-@property (nonatomic, retain) KSYGPUPipBlendFilter     *pipFilter;
-@property(nonatomic, retain)  GPUImagePicture          *bgPic;
-
-
-
 @property (nonatomic, retain) KSYAudioMixer*     aMixer;
 @property (nonatomic, assign) int     micTrack;
-@property (nonatomic, assign) int     bgmTrack;
-@property (nonatomic, assign) int     pipTrack;
 
 // presetCfgs
 @property (nonatomic, retain) KSYPresetCfgView * presetCfgView;
@@ -93,7 +75,6 @@ typedef struct _StreamState {
 - (void) onCaptureStateChange:(NSNotification *)notification;
 - (void) onNetStateEvent     :(NSNotification *)notification;
 - (void) onStreamStateChange :(NSNotification *)notification;
-- (void) onBgmPlayerStateChange:(NSNotification*)notify;
 
 #pragma mark - UI respond
 - (void) onFlash;
@@ -103,13 +84,4 @@ typedef struct _StreamState {
 - (void) onStream;
 // gpu filter
 - (void) onFilterChange:(id)sender;
-// audio mixer
-- (void)onAMixerSwitch:(UISwitch *)sw;
-- (void)onAMixerSlider:(KSYNameSlider *)slider;
-// 选择混响类型
-- (void)onReverbType:(UISegmentedControl *)seg;
-//pip
-- (void)onPipStop;
-//pure audio stream
-- (void)onMiscSwitch:(UISwitch *)sw;
 @end

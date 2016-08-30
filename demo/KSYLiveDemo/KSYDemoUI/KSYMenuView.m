@@ -13,34 +13,24 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _bgmBtn   = [self addButton:@"背景音乐"];
-        _pipBtn    = [self addButton:@"画中画"];
         _filterBtn = [self addButton:@"美颜"];
-        _miscBtn   = [self addButton:@"其他"];
-        _mixBtn    = [self addButton:@"混音"];
-        _reverbBtn = [self addButton:@"混响"];
-        
+        _rtcBtn    = [self addButton:@"连麦"];
         _backBtn   = [self addButton:@"返回菜单"
                               action:@selector(onBack:)];
+        _backBtn.hidden = YES;
     }
+    
     return self;
 }
 - (void)layoutUI{
     [super layoutUI];
-    
-    [self putRow: @[_bgmBtn, _pipBtn, _mixBtn,_backBtn] ];
-    [self putRow: @[_filterBtn, _reverbBtn, _miscBtn, [NSNull null] ] ];
+    [self putRow: @[_filterBtn, _rtcBtn, _backBtn]];
     [self hideAllBtn:NO];
 }
 - (void)hideAllBtn: (BOOL) bHide {
     _backBtn.hidden   = !bHide; // 返回
-    
-    _bgmBtn.hidden    = bHide;
-    _pipBtn.hidden    = bHide;
     _filterBtn.hidden = bHide;
-    _miscBtn.hidden   = bHide;
-    _mixBtn.hidden    = bHide;
-    _reverbBtn.hidden = bHide;
+    _rtcBtn.hidden    = bHide;
 }
 - (IBAction)onBack:(id)sender {
     for (UIView * v in self.subviews){

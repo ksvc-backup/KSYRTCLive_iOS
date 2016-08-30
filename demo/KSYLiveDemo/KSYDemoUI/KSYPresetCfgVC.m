@@ -9,24 +9,9 @@
 #import "KSYPresetCfgVC.h"
 #import "KSYUIView.h"
 #import "KSYPresetCfgView.h"
-#import "KSYBlockDemoVC.h"
-#import "KSYKitDemoVC.h"
+#import "KSYStreamerVC.h"
+#import "KSYRTCKitDemoVC.h"
 
-
-#ifdef KSYSTREAMER_DEMO
-@interface KSYSimpleStreamerVC : UIViewController
-@end
-@interface KSYGPUStreamerKitVC : UIViewController
-@end
-@interface rawVC : UIViewController
-@end
-@interface imageVC : UIViewController
-@end
-@interface movieWriterVC : UIViewController
-@end
-@interface KSYSimKitVC : UIViewController
-@end
-#endif
 
 @interface KSYPresetCfgVC () {
     KSYPresetCfgView * _cfgView;
@@ -86,22 +71,8 @@
 
 - (IBAction)btnFunc:(id)sender {
     UIViewController *vc = nil;
-    if ( sender == _cfgView.btn0) { // kit demo
-        vc = [[KSYKitDemoVC alloc] initWithCfg:_cfgView];
-    }
-    else if (sender == _cfgView.btn1) { // block demo
-        vc = [[KSYBlockDemoVC alloc] initWithCfg:_cfgView];
-    }
-    else if ( sender == _cfgView.btn2) { // tests
-#ifdef KSYSTREAMER_DEMO
-        vc = [[KSYSimpleStreamerVC alloc] init];
-        vc = [[imageVC alloc] init];
-        //vc = [[movieWriterVC alloc] init];
-#else
-        [self dismissViewControllerAnimated:FALSE
-                                 completion:nil];
-        return;
-#endif
+    if ( sender == _cfgView.btn0) {
+        vc = [[KSYRTCKitDemoVC alloc] initWithCfg:_cfgView];
     }
     if (vc){
         [self presentViewController:vc animated:true completion:nil];

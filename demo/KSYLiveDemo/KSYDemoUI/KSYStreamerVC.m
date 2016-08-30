@@ -6,18 +6,14 @@
 //  Copyright (c) 2015 ksyun. All rights reserved.
 //
 
-#import <libksygpulive/libksygpulive.h>
-#import <libksygpulive/libksygpuimage.h>
+//#import <KSYGPUStreamer/KSYGPUStreamerFramework.h>
 #import "KSYUIView.h"
 #import "KSYUIVC.h"
 #import "KSYPresetCfgView.h"
 #import "KSYStreamerVC.h"
 #import <GPUImage/GPUImage.h>
 #import "KSYFilterView.h"
-#import "KSYBgmView.h"
-#import "KSYPipView.h"
 #import "KSYNameSlider.h"
-#import "KSYReverbView.h"
 
 @interface KSYStreamerVC () {
     StreamState _lastStD;
@@ -26,17 +22,11 @@
     int         _raiseCnt;
     int         _dropCnt;
     
-    BOOL        _bgmPlayNext;
     UISwipeGestureRecognizer *_swipeGest;
     
 }
 
-@property KSYAudioReverb*  audioReverb;
-
-
 @end
-
-
 @implementation KSYStreamerVC
 
 - (id) initWithCfg:(KSYPresetCfgView*)presetCfgView{
@@ -45,7 +35,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _lastState = &_lastStD;
     [self initStreamStat];
-    _bgmPlayNext = YES;
     return self;
 }
 // 将推流状态信息清0
@@ -55,6 +44,7 @@
     _notGoodCnt = 0;
     _raiseCnt   = 0;
     _dropCnt    = 0;
+    
 }
 
 #pragma mark - UIViewController
@@ -77,61 +67,26 @@
     _ksyMenuView    = [[KSYMenuView alloc]initWithParent:_ctrlView];
     _ksyMenuView.hidden = NO; // menu
     _ksyFilterView  = [[KSYFilterView alloc]initWithParent:_ksyMenuView];
-    _ksyBgmView     = [[KSYBgmView alloc]initWithParent:_ksyMenuView];
-    _ksyPipView     = [[KSYPipView alloc]initWithParent:_ksyMenuView];
-    _audioMixerView = [[KSYAudioMixerView alloc]initWithParent:_ksyMenuView];
-    _reverbView     = [[KSYReverbView alloc]initWithParent:_ksyMenuView];
-    _miscView       = [[KSYMiscView alloc]initWithParent:_ksyMenuView];
+    _rtcView        = [[KSYRtcView alloc]initWithParent:_ksyMenuView];
+    _rtcSlaveView   = [[KSYRtcSlaveView alloc]initWithParent:_rtcView];
+    _rtcMasterView = [[KSYRtcMasterView alloc]initWithParent:_rtcView];
     
     __weak KSYStreamerVC *weakself = self;
     _ksyMenuView.onBtnBlock=^(id sender){
         [weakself onMenuBtnPress:sender];
     };
-    // 背景音乐控制页面
-    _ksyBgmView.onBtnBlock = ^(id sender) {
-        [weakself onBgmBtnPress:sender];
-    };
-    _ksyBgmView.onSliderBlock = ^(id sender) {
-        [weakself onBgmVolume:sender];
-    };
-//    _ksyBgmView.onSegCtrlBlock = ^(id sender) {
-//        [weakself onBgmCtrSle:sender];
-//    };
     // 滤镜相关参数改变
-    _ksyFilterView.onBtnBlock=^(id sender) {
+    _ksyFilterView.onSegCtrlBlock=^(id sender) {
         [weakself onFilterChange:sender];
     };
-    // 混音相关参数改变
-    _audioMixerView.onSwitchBlock=^(id sender){
-        [weakself onAMixerSwitch:sender];
+    _rtcMasterView.onBtnBlock = ^(id sender){
+        [weakself onRtcMasterBtn:sender];
     };
-    _audioMixerView.onSliderBlock=^(id sender){
-        [weakself onAMixerSlider:sender];
+    _rtcSlaveView.onBtnBlock = ^(id sender){
+        [weakself onRtcSlaveBtn:sender];
     };
-    //混响的实现
-    _reverbView.onSegCtrlBlock = ^(id sender){
-        [weakself onReverbType:sender];
-    };
-    //混音实现
-    _audioMixerView.onSegCtrlBlock=^(id sender){
-        [weakself onAMixerSegCtrl:sender];
-    };
-    // 画中画播放控制视图
-    _ksyPipView.onBtnBlock = ^(id sender){
-        [weakself onPipBtnPress:sender];
-    };
-    _ksyPipView.onSliderBlock = ^(id sender) {
-        [weakself pipVolChange:sender];
-    };
-    // 其他杂项
-    _miscView.onBtnBlock = ^(id sender) {
-        [weakself onMiscBtns: sender];
-    };
-    _miscView.onSwitchBlock = ^(id sender) {
-        [weakself onMiscSwitch: sender];
-    };
-    _miscView.onSliderBlock = ^(id sender) {
-        [weakself onMiscSlider: sender];
+    _rtcView.onBtnBlock= ^(id sender){
+        [weakself onRtcBtnPress:sender];
     };
 }
 
@@ -166,18 +121,6 @@
            selector:@selector(onNetStateEvent:)
                name:KSYNetStateEventNotification
              object:nil];
-    [dc addObserver:self
-           selector:@selector(onBgmPlayerStateChange:)
-               name:KSYAudioStateDidChangeNotification
-             object:nil];
-    [dc addObserver:self
-           selector:@selector(onPipPlayerNotify:)
-               name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
-             object:nil];
-    [dc addObserver:self
-           selector:@selector(onPipPlayerNotify:)
-               name:MPMoviePlayerPlaybackDidFinishNotification
-             object:nil];
 }
 - (void) rmObservers {
     [super rmObservers];
@@ -190,15 +133,6 @@
                 object:nil];
     [dc removeObserver:self
                   name:KSYNetStateEventNotification
-                object:nil];
-    [dc removeObserver:self
-                  name:KSYAudioStateDidChangeNotification
-                object:nil];
-    [dc removeObserver:self
-                  name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
-                object:nil];
-    [dc removeObserver:self
-                  name:MPMoviePlayerPlaybackDidFinishNotification
                 object:nil];
 }
 
@@ -302,15 +236,7 @@
         default:break;
     }
 }
-- (void) onBgmPlayerStateChange  :(NSNotification *)notification{
-    NSString * st = [_bgmPlayer getCurBgmStateName];
-    _ksyBgmView.bgmStatus = [st substringFromIndex:17];
-    if ( _bgmPlayer.bgmPlayerState == KSYBgmPlayerStateStopped){
-        if (_bgmPlayNext){
-            [self onBgmPlay];
-        }
-    }
-}
+
 - (void) onStreamStateChange :(NSNotification *)notification{
     if (_streamerBase){
         NSLog(@"stream State %@", [_streamerBase getCurStreamStateName]);
@@ -321,11 +247,6 @@
     }
     else if (_streamerBase.streamState == KSYStreamStateConnecting) {
         [self initStreamStat]; // 尝试开始连接时,重置统计数据
-    }
-    else if (_streamerBase.streamState == KSYStreamStateConnected) {
-        if ([self.miscView.swiAudio isOn] ){
-            _streamerBase.bWithVideo = NO;
-        }
     }
 }
 
@@ -338,46 +259,6 @@
             _streamerBase.bWithVideo = YES;
             [_streamerBase startStream:self.hostURL];
         });
-    }
-}
-- (void) onPipPlayerNotify:(NSNotification *)notification{ // see blk/kit
-}
-#pragma mark - timer respond per second
-- (void)onTimer:(NSTimer *)theTimer{
-    if (_streamerBase.streamState == KSYStreamStateConnected ) {
-        StreamState curState = {0};
-        curState.timeSecond     = [[NSDate date]timeIntervalSince1970];
-        curState.uploadKByte    = [_streamerBase uploadedKByte];
-        curState.encodedFrames  = [_streamerBase encodedFrames];
-        curState.droppedVFrames = [_streamerBase droppedVideoFrames];
-        StreamState deltaS  = {0};
-        deltaS.timeSecond    = curState.timeSecond    -_lastStD.timeSecond    ;
-        deltaS.uploadKByte   = curState.uploadKByte   -_lastStD.uploadKByte   ;
-        deltaS.encodedFrames = curState.encodedFrames -_lastStD.encodedFrames ;
-        deltaS.droppedVFrames= curState.droppedVFrames-_lastStD.droppedVFrames;
-        _lastStD = curState;
-        
-        double realTKbps   = deltaS.uploadKByte*8 / deltaS.timeSecond;
-        double encFps      = deltaS.encodedFrames / deltaS.timeSecond;
-        double dropRate    = (deltaS.droppedVFrames ) / deltaS.timeSecond;
-        double dropPercent = deltaS.droppedVFrames * 100.0 / curState.droppedVFrames;
-        NSString* liveTime =[self timeFormatted: (int)(curState.timeSecond-_startTime) ] ;
-        NSString *uploadDateSize = [ self sizeFormatted:curState.uploadKByte];
-        NSString* stateurl  = [NSString stringWithFormat:@"%@ (%@)\n", [_hostURL absoluteString], liveTime];
-        NSString* statekbps = [NSString stringWithFormat:@"实时码率(kbps):%4.1f  A%4.1f V%4.1f\n", realTKbps, [_streamerBase encodeAKbps], [_streamerBase encodeVKbps] ];
-        NSString* statefps  = [NSString stringWithFormat:@"实时帧率%2.1f fps  总上传:%@\n", encFps, uploadDateSize ];
-        NSString* statedrop = [NSString stringWithFormat:@"丢帧 %4d | %3.1f | %2.1f%% \n", curState.droppedVFrames, dropRate, dropPercent ];
-        NSString* netEvent = [NSString stringWithFormat:@"网络事件 %d bad | %d raise | %d drop\n", _notGoodCnt, _raiseCnt, _dropCnt];
-        NSString *cpu_use = [NSString stringWithFormat:@"cpu_use: %.2f",[self cpu_usage]];
-        UILabel *stat = _ctrlView.lblStat;
-        stat.text = [ stateurl    stringByAppendingString:statekbps ];
-        stat.text = [ stat.text  stringByAppendingString:statefps  ];
-        stat.text = [ stat.text  stringByAppendingString:statedrop ];
-        stat.text = [ stat.text  stringByAppendingString:netEvent  ];
-        stat.text = [ stat.text  stringByAppendingString:cpu_use  ];
-    }
-    if (_bgmPlayer && _bgmPlayer.bgmPlayerState ==KSYBgmPlayerStatePlaying ) {
-        _ksyBgmView.progressV.progress = _bgmPlayer.bgmProcess;
     }
 }
 
@@ -404,27 +285,13 @@
 //menuView control
 - (void)onMenuBtnPress:(UIButton *)btn{
     KSYUIView * view = nil;
-    if (btn == _ksyMenuView.bgmBtn ){
-        view = _ksyBgmView; // 背景音乐播放相关
-    }
-    else if (btn == _ksyMenuView.filterBtn ){
+    if (btn == _ksyMenuView.filterBtn ){
         view = _ksyFilterView; // 美颜滤镜相关
     }
-    else if (btn == _ksyMenuView.pipBtn ){
-        view = _ksyPipView;   // 画中画播放相关
+    else if (btn == _ksyMenuView.rtcBtn){
+        view = _rtcView;
     }
-    else if (btn == _ksyMenuView.mixBtn ){
-        view = _audioMixerView;    // 混音控制台
-        _audioMixerView.micType = _capDev.currentMicType;
-        [_audioMixerView initMicInput];
-    }
-    else if (btn == _ksyMenuView.miscBtn ){
-        view = _miscView;
-        [_miscView initMicmOutput];
-    }
-    else if (btn == _ksyMenuView.reverbBtn ){
-        view = _reverbView;
-    }
+    
     // 将菜单的按钮隐藏, 将触发二级菜单的view显示
     if (view){
         [_ksyMenuView hideAllBtn:YES];
@@ -433,6 +300,7 @@
         [view     layoutUI];
     }
 }
+
 
 - (void)swipeController:(UISwipeGestureRecognizer *)swipGestRec{
     if (swipGestRec == _swipeGest){
@@ -445,111 +313,47 @@
         }];
     }
 }
-#pragma mark - subviews: bgmview
-//bgmView Control
-- (void)onBgmBtnPress:(UIButton *)btn{
-    if (btn == _ksyBgmView.previousBtn) {
-        [self onBgmStop];
+- (void)onRtcBtnPress:(UIButton *)btn{
+    KSYUIView * view = nil;
+    if (btn == _rtcView.masterBtn)
+    {
+        view =_rtcMasterView;
+        if(_rtcSlaveView)
+            _rtcSlaveView.hidden = YES;
+        [self onMasterChoosed:YES];
     }
-    else if (btn == _ksyBgmView.playBtn){
-        [self onBgmPlay];
+    else if (btn == _rtcView.slaveBtn)
+    {
+        view = _rtcSlaveView;
+        if(_rtcMasterView)
+            _rtcMasterView.hidden = YES;
+        [self onMasterChoosed:NO];
     }
-    else if (btn ==  _ksyBgmView.pauseBtn){
-        if (_bgmPlayer && _bgmPlayer.bgmPlayerState == KSYBgmPlayerStatePlaying) {
-            [_bgmPlayer pauseBgm];
-        }
-        else if (_bgmPlayer && _bgmPlayer.bgmPlayerState == KSYBgmPlayerStatePaused){
-            [_bgmPlayer resumeBgm];
-        }
+    
+    if (view){
+        [_ksyMenuView hideAllBtn:YES];
+        view.hidden = NO;
+        view.frame = _ksyMenuView.frame;
+        [view     layoutUI];
     }
-    else if (btn == _ksyBgmView.stopBtn){
-        [self onBgmStop];
-    }
-    else if (btn == _ksyBgmView.nextBtn){
-        [self onBgmStop];
-    }
-    else if (btn == _ksyBgmView.muteBtn){
-        // 仅仅是静音了本地播放, 推流中仍然有音乐
-        _bgmPlayer.bMutBgmPlay = !_bgmPlayer.bMutBgmPlay;
-    }
-}
-- (void) onBgmPlay{
-    NSString* path = _ksyBgmView.bgmPath;
-    if (!path) {
-        [self onBgmStop];
-    }
-    if (_bgmPlayer) {
-        _bgmPlayer.bgmFinishBlock = ^{
-            NSLog(@"bgm over %@", path);
-        };
-        [_bgmPlayer startPlayBgm:path isLoop:NO];
-    }
-}
-
-- (void) onBgmStop{
-    if (_bgmPlayer && _bgmPlayer.bgmPlayerState == KSYBgmPlayerStatePlaying) {
-        [_bgmPlayer stopPlayBgm];
-    }
-}
-
-// 背景音乐音量调节
-- (void)onBgmVolume:(id )sl{
-    if (sl == _ksyBgmView.volumSl){
-        _bgmPlayer.bgmVolume = _ksyBgmView.volumSl.normalValue;
-    }
-}
-#pragma mark - subviews: pipView
-//pipView btn Control
-- (void)onPipBtnPress:(UIButton *)btn{
-    if (btn == _ksyPipView.pipPlay){
-        [self onPipPlay];
-    }
-    else if (btn == _ksyPipView.pipPause){
-        [self onPipPause];
-    }
-    else if (btn == _ksyPipView.pipStop){
-        [self onPipStop];
-    }
-    else if (btn == _ksyPipView.pipNext){
-        [self onPipNext];
-    }
-    else if (btn == _ksyPipView.bgpNext){
-        [self onBgpNext];
-    }
-}
-- (void)onPipPlay{// see kit & block
-}
-- (void)onPipPause{ // see kit & block
-}
-- (void)onPipStop{ // see kit & block
-}
-- (void)onPipNext{ // see kit & block
-}
-- (void)onBgpNext{ // see kit & block
-}
-//pipView slider  control
-- (void)pipVolChange:(id)sender{ // see kit & block
 }
 
 #pragma mark - subviews: basic ctrl
 - (void) onFlash { //  see kit or block
 }
 - (void) onCameraToggle{ // see kit or block
-    if (_capDev && _capDev.cameraPosition == AVCaptureDevicePositionBack) {
-        [_ctrlView.btnFlash setEnabled:YES];
-    }
-    else{
-        [_ctrlView.btnFlash setEnabled:NO];
-    }
+//    if (_capDev && _capDev.cameraPosition == AVCaptureDevicePositionBack) {
+//        [_ctrlView.btnFlash setEnabled:YES];
+//    }
+//    else{
+//        [_ctrlView.btnFlash setEnabled:NO];
+//    }
 }
 - (void) onCapture{ // see kit or block
 }
 - (void) onStream{ // see kit or block
 }
 - (void) onQuit{  // quit current demo
-    if (self.bgmPlayer){
-        [self onBgmStop];
-    }
     if (self.streamerBase){
         [self.streamerBase stopStream];
         self.streamerBase = nil;
@@ -559,95 +363,93 @@
 }
 
 #pragma mark - UI respond : gpu filters
-- (void) onFilterChange:(id)sender{
-    // see kit or block
-    self.filter = self.ksyFilterView.curFilter;
+- (void) onFilterChange:(id)sender{ // see kit or block
 }
 
-#pragma mark - UI respond : audio mixer
-- (void)onAMixerSwitch:(UISwitch *)sw{
-    if (sw == _audioMixerView.muteStream){
-        BOOL mute = _audioMixerView.muteStream.isOn;
-        [_streamerBase muteStreame:mute];
+#pragma mark - rtc
+- (void)onRtcMasterBtn:(id)sender{
+    if (sender == _rtcMasterView.registerBtn) {
+        NSString * localId = _rtcMasterView.localid.text;
+        [self onRtcRegister:localId];
     }
-    else if (sw == _audioMixerView.bgmMix){
-        // 背景音乐 是否 参与混音
-        [_aMixer setTrack:_bgmTrack enable: sw.isOn];
+    else if (sender == _rtcMasterView.startCallBtn){
+        NSString * remoteId = _rtcMasterView.remoteid.text;
+        [self onRtcStartCall:remoteId];
     }
-    else if (sw == _audioMixerView.pipMix){
-        // 画中画音乐 是否 参与混音
-        [_aMixer setTrack:_pipTrack enable: sw.isOn];
+    else if (sender == _rtcMasterView.answerCallBtn){
+        [self onRtcAnswerCall];
     }
-}
-- (void)onAMixerSegCtrl:(UISegmentedControl *)seg{
-    if (_capDev && seg == _audioMixerView.micInput) {
-        _capDev.currentMicType = _audioMixerView.micType;
+    else if (sender == _rtcMasterView.unregisterBtn){
+        [self onRtcUnregister];
     }
-}
-- (void)onAMixerSlider:(KSYNameSlider *)slider{
-    // see kit or block
-}
-
-#pragma mark - reverb action
-- (void)onReverbType:(UISegmentedControl *)seg{
-    if (seg != _reverbView.reverbType){
-        return;
+    else if (sender == _rtcMasterView.stopCallBtn){
+        [self onRtcStopCall];
     }
-    int t = (int)_reverbView.reverbType.selectedSegmentIndex;
-    if (t == 0){
-        _reverb = nil;
+    else if(sender == _rtcMasterView.rejectCallBtn){
+        [self onRtcRejectCall];
     }
-    else {
-        _reverb = [[ KSYAudioReverb alloc] initWithType:t];
+    else if (sender == _rtcMasterView.uninitBtn){
+        [self onRtcunInitCall];
+    }
+    else if (sender == _rtcMasterView.adjustWindowBtn){
+        [self onRtcAdjustWindow];
     }
 }
 
-#pragma mark - misc features
-- (void)onMiscBtns:(id)sender {
-    if (sender == _miscView.btn0){
-        [self onSnapshot:sender];
+- (void)onRtcSlaveBtn:(id)sender{
+    if (sender == _rtcSlaveView.registerBtn) {
+        NSString * localId = _rtcSlaveView.localid.text;
+        [self onRtcRegister:localId];
     }
-    else if (sender == _miscView.btn1){
-        __weak KSYStreamerVC *weakself = self;
-        [_streamerBase getSnapshotWithCompletion:^(UIImage * img){
-            [weakself saveImage: img
-                             to: @"snap1.png" ];
-        }];
+    else if (sender == _rtcSlaveView.startCallBtn){
+        NSString * remoteId = _rtcSlaveView.remoteid.text;
+        [self onRtcStartCall:remoteId];
     }
-    else if (sender == _miscView.btn2) {
-        [_filter useNextFrameForImageCapture];
-        [self saveImage: _filter.imageFromCurrentFramebuffer
-                     to: @"snap2.png" ];
+    else if (sender == _rtcSlaveView.answerCallBtn){
+        [self onRtcAnswerCall];
+    }
+    else if (sender == _rtcSlaveView.unregisterBtn){
+        [self onRtcUnregister];
+    }
+    else if (sender == _rtcSlaveView.stopCallBtn){
+        [self onRtcStopCall];
+    }
+    else if(sender == _rtcSlaveView.rejectCallBtn){
+        [self onRtcRejectCall];
+    }
+    else if (sender == _rtcSlaveView.uninitBtn){
+        [self onRtcunInitCall];
     }
 }
 
-- (void)onSnapshot:(id)sender {
-    NSString* path =@"snapshot/c.jpg";
-    [_streamerBase takePhotoWithQuality:1 fileName:path];
-    NSLog(@"Snapshot save to %@", path);
+-(void)onMasterChoosed:(BOOL)isMaster{// see kit & block
+}
+- (void)onRtcRegister:(NSString *)localid{// see kit & block
+}
+- (void)onRtcStartCall:(NSString *)remoteid{ // see kit & block
+}
+- (void)onRtcAnswerCall{ // see kit & block
+}
+- (void)onRtcUnregister{ // see kit & block
+}
+- (void)onRtcStopCall{ // see kit & block
+}
+- (void)onRtcunInitCall{ // see kit & block
+}
+- (void)onRtcRejectCall{ // see kit & block
+}
+- (void)onRtcAdjustWindow{ // see kit & block
 }
 
-- (void)saveImage: (UIImage *)image
-               to: (NSString*)path {
-    NSString * dir = [NSHomeDirectory() stringByAppendingString:@"/Documents/"];
-    NSString * file = [dir stringByAppendingPathComponent:path];
-    NSData *imageData = UIImagePNGRepresentation(image);
-    BOOL ret = [imageData writeToFile:file atomically:YES];
-    NSLog(@"write %@ %@", file, ret ? @"OK":@"failed");
+- (void)keyboardWillShow:(NSNotification *)not{
+    [_ksyMenuView hideAllBtn:YES];
 }
 
-#pragma mark - micMonitor
-- (void)onMiscSwitch:(UISwitch *)sw{  // see kit & block
-    if (sw == _miscView.swiAudio && _streamerBase) {
-        if (sw.on == YES) {
-            // disable video, only stream with audio
-            _streamerBase.bWithVideo = NO;
-        }else{
-            _streamerBase.bWithVideo = YES;
-        }
-        sw.on = !_streamerBase.bWithVideo;
-    }
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [_rtcMasterView.localid resignFirstResponder];
+    [_rtcMasterView.remoteid resignFirstResponder];
+    [_rtcSlaveView.localid resignFirstResponder];
+    [_rtcSlaveView.remoteid resignFirstResponder];
 }
-- (void)onMiscSlider:(KSYNameSlider *)slider {  // see kit & block
-}
+
 @end

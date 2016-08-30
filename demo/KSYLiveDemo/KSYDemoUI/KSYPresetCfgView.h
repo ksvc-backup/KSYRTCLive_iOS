@@ -14,17 +14,13 @@
 #import <libksygpulivedylib/libksygpuimage.h>
 #else
 #import <libksygpulive/libksygpulive.h>
-#import <libksygpulive/libksygpuimage.h>
+#import "libksygpulive/KSYMoviePlayerController.h"
 #endif
 
 @interface KSYPresetCfgView : KSYUIView
 
 // UI elements
 @property UIButton* btn0;
-@property UIButton* btn1;
-@property UIButton* btn2;
-@property UIButton* btn3;
-@property UIButton* btn4;
 
 // preset settings
 // capture
