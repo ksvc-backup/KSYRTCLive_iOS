@@ -230,6 +230,9 @@
     UISegmentedControl * segC;
     segC = [[UISegmentedControl alloc] initWithItems:items];
     segC.selectedSegmentIndex = 0;
+    segC.layer.cornerRadius = 5;
+    segC.clipsToBounds = YES;
+    segC.layer.masksToBounds = YES;
     [segC addTarget:self
                action:@selector(onSegCtrl:)
      forControlEvents:UIControlEventValueChanged];

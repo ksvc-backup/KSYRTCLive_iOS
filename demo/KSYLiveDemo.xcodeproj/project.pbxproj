@@ -77,6 +77,7 @@
 		F2C05CB71D756A7E00AD3CFD /* KSYRtcSlaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05CB31D756A7E00AD3CFD /* KSYRtcSlaveView.m */; };
 		F2C05CB81D756A7E00AD3CFD /* KSYRtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05CB51D756A7E00AD3CFD /* KSYRtcView.m */; };
 		F2E6BC481D757ADA0090E557 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E6BC471D757ADA0090E557 /* libc++.tbd */; };
+		F2E6BC4C1D767C840090E557 /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E6BC4B1D767C840090E557 /* KSYReachability.m */; };
 		F8BD96ADDC57202352A62CF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3AA2C25B6C7F287039ECBE8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +165,8 @@
 		F2C05CB41D756A7E00AD3CFD /* KSYRtcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcView.h; sourceTree = "<group>"; };
 		F2C05CB51D756A7E00AD3CFD /* KSYRtcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcView.m; sourceTree = "<group>"; };
 		F2E6BC471D757ADA0090E557 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		F2E6BC4A1D767C840090E557 /* KSYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYReachability.h; sourceTree = "<group>"; };
+		F2E6BC4B1D767C840090E557 /* KSYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYReachability.m; sourceTree = "<group>"; };
 		F3AA2C25B6C7F287039ECBE8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -315,6 +318,8 @@
 		06FBBD441D2E17E00065ED55 /* KSYUIUtils */ = {
 			isa = PBXGroup;
 			children = (
+				F2E6BC4A1D767C840090E557 /* KSYReachability.h */,
+				F2E6BC4B1D767C840090E557 /* KSYReachability.m */,
 				060AE9C31D4653010064DD65 /* KSYFileSelector.h */,
 				060AE9C41D4653010064DD65 /* KSYFileSelector.m */,
 				06FBBD451D2E17E00065ED55 /* KSYNameSlider.h */,
@@ -525,6 +530,7 @@
 				E3B007391CE31547009AF074 /* KSYDBCreater.m in Sources */,
 				06B2B1AC1BE8F0D900E0CC85 /* AppDelegate.m in Sources */,
 				06FBBD691D2E17E00065ED55 /* KSYUIVC.m in Sources */,
+				F2E6BC4C1D767C840090E557 /* KSYReachability.m in Sources */,
 				58C462AE1D3C76E0001BC26A /* KSYProberVC.m in Sources */,
 				069E428A1C10357D00392B5E /* KSYLiveVC.m in Sources */,
 				06B2B1AF1BE8F0D900E0CC85 /* KSYPlayerVC.m in Sources */,
