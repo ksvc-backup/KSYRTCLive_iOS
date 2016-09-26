@@ -7,7 +7,7 @@
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
 
 ### 文档
-[详情请见wiki](https://github.com/ksvc/KSYLive_iOS/wiki/rtc)
+[详情请见wiki](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
 
 ## 二.连麦大事记
 ### 发布大事记
