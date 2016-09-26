@@ -1,3 +1,0 @@
-#use_frameworks!
-pod 'KSYGPULive_iOS', :git => 'https://github.com/ksvc/KSYLive_iOS.git',:tag=>'v1.6.3’
-pod 'Bugly'

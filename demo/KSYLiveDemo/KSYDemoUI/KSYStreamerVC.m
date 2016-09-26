@@ -23,7 +23,6 @@
     int         _dropCnt;
     
     UISwipeGestureRecognizer *_swipeGest;
-    
 }
 
 @end
@@ -391,9 +390,6 @@
     else if (sender == _rtcMasterView.uninitBtn){
         [self onRtcunInitCall];
     }
-    else if (sender == _rtcMasterView.adjustWindowBtn){
-        [self onRtcAdjustWindow];
-    }
 }
 
 - (void)onRtcSlaveBtn:(id)sender{
@@ -438,7 +434,7 @@
 }
 - (void)onRtcRejectCall{ // see kit & block
 }
-- (void)onRtcAdjustWindow{ // see kit & block
+-(void) onSwitchRtcView:(CGPoint)location{// see kit & block
 }
 
 - (void)keyboardWillShow:(NSNotification *)not{
@@ -450,6 +446,11 @@
     [_rtcMasterView.remoteid resignFirstResponder];
     [_rtcSlaveView.localid resignFirstResponder];
     [_rtcSlaveView.remoteid resignFirstResponder];
+    
+    CGPoint origin = [[touches anyObject] locationInView:self.view];
+    CGPoint location;
+    location.x = origin.x/self.view.frame.size.width;
+    location.y = origin.y/self.view.frame.size.height;
+    [self onSwitchRtcView:location];
 }
-
 @end

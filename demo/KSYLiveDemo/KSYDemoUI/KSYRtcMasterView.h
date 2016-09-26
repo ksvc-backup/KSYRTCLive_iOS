@@ -15,7 +15,6 @@
 @property UIButton * unregisterBtn;
 @property UIButton * stopCallBtn;
 @property UIButton * uninitBtn;
-@property UIButton * adjustWindowBtn;
 @property UIButton * rejectCallBtn;
 @property UITextField * localid;
 @property UITextField * remoteid;

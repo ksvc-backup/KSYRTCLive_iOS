@@ -19,13 +19,12 @@
     _rejectCallBtn = [self addButton:@"拒绝"];
     _localid = [self addTextField:@"330"];
     _remoteid = [self addTextField:@"340"];
-    _adjustWindowBtn = [self addButton:@"调整窗口"];
     return self;
 }
 - (void)layoutUI{
     [super layoutUI];
     [self putRow:@[_localid,_remoteid]];
-    [self putRow:@[_registerBtn,_unregisterBtn,_stopCallBtn,_rejectCallBtn,_adjustWindowBtn]];
+    [self putRow:@[_registerBtn,_unregisterBtn,_stopCallBtn,_rejectCallBtn]];
     [self putRow:@[_startCallBtn,_answerCallBtn]];
 }
 

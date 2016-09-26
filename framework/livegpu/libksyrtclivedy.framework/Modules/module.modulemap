@@ -1,0 +1,6 @@
+framework module libksyrtclivedy {
+  umbrella header "libksyrtclivedy.h"
+
+  export *
+  module * { export * }
+}
