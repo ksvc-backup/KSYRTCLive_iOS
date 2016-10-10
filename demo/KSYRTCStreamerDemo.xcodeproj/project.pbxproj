@@ -1,0 +1,562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0647006B1C5C8C2100A31FC7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0647006A1C5C8C2100A31FC7 /* libz.tbd */; };
+		E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */; };
+		E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F877841D38CBCB004FDB25 /* KSYRtcView.m */; };
+		F21B3E951D1AB7DA00B26EB5 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */; };
+		F22125741D9D16E500796C7A /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125711D9D16E500796C7A /* libksygpuliveDy.framework */; };
+		F22125751D9D16E500796C7A /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125721D9D16E500796C7A /* libksyrtclivedy.framework */; };
+		F22125781D9D178100796C7A /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125761D9D178100796C7A /* libksygpuliveDy.framework */; };
+		F22125791D9D178100796C7A /* libksygpuliveDy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F22125761D9D178100796C7A /* libksygpuliveDy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F221257A1D9D178100796C7A /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125771D9D178100796C7A /* libksyrtclivedy.framework */; };
+		F221257B1D9D178100796C7A /* libksyrtclivedy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F22125771D9D178100796C7A /* libksyrtclivedy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257D1D9D17C400796C7A /* KSYFileSelector.m */; };
+		F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257F1D9D17C400796C7A /* KSYNameSlider.m */; };
+		F22125881D9D17C400796C7A /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125811D9D17C400796C7A /* KSYReachability.m */; };
+		F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125831D9D17C400796C7A /* KSYUIVC.m */; };
+		F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125851D9D17C400796C7A /* KSYUIView.m */; };
+		F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F56C1D82B87B0008B04D /* libicucore.tbd */; };
+		F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F5771D82B8AB0008B04D /* GLKit.framework */; };
+		F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */; };
+		F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F292E0E81D193DFF007D10C8 /* libpthread.tbd */; };
+		F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */; };
+		F2C05C471D7420AB00AD3CFD /* KSYPresetCfgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C411D7420AB00AD3CFD /* KSYPresetCfgVC.m */; };
+		F2C05C481D7420AB00AD3CFD /* KSYPresetCfgView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */; };
+		F2C05C491D7420AB00AD3CFD /* KSYRTCKitDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C451D7420AB00AD3CFD /* KSYRTCKitDemoVC.m */; };
+		F2C05C4C1D7420B500AD3CFD /* KSYStreamerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C4B1D7420B500AD3CFD /* KSYStreamerVC.m */; };
+		F2C05C571D74234000AD3CFD /* KSYCtrlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C531D74234000AD3CFD /* KSYCtrlView.m */; };
+		F2C05C581D74234000AD3CFD /* KSYFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C551D74234000AD3CFD /* KSYFilterView.m */; };
+		F2C05C811D755D7300AD3CFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C801D755D7300AD3CFD /* AppDelegate.m */; };
+		F2C05C871D755DB900AD3CFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C861D755DB900AD3CFD /* main.m */; };
+		F2C05C911D755E6600AD3CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C05C8E1D755E6600AD3CFD /* Assets.xcassets */; };
+		F2C05C931D755E6600AD3CFD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2C05C901D755E6600AD3CFD /* Info.plist */; };
+		F2C05CA91D75656900AD3CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */; };
+		F2C05CAA1D75656900AD3CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C05CA71D75656900AD3CFD /* Main.storyboard */; };
+		F2E193A21D407B4500A384FD /* KSYRtcMasterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E1939F1D407B4500A384FD /* KSYRtcMasterView.m */; };
+		F2E193A31D407B4500A384FD /* KSYRtcSlaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E193A11D407B4500A384FD /* KSYRtcSlaveView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F264418E1D88FE930015D841 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F22125791D9D178100796C7A /* libksygpuliveDy.framework in Embed Frameworks */,
+				F221257B1D9D178100796C7A /* libksyrtclivedy.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0647003E1C5C8B0900A31FC7 /* KSYRTCStreamerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSYRTCStreamerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		064700661C5C8C1600A31FC7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		0647006A1C5C8C2100A31FC7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		064700B41C5C9E1A00A31FC7 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../../../extra/GPUImage/build/GPUImage.framework; sourceTree = "<group>"; };
+		E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		E3F877831D38CBCB004FDB25 /* KSYRtcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcView.h; sourceTree = "<group>"; };
+		E3F877841D38CBCB004FDB25 /* KSYRtcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcView.m; sourceTree = "<group>"; };
+		F20B34111D9BAD06001A0910 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../../../build_rtc/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F20B34131D9BAD42001A0910 /* libksygpulive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpulive.framework; path = ../../../build_rtc/libksygpulive.framework; sourceTree = "<group>"; };
+		F20B34151D9BAF4C001A0910 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../../../build_rtc/GPUImage.framework; sourceTree = "<group>"; };
+		F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "/usr/lib/libc++.1.dylib"; sourceTree = "<absolute>"; };
+		F22125701D9D16E500796C7A /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../framework/livegpu/GPUImage.framework; sourceTree = "<group>"; };
+		F22125711D9D16E500796C7A /* libksygpuliveDy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpuliveDy.framework; path = ../framework/livegpu/libksygpuliveDy.framework; sourceTree = "<group>"; };
+		F22125721D9D16E500796C7A /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/livegpu/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F22125761D9D178100796C7A /* libksygpuliveDy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpuliveDy.framework; path = ../framework/livegpu/libksygpuliveDy.framework; sourceTree = "<group>"; };
+		F22125771D9D178100796C7A /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/livegpu/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F221257C1D9D17C400796C7A /* KSYFileSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYFileSelector.h; sourceTree = "<group>"; };
+		F221257D1D9D17C400796C7A /* KSYFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYFileSelector.m; sourceTree = "<group>"; };
+		F221257E1D9D17C400796C7A /* KSYNameSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYNameSlider.h; sourceTree = "<group>"; };
+		F221257F1D9D17C400796C7A /* KSYNameSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNameSlider.m; sourceTree = "<group>"; };
+		F22125801D9D17C400796C7A /* KSYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYReachability.h; sourceTree = "<group>"; };
+		F22125811D9D17C400796C7A /* KSYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYReachability.m; sourceTree = "<group>"; };
+		F22125821D9D17C400796C7A /* KSYUIVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIVC.h; sourceTree = "<group>"; };
+		F22125831D9D17C400796C7A /* KSYUIVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIVC.m; sourceTree = "<group>"; };
+		F22125841D9D17C400796C7A /* KSYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIView.h; sourceTree = "<group>"; };
+		F22125851D9D17C400796C7A /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
+		F227F56C1D82B87B0008B04D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		F227F5771D82B8AB0008B04D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F292E0D61D193C8B007D10C8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		F292E0E11D193D23007D10C8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		F292E0E81D193DFF007D10C8 /* libpthread.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libpthread.tbd; path = usr/lib/libpthread.tbd; sourceTree = SDKROOT; };
+		F2C05C3E1D7420AB00AD3CFD /* KSYMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYMenuView.h; sourceTree = "<group>"; };
+		F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYMenuView.m; sourceTree = "<group>"; };
+		F2C05C401D7420AB00AD3CFD /* KSYPresetCfgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgVC.h; sourceTree = "<group>"; };
+		F2C05C411D7420AB00AD3CFD /* KSYPresetCfgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPresetCfgVC.m; sourceTree = "<group>"; };
+		F2C05C421D7420AB00AD3CFD /* KSYPresetCfgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgView.h; sourceTree = "<group>"; };
+		F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPresetCfgView.m; sourceTree = "<group>"; };
+		F2C05C441D7420AB00AD3CFD /* KSYRTCKitDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRTCKitDemoVC.h; sourceTree = "<group>"; };
+		F2C05C451D7420AB00AD3CFD /* KSYRTCKitDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRTCKitDemoVC.m; sourceTree = "<group>"; };
+		F2C05C4A1D7420B500AD3CFD /* KSYStreamerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYStreamerVC.h; sourceTree = "<group>"; };
+		F2C05C4B1D7420B500AD3CFD /* KSYStreamerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYStreamerVC.m; sourceTree = "<group>"; };
+		F2C05C521D74234000AD3CFD /* KSYCtrlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYCtrlView.h; sourceTree = "<group>"; };
+		F2C05C531D74234000AD3CFD /* KSYCtrlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYCtrlView.m; sourceTree = "<group>"; };
+		F2C05C541D74234000AD3CFD /* KSYFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYFilterView.h; sourceTree = "<group>"; };
+		F2C05C551D74234000AD3CFD /* KSYFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYFilterView.m; sourceTree = "<group>"; };
+		F2C05C7F1D755D7300AD3CFD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = KSYRTCStreamerDemo/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		F2C05C801D755D7300AD3CFD /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = KSYRTCStreamerDemo/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		F2C05C861D755DB900AD3CFD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = KSYRTCStreamerDemo/main.m; sourceTree = SOURCE_ROOT; };
+		F2C05C8E1D755E6600AD3CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = KSYRTCStreamerDemo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		F2C05C901D755E6600AD3CFD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KSYRTCStreamerDemo/Info.plist; sourceTree = SOURCE_ROOT; };
+		F2C05CA61D75656900AD3CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = KSYRTCStreamerDemo/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F2C05CA81D75656900AD3CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = KSYRTCStreamerDemo/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2E1939E1D407B4500A384FD /* KSYRtcMasterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcMasterView.h; sourceTree = "<group>"; };
+		F2E1939F1D407B4500A384FD /* KSYRtcMasterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcMasterView.m; sourceTree = "<group>"; };
+		F2E193A01D407B4500A384FD /* KSYRtcSlaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcSlaveView.h; sourceTree = "<group>"; };
+		F2E193A11D407B4500A384FD /* KSYRtcSlaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcSlaveView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0647003B1C5C8B0900A31FC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F22125741D9D16E500796C7A /* libksygpuliveDy.framework in Frameworks */,
+				F22125751D9D16E500796C7A /* libksyrtclivedy.framework in Frameworks */,
+				F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */,
+				F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */,
+				F21B3E951D1AB7DA00B26EB5 /* libc++.1.dylib in Frameworks */,
+				F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */,
+				F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */,
+				E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */,
+				F221257A1D9D178100796C7A /* libksyrtclivedy.framework in Frameworks */,
+				F22125781D9D178100796C7A /* libksygpuliveDy.framework in Frameworks */,
+				0647006B1C5C8C2100A31FC7 /* libz.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0626F0F21D2DFF0400193DAC /* KSYDemoUI */ = {
+			isa = PBXGroup;
+			children = (
+				F2C05C4A1D7420B500AD3CFD /* KSYStreamerVC.h */,
+				F2C05C4B1D7420B500AD3CFD /* KSYStreamerVC.m */,
+				F2C05C3E1D7420AB00AD3CFD /* KSYMenuView.h */,
+				F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */,
+				F2C05C401D7420AB00AD3CFD /* KSYPresetCfgVC.h */,
+				F2C05C411D7420AB00AD3CFD /* KSYPresetCfgVC.m */,
+				F2C05C421D7420AB00AD3CFD /* KSYPresetCfgView.h */,
+				F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */,
+				F2C05C441D7420AB00AD3CFD /* KSYRTCKitDemoVC.h */,
+				F2C05C451D7420AB00AD3CFD /* KSYRTCKitDemoVC.m */,
+				06FBBD8D1D2E21D10065ED55 /* subviews */,
+			);
+			path = KSYDemoUI;
+			sourceTree = SOURCE_ROOT;
+		};
+		0626F1181D2DFF0400193DAC /* KSYUIUtils */ = {
+			isa = PBXGroup;
+			children = (
+				F221257C1D9D17C400796C7A /* KSYFileSelector.h */,
+				F221257D1D9D17C400796C7A /* KSYFileSelector.m */,
+				F221257E1D9D17C400796C7A /* KSYNameSlider.h */,
+				F221257F1D9D17C400796C7A /* KSYNameSlider.m */,
+				F22125801D9D17C400796C7A /* KSYReachability.h */,
+				F22125811D9D17C400796C7A /* KSYReachability.m */,
+				F22125821D9D17C400796C7A /* KSYUIVC.h */,
+				F22125831D9D17C400796C7A /* KSYUIVC.m */,
+				F22125841D9D17C400796C7A /* KSYUIView.h */,
+				F22125851D9D17C400796C7A /* KSYUIView.m */,
+			);
+			path = KSYUIUtils;
+			sourceTree = SOURCE_ROOT;
+		};
+		064700351C5C8B0900A31FC7 = {
+			isa = PBXGroup;
+			children = (
+				F22125761D9D178100796C7A /* libksygpuliveDy.framework */,
+				F22125771D9D178100796C7A /* libksyrtclivedy.framework */,
+				F227F5771D82B8AB0008B04D /* GLKit.framework */,
+				F227F56C1D82B87B0008B04D /* libicucore.tbd */,
+				F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */,
+				F2C05CA71D75656900AD3CFD /* Main.storyboard */,
+				064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */,
+				0647003F1C5C8B0900A31FC7 /* Products */,
+				F20B34101D9BAD06001A0910 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0647003F1C5C8B0900A31FC7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0647003E1C5C8B0900A31FC7 /* KSYRTCStreamerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				F2C05C8E1D755E6600AD3CFD /* Assets.xcassets */,
+				F2C05C7F1D755D7300AD3CFD /* AppDelegate.h */,
+				F2C05C801D755D7300AD3CFD /* AppDelegate.m */,
+				06A5B6091D43BDDF00D9EE31 /* libs */,
+				0626F1181D2DFF0400193DAC /* KSYUIUtils */,
+				0626F0F21D2DFF0400193DAC /* KSYDemoUI */,
+				064700411C5C8B0900A31FC7 /* Supporting Files */,
+			);
+			path = KSYRTCStreamerDemo;
+			sourceTree = "<group>";
+		};
+		064700411C5C8B0900A31FC7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2C05C901D755E6600AD3CFD /* Info.plist */,
+				F2C05C861D755DB900AD3CFD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06A5B6091D43BDDF00D9EE31 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */,
+				F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */,
+				F292E0E81D193DFF007D10C8 /* libpthread.tbd */,
+				F292E0E11D193D23007D10C8 /* libstdc++.tbd */,
+				F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */,
+				F292E0D61D193C8B007D10C8 /* libc++.tbd */,
+				E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */,
+				064700B41C5C9E1A00A31FC7 /* GPUImage.framework */,
+				0647006A1C5C8C2100A31FC7 /* libz.tbd */,
+				064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */,
+				064700661C5C8C1600A31FC7 /* VideoToolbox.framework */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		06FBBD8D1D2E21D10065ED55 /* subviews */ = {
+			isa = PBXGroup;
+			children = (
+				F2C05C521D74234000AD3CFD /* KSYCtrlView.h */,
+				F2C05C531D74234000AD3CFD /* KSYCtrlView.m */,
+				F2C05C541D74234000AD3CFD /* KSYFilterView.h */,
+				F2C05C551D74234000AD3CFD /* KSYFilterView.m */,
+				F2E1939E1D407B4500A384FD /* KSYRtcMasterView.h */,
+				F2E1939F1D407B4500A384FD /* KSYRtcMasterView.m */,
+				F2E193A01D407B4500A384FD /* KSYRtcSlaveView.h */,
+				F2E193A11D407B4500A384FD /* KSYRtcSlaveView.m */,
+				E3F877831D38CBCB004FDB25 /* KSYRtcView.h */,
+				E3F877841D38CBCB004FDB25 /* KSYRtcView.m */,
+			);
+			name = subviews;
+			sourceTree = "<group>";
+		};
+		F20B34101D9BAD06001A0910 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F22125701D9D16E500796C7A /* GPUImage.framework */,
+				F22125711D9D16E500796C7A /* libksygpuliveDy.framework */,
+				F22125721D9D16E500796C7A /* libksyrtclivedy.framework */,
+				F20B34151D9BAF4C001A0910 /* GPUImage.framework */,
+				F20B34131D9BAD42001A0910 /* libksygpulive.framework */,
+				F20B34111D9BAD06001A0910 /* libksyrtclivedy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0647003D1C5C8B0900A31FC7 /* KSYRTCStreamerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 064700551C5C8B0900A31FC7 /* Build configuration list for PBXNativeTarget "KSYRTCStreamerDemo" */;
+			buildPhases = (
+				0647003A1C5C8B0900A31FC7 /* Sources */,
+				0647003B1C5C8B0900A31FC7 /* Frameworks */,
+				0647003C1C5C8B0900A31FC7 /* Resources */,
+				F264418E1D88FE930015D841 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KSYRTCStreamerDemo;
+			productName = KSYRTCStreamerDemo;
+			productReference = 0647003E1C5C8B0900A31FC7 /* KSYRTCStreamerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		064700361C5C8B0900A31FC7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = ksyun;
+				TargetAttributes = {
+					0647003D1C5C8B0900A31FC7 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = ZGJ54Q7R45;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 064700391C5C8B0900A31FC7 /* Build configuration list for PBXProject "KSYRTCStreamerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 064700351C5C8B0900A31FC7;
+			productRefGroup = 0647003F1C5C8B0900A31FC7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0647003D1C5C8B0900A31FC7 /* KSYRTCStreamerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0647003C1C5C8B0900A31FC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2C05CA91D75656900AD3CFD /* LaunchScreen.storyboard in Resources */,
+				F2C05C931D755E6600AD3CFD /* Info.plist in Resources */,
+				F2C05C911D755E6600AD3CFD /* Assets.xcassets in Resources */,
+				F2C05CAA1D75656900AD3CFD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0647003A1C5C8B0900A31FC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */,
+				F22125881D9D17C400796C7A /* KSYReachability.m in Sources */,
+				F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */,
+				F2C05C581D74234000AD3CFD /* KSYFilterView.m in Sources */,
+				F2C05C491D7420AB00AD3CFD /* KSYRTCKitDemoVC.m in Sources */,
+				F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */,
+				F2E193A21D407B4500A384FD /* KSYRtcMasterView.m in Sources */,
+				F2C05C471D7420AB00AD3CFD /* KSYPresetCfgVC.m in Sources */,
+				F2E193A31D407B4500A384FD /* KSYRtcSlaveView.m in Sources */,
+				F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */,
+				F2C05C481D7420AB00AD3CFD /* KSYPresetCfgView.m in Sources */,
+				F2C05C871D755DB900AD3CFD /* main.m in Sources */,
+				E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */,
+				F2C05C811D755D7300AD3CFD /* AppDelegate.m in Sources */,
+				F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */,
+				F2C05C4C1D7420B500AD3CFD /* KSYStreamerVC.m in Sources */,
+				F2C05C571D74234000AD3CFD /* KSYCtrlView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2C05CA61D75656900AD3CFD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F2C05CA71D75656900AD3CFD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2C05CA81D75656900AD3CFD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		064700531C5C8B0900A31FC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../../build/;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		064700541C5C8B0900A31FC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = ../../../build/;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		064700561C5C8B0900A31FC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = ../framework/livegpu;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					KSYSTREAMER_DEMO,
+				);
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		064700571C5C8B0900A31FC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = ../framework/livegpu;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = KSYSTREAMER_DEMO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		064700391C5C8B0900A31FC7 /* Build configuration list for PBXProject "KSYRTCStreamerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				064700531C5C8B0900A31FC7 /* Debug */,
+				064700541C5C8B0900A31FC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		064700551C5C8B0900A31FC7 /* Build configuration list for PBXNativeTarget "KSYRTCStreamerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				064700561C5C8B0900A31FC7 /* Debug */,
+				064700571C5C8B0900A31FC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 064700361C5C8B0900A31FC7 /* Project object */;
+}

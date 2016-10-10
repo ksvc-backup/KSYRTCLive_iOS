@@ -1,0 +1,14 @@
+platform :ios, '7.0'
+inhibit_all_warnings!
+use_frameworks!
+
+target 'KSYRTCStreamerDemo' do
+   pod 'Bugly'
+   pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag=>'v1.8.2'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    puts "!!!! #{target.name}"
+  end
+end

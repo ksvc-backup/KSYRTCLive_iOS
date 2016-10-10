@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "506E06A03C8A1B5EB52B6E6B0F92F081A492C048",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "506E06A03C8A1B5EB52B6E6B0F92F081A492C048" : 0,
+    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C6A04973-3182-4151-8FBC-BD218E1EB5E6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "506E06A03C8A1B5EB52B6E6B0F92F081A492C048" : "ksystreameriossdk\/",
+    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KSYGPUStreamerDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "demos\/KSYRTCStreamerDemo\/KSYGPUStreamerDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/KSYStreameriOSSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "506E06A03C8A1B5EB52B6E6B0F92F081A492C048"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libksylive.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F80F88490BD9C1963793C74EA979B472EBDFFF2"
+    }
+  ]
+}
