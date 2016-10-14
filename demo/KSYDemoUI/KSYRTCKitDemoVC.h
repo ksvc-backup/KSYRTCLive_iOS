@@ -10,7 +10,5 @@
 @class KSYRTCStreamerKit;
 
 @interface KSYRTCKitDemoVC : KSYStreamerVC
-
 @property KSYRTCStreamerKit * kit;
-
 @end

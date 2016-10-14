@@ -1,51 +1,30 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "506E06A03C8A1B5EB52B6E6B0F92F081A492C048",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B5AAE5F75AA83B1592C21C169BA8D6F829EB69C3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB" : 0,
-    "DA026B4BD2D7A3D90DFB525B3634DC400564CD0E" : 0,
-    "CC1F8D6D5715B3835CA7584879B3F333CE9D8E47" : 9223372036854775807,
-    "506E06A03C8A1B5EB52B6E6B0F92F081A492C048" : 0,
-    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : 0
+    "6FD5D6586A6E9ADDEF2DBBE7BA86DB36DE08F6E9" : 9223372036854775807,
+    "B5AAE5F75AA83B1592C21C169BA8D6F829EB69C3" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "33C85CB2-D364-44F6-B651-7340F3BBC450",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB" : "build\/",
-    "DA026B4BD2D7A3D90DFB525B3634DC400564CD0E" : "ksystreameriossdk\/frameworks\/KSYRtmp\/",
-    "CC1F8D6D5715B3835CA7584879B3F333CE9D8E47" : "extra\/libyuv_ios\/",
-    "506E06A03C8A1B5EB52B6E6B0F92F081A492C048" : "ksystreameriossdk\/",
-    "5F80F88490BD9C1963793C74EA979B472EBDFFF2" : ""
+    "6FD5D6586A6E9ADDEF2DBBE7BA86DB36DE08F6E9" : "build_rtc\/",
+    "B5AAE5F75AA83B1592C21C169BA8D6F829EB69C3" : "KSYDiversityLive_iOS\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "KSYRTCStreamerDemo",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "demos\/KSYRTCStreamerDemo\/KSYRTCStreamerDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "rtc\/demo\/KSYRTCStreamerDemo.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/KSYStreameriOSSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:yulin6666\/build_rtc.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "506E06A03C8A1B5EB52B6E6B0F92F081A492C048"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6FD5D6586A6E9ADDEF2DBBE7BA86DB36DE08F6E9"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libksylive.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/KSYDiversityLive_iOS.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F80F88490BD9C1963793C74EA979B472EBDFFF2"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libksylivedep.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64B53C2E5C97E0E2759D89DEE92731E5E76C66DB"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/libyuv.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CC1F8D6D5715B3835CA7584879B3F333CE9D8E47"
-    },
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/networkAdaptor.git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DA026B4BD2D7A3D90DFB525B3634DC400564CD0E"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B5AAE5F75AA83B1592C21C169BA8D6F829EB69C3"
     }
   ]
 }

@@ -5,7 +5,6 @@
 //  Created by yiqian on 6/23/16.
 //  Copyright © 2016 ksyun. All rights reserved.
 //
-
 #import "KSYStreamerVC.h"
 #import <libksyrtclivedy/KSYRTCStreamerKit.h>
 #import <libksyrtclivedy/KSYRTCStreamer.h>
@@ -16,7 +15,6 @@
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-
 @interface KSYRTCKitDemoVC () {
     id _filterBtn;
     UILabel* label;
@@ -200,6 +198,7 @@
         }
         else if(status == 408){
             [weak_demo statEvent:@"对方无应答," result:status];
+            [weak_kit stopRTCView];
         }
         else if(status == 404){
             [weak_demo statEvent:@"呼叫未注册号码,主动停止" result:status];
@@ -213,6 +212,11 @@
             {
                 [weak_demo statEvent:@"断开连接," result:status];
             }
+        }
+        else if(status == 408)
+        {
+            [weak_demo statEvent:@"408超时" result:status];
+            [weak_kit stopRTCView];
         }
         NSLog(@"oncallstop:%d",status);
     };
