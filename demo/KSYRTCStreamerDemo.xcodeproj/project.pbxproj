@@ -11,12 +11,6 @@
 		E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */; };
 		E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F877841D38CBCB004FDB25 /* KSYRtcView.m */; };
 		F21B3E951D1AB7DA00B26EB5 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */; };
-		F22125741D9D16E500796C7A /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125711D9D16E500796C7A /* libksygpuliveDy.framework */; };
-		F22125751D9D16E500796C7A /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125721D9D16E500796C7A /* libksyrtclivedy.framework */; };
-		F22125781D9D178100796C7A /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125761D9D178100796C7A /* libksygpuliveDy.framework */; };
-		F22125791D9D178100796C7A /* libksygpuliveDy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F22125761D9D178100796C7A /* libksygpuliveDy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F221257A1D9D178100796C7A /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22125771D9D178100796C7A /* libksyrtclivedy.framework */; };
-		F221257B1D9D178100796C7A /* libksyrtclivedy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F22125771D9D178100796C7A /* libksyrtclivedy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257D1D9D17C400796C7A /* KSYFileSelector.m */; };
 		F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257F1D9D17C400796C7A /* KSYNameSlider.m */; };
 		F22125881D9D17C400796C7A /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125811D9D17C400796C7A /* KSYReachability.m */; };
@@ -24,6 +18,12 @@
 		F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125851D9D17C400796C7A /* KSYUIView.m */; };
 		F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F56C1D82B87B0008B04D /* libicucore.tbd */; };
 		F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F5771D82B8AB0008B04D /* GLKit.framework */; };
+		F260582A1DB4A23700E4D688 /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26058281DB4A23700E4D688 /* libksygpuliveDy.framework */; };
+		F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */; };
+		F260582E1DB4A25200E4D688 /* libksygpuliveDy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F260582C1DB4A25200E4D688 /* libksygpuliveDy.framework */; };
+		F260582F1DB4A25200E4D688 /* libksygpuliveDy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F260582C1DB4A25200E4D688 /* libksygpuliveDy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F26058301DB4A25200E4D688 /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */; };
+		F26058311DB4A25200E4D688 /* libksyrtclivedy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */; };
 		F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F292E0E81D193DFF007D10C8 /* libpthread.tbd */; };
 		F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */; };
@@ -50,8 +50,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F22125791D9D178100796C7A /* libksygpuliveDy.framework in Embed Frameworks */,
-				F221257B1D9D178100796C7A /* libksyrtclivedy.framework in Embed Frameworks */,
+				F260582F1DB4A25200E4D688 /* libksygpuliveDy.framework in Embed Frameworks */,
+				F26058311DB4A25200E4D688 /* libksyrtclivedy.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,6 +89,10 @@
 		F227F56C1D82B87B0008B04D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		F227F5771D82B8AB0008B04D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F26058281DB4A23700E4D688 /* libksygpuliveDy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpuliveDy.framework; path = ../framework/libksygpuliveDy.framework; sourceTree = "<group>"; };
+		F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F260582C1DB4A25200E4D688 /* libksygpuliveDy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpuliveDy.framework; path = ../framework/libksygpuliveDy.framework; sourceTree = "<group>"; };
+		F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
 		F292E0D61D193C8B007D10C8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		F292E0E11D193D23007D10C8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -125,16 +129,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F22125741D9D16E500796C7A /* libksygpuliveDy.framework in Frameworks */,
-				F22125751D9D16E500796C7A /* libksyrtclivedy.framework in Frameworks */,
+				F260582A1DB4A23700E4D688 /* libksygpuliveDy.framework in Frameworks */,
+				F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */,
 				F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */,
 				F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */,
 				F21B3E951D1AB7DA00B26EB5 /* libc++.1.dylib in Frameworks */,
 				F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */,
 				F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */,
 				E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */,
-				F221257A1D9D178100796C7A /* libksyrtclivedy.framework in Frameworks */,
-				F22125781D9D178100796C7A /* libksygpuliveDy.framework in Frameworks */,
+				F26058301DB4A25200E4D688 /* libksyrtclivedy.framework in Frameworks */,
+				F260582E1DB4A25200E4D688 /* libksygpuliveDy.framework in Frameworks */,
 				0647006B1C5C8C2100A31FC7 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +184,8 @@
 		064700351C5C8B0900A31FC7 = {
 			isa = PBXGroup;
 			children = (
+				F260582C1DB4A25200E4D688 /* libksygpuliveDy.framework */,
+				F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */,
 				F22125761D9D178100796C7A /* libksygpuliveDy.framework */,
 				F22125771D9D178100796C7A /* libksyrtclivedy.framework */,
 				F227F5771D82B8AB0008B04D /* GLKit.framework */,
@@ -261,6 +267,8 @@
 		F20B34101D9BAD06001A0910 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F26058281DB4A23700E4D688 /* libksygpuliveDy.framework */,
+				F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */,
 				F22125701D9D16E500796C7A /* GPUImage.framework */,
 				F22125711D9D16E500796C7A /* libksygpuliveDy.framework */,
 				F22125721D9D16E500796C7A /* libksyrtclivedy.framework */,
@@ -486,7 +494,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = ../framework/livegpu;
+				FRAMEWORK_SEARCH_PATHS = ../framework;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -518,7 +526,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = ../framework/livegpu;
+				FRAMEWORK_SEARCH_PATHS = ../framework;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = KSYSTREAMER_DEMO;
 				HEADER_SEARCH_PATHS = "";
