@@ -18,9 +18,9 @@
 #import "KSYRtcMasterView.h"
 #import "KSYRtcSlaveView.h"
 
-#import <libksygpuliveDy/libksygpuimage.h>
-#import <libksygpuliveDy/KSYGPUStreamerKit.h>
-#import "libksygpuliveDy/KSYMoviePlayerController.h"
+#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/KSYGPUStreamerKit.h>
+#import "libksygpulive/KSYMoviePlayerController.h"
 
 typedef struct _StreamState {
     double    timeSecond;   // 更新时间

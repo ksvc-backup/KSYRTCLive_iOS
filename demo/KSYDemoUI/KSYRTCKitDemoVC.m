@@ -9,8 +9,8 @@
 #import <libksyrtclivedy/KSYRTCStreamerKit.h>
 #import <libksyrtclivedy/KSYRTCStreamer.h>
 
-#import <libksygpuliveDy/libksygpuimage.h>
-#import <libksygpuliveDy/KSYGPUStreamerKit.h>
+#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/KSYGPUStreamerKit.h>
 #import "KSYRTCKitDemoVC.h"
 #import <sys/socket.h>
 #import <netinet/in.h>
@@ -56,6 +56,22 @@
     [self.view addSubview:_winRtcView];
     [self.view bringSubviewToFront:_winRtcView];
     [_winRtcView addGestureRecognizer:panGestureRecognizer];
+    
+    //设置logo
+    [self setupLogo];
+}
+
+- (void) setupLogo{
+    CGFloat yPos = 0.05;
+    CGFloat hgt  = 0.1;
+    NSString *logoFile=[NSHomeDirectory() stringByAppendingString:@"/Documents/ksvc.png"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logoFile]){
+        NSURL *url =[[NSURL alloc] initFileURLWithPath:logoFile];
+        _kit.logoPic  = [[GPUImagePicture alloc] initWithURL: url];
+        _kit.logoRect = CGRectMake(0, 0, 193, 40);
+        _kit.logoAlpha= 1.0;
+        yPos += hgt;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -142,7 +158,7 @@
 - (void) onFilterChange:(id)sender{
     if (self.ksyFilterView.curFilter != _kit.filter){
         // use a new filter
-        [_kit setupRtcFilter:self.ksyFilterView.curFilter];
+        [_kit setupFilter:self.ksyFilterView.curFilter];
     }
 }
 
@@ -159,7 +175,7 @@
     //设置视频帧率
     _kit.rtcSteamer.videoFPS = 15;
     //是否打开rtc的日志
-    _kit.rtcSteamer.openRtcLog = YES;
+    _kit.rtcSteamer.openRtcLog = NO;
     //设置对端视频的宽高
     _kit.rtcSteamer.scaledWidth = 180;
     _kit.rtcSteamer.scaledHeight = 320;
@@ -168,8 +184,15 @@
     _kit.rtcSteamer.MaxBps = 256000;
     //设置信令传输模式,tls为推荐
     _kit.rtcSteamer.rtcMode = 1;
-    //设置小窗口的大小和显示
+    //设置小窗口的图层和显示大小
     _kit.winRect = CGRectMake(0.6, 0.6, 0.3, 0.3);
+    _kit.rtcLayer = 4;
+    //设置自定义悬浮view的图层,数值大的图层显示在顶层
+    _kit.customViewRect = CGRectMake(0.5, 0.5, 0.4, 0.4);
+    _kit.customViewLayer = 3;
+    //设置自定义view，加入contentview
+    UIView * customView = [self createUIView];
+    [_kit.contentView addSubview:customView];
     
     __weak KSYRTCKitDemoVC *weak_demo = self;
     __weak KSYRTCStreamerKit *weak_kit = _kit;
@@ -269,7 +292,7 @@
     if(![self checkNetworkReachability:AF_INET6])
     {
     //获取鉴权串，demo里为testAppServer，请改用自己的appserver
-    TestASString = [NSString stringWithFormat:@"http://120.132.89.26:6001/rtcauth?uid=%@",localid];
+    TestASString = [NSString stringWithFormat:@"http://120.92.10.164:6002/rtcauth?uid=%@",localid];
     _kit.rtcSteamer.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",
                                     [self AuthFromTestAS:TestASString]];
     }
@@ -392,5 +415,25 @@
     return (isReachable && !isLocalAddress && !isDirect) ? YES : NO;
 }
 
+//-(UIImageView *)createUIImageView{
+//    UIImageView * inputView;
+//    NSString *aPath3=[NSString stringWithFormat:@"%@/Documents/%@.png",NSHomeDirectory(),@"ksvc"];
+//    UIImage *inputImage=[[UIImage alloc]initWithContentsOfFile:aPath3];
+//    inputView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, inputImage.size.width, inputImage.size.height)];
+//    inputView.image = inputImage;
+//    inputView.contentMode = UIViewContentModeScaleAspectFit;
+//    inputView.tag = 500;
+//    inputView.hidden = NO;
+//    inputView.alpha = 0.5;
+//    
+//    return inputView;
+//}
+
+-(UIView *)createUIView{
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    view.layer.borderWidth = 10;
+    view.layer.borderColor = [[UIColor blueColor] CGColor];
+    return view;
+}
 
 @end

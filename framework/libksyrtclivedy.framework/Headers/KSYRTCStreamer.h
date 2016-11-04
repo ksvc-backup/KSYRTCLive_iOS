@@ -151,7 +151,7 @@ typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
 /*
  @abstract start call的回调函数
  */
-@property (nonatomic, copy)void (^onCallStart)(int status);
+@property (nonatomic, copy)void (^onRtcCallStart)(int status);
 /*
  @abstract answer的回调函数
  */
@@ -164,7 +164,7 @@ typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
 /*
  @abstract stop call的回调函数
  */
-@property (nonatomic, copy)void (^onCallStop)(int status);
+@property (nonatomic, copy)void (^onRTCCallStop)(int status);
 
 /*
  @abstract call coming的回调函数，返回远端的remoteURI

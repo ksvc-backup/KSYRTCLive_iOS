@@ -25,25 +25,41 @@
  @abstract stop call的回调函数
  */
 @property (nonatomic, copy)void (^onCallStop)(int status);
-
-/**
- @abstract 设置小窗口的位置，可以动态调整
+#pragma 小窗口相关配置
+/*
+ @abstract 小窗口图层
  */
-
+@property (nonatomic, readwrite) NSInteger rtcLayer;
+/**
+ @abstract 小窗口图层的大小
+ */
 @property (nonatomic, readwrite) CGRect winRect;
+/*
+ @abstract 用户自定义图层
+ */
+@property (nonatomic, readwrite) NSInteger customViewLayer;
+/*
+ @abstract 用户自定义图层的大小
+ */
+@property (nonatomic, readwrite) CGRect customViewRect;
+/*
+ @abstract 自定义图层母类，可往里addview
+ */
+@property (nonatomic, readwrite)UIView * contentView;
 
 /**
  @abstract 主窗口和小窗口切换
  */
 @property (nonatomic, readwrite) BOOL selfInFront;
 
+#pragma 操作函数
 /**
  @abstract 停止音视频采集和渲染
-  */
+ */
 -(void)stopRTCView;
 
 /**
- @abstract 设置美颜接口
+ @abstract 加入rtc窗口滤镜
  */
-- (void) setupRtcFilter:(GPUImageOutput<GPUImageInput>*) filter;
+- (void) setupRtcFilter:(GPUImageOutput<GPUImageInput> *) filter;
 @end

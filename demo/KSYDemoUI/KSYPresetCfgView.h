@@ -13,8 +13,8 @@
 #import <libksygpulivedylib/libksygpulivedylib.h>
 #import <libksygpulivedylib/libksygpuimage.h>
 #else
-#import <libksygpuliveDy/libksygpulive.h>
-#import "libksygpuliveDy/KSYMoviePlayerController.h"
+#import <libksygpulive/libksygpulive.h>
+#import "libksygpulive/KSYMoviePlayerController.h"
 #endif
 
 @interface KSYPresetCfgView : KSYUIView

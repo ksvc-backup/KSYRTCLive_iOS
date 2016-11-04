@@ -175,7 +175,6 @@
     _streamerBase.videoMaxBitrate  = 1000;
     _streamerBase.videoMinBitrate  =    0;
     _streamerBase.audiokBPS        =   48;
-    _streamerBase.enAutoApplyEstimateBW     = YES;
     _streamerBase.shouldEnableKSYStatModule = YES;
     _streamerBase.videoFPS = 15;
     _streamerBase.logBlock = ^(NSString* str){
@@ -194,7 +193,6 @@
         _streamerBase.videoMinBitrate  = 0; //
         _streamerBase.audiokBPS        = [_presetCfgView audioKbps];
         _streamerBase.videoFPS         = [_presetCfgView frameRate];
-        _streamerBase.enAutoApplyEstimateBW = YES;
         _streamerBase.shouldEnableKSYStatModule = YES;
         _streamerBase.logBlock = ^(NSString* str){ };
         _hostURL = [NSURL URLWithString:[_presetCfgView hostUrl]];
