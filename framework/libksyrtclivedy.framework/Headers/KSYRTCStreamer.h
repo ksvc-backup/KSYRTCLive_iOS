@@ -53,7 +53,8 @@ typedef enum KSYRTCResult{
 
 typedef void (^RTCVideoDataBlock)(CVPixelBufferRef pixelBuffer);
 
-typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
+typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts,uint32_t channels,
+uint32_t sampleRate,uint32_t bytesPerSample);
 
 @interface KSYRTCSteamer: NSObject
 /*
@@ -83,10 +84,6 @@ typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
  */
 @property (nonatomic, assign) int videoFPS;
 /*
- @abstract 传输平均比特率
- */
-@property (nonatomic, assign) int AvgBps;
-/*
  @abstract 传输最大比特率
  */
 @property (nonatomic, assign) int MaxBps;
@@ -105,19 +102,27 @@ typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
  */
 @property (nonatomic, assign) BOOL forceTurn;
 /*
- @abstract 对端视频数据宽度
+ @abstract 视频数据宽度
  */
-@property (nonatomic, assign) int scaledWidth;
-
+@property (nonatomic, assign) int videoWidth;
 /*
- @abstract 对端视频数据高度
+ @abstract 视频数据高度
  */
-@property (nonatomic, assign) int scaledHeight;
+@property (nonatomic, assign) int videoHeight;
+/*
+ @abstract 视频发送缩放比例,从0～1
+ */
+@property (nonatomic, assign) float sendVideoRatio;
 
 /*
  @abstract 辅播可以通过这个接口不发送视频数据
  */
-@property (nonatomic, assign) BOOL muteVideo;
+@property (nonatomic, assign) BOOL notWithVideo;
+
+/**
+ @abstract   sdk版本号
+ **/
+@property (nonatomic, readonly)NSString* sdkVersion;
 
 /*
  @abstract rtc信令的传输模式,默认为TLS
@@ -249,6 +254,56 @@ typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts);
  @see CMSampleBufferRef
  */
 -(int) processAudio:(CMSampleBufferRef)sampleBuffer;
+
+#pragma  mark - 统计数据
+
+/**
+ @abstract   视频发送bytes数
+**/
+@property (nonatomic, readonly)int64_t    videoSendByte;
+/**
+ @abstract   视频发送丢包率
+ **/
+@property (nonatomic, readonly)int32_t    videoSendLost;
+/**
+ @abstract   视频接收bytes数
+ **/
+@property (nonatomic, readonly)int64_t    videoRecvByte;
+/**
+ @abstract   视频接收丢包率
+ **/
+@property (nonatomic, readonly)int32_t    videoRecvLost;
+/**
+ @abstract   音频发送bytes数
+ **/
+@property (nonatomic, readonly)int64_t    audioSendByte;
+/**
+ @abstract   音频发送丢包率
+ **/
+@property (nonatomic, readonly)int32_t    audioSendLost;
+/**
+ @abstract   音频接收bytes数
+ **/
+@property (nonatomic, readonly)int64_t    audioRecvByte;
+/**
+ @abstract   音频接收丢包率
+ **/
+@property (nonatomic, readonly)int32_t    audioRecvLost;
+
+/**
+ @abstract   上报的信息回调给上层
+ **/
+@property (nonatomic, assign)BOOL enableUpLoadLog;
+
+/**
+ @abstract   上报信息的回调
+ **/
+@property (nonatomic, copy) void(^collectDataBlock)(NSString *message);
+
+/**
+ @abstract   sdk log的回调
+ **/
+@property (nonatomic, copy) void(^sdkLogBlock)(NSString *message);
 
 @end
 

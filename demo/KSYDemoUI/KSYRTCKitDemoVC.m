@@ -6,7 +6,7 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import "KSYStreamerVC.h"
-#import <libksyrtclivedy/KSYRTCStreamerKit.h>
+#import "KSYRTCStreamerKit.h"
 #import <libksyrtclivedy/KSYRTCStreamer.h>
 
 #import <libksygpulive/libksygpuimage.h>
@@ -25,6 +25,7 @@
     UIPanGestureRecognizer *panGestureRecognizer;
     UIView* _winRtcView;
 }
+@property bool beQuit;
 
 @end
 
@@ -43,6 +44,8 @@
     //设置rtc参数
     [self setRtcSteamerCfg];
     
+    _ismaster = NO;
+    _beQuit = NO;
     //设置拖拽手势
     panGestureRecognizer=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
     CGRect rect;
@@ -139,21 +142,20 @@
 }
 
 
-- (void) onQuit{  // quit current demo
-    [_kit.streamerBase stopStream];
-    self.streamerBase = nil;
-    
-    [_kit stopPreview];
-    [_kit stopRTCView];
-    if(_kit.rtcSteamer)
+- (void) onQuit{
+    if(_kit.callstarted)
     {
         [_kit.rtcSteamer stopCall];
-        [_kit.rtcSteamer unRegisterRTC];
-        _kit.rtcSteamer = nil;
+        _beQuit = YES;
     }
-    _kit = nil;
-    [super onQuit];
+    else
+    {
+        [_kit.rtcSteamer unRegisterRTC];
+        _kit = nil;
+        [super onQuit];
+    }
 }
+
 
 - (void) onFilterChange:(id)sender{
     if (self.ksyFilterView.curFilter != _kit.filter){
@@ -164,41 +166,32 @@
 
 #pragma mark - UIViewController
 - (void) setRtcSteamerCfg {
-    //设置ak/sk鉴权信息,本demo从testAppServer取，客户请从自己的appserver获取。
-    _kit.rtcSteamer.authString = nil;
-    //设置域名查询domain，内部使用
-    _kit.rtcSteamer.queryDomainString = @"http://rtc.vcloud.ks-live.com:6000/querydomain";
-    //设定公司后缀
-    _kit.rtcSteamer.uniqName = @"apptest";
-    //设置音频采样率
-    _kit.rtcSteamer.sampleRate = 44100;
-    //设置视频帧率
-    _kit.rtcSteamer.videoFPS = 15;
-    //是否打开rtc的日志
-    _kit.rtcSteamer.openRtcLog = NO;
-    //设置对端视频的宽高
-    _kit.rtcSteamer.scaledWidth = 180;
-    _kit.rtcSteamer.scaledHeight = 320;
-    //设置rtc传输的码率
-    _kit.rtcSteamer.AvgBps = 256000;
-    _kit.rtcSteamer.MaxBps = 256000;
-    //设置信令传输模式,tls为推荐
-    _kit.rtcSteamer.rtcMode = 1;
-    //设置小窗口的图层和显示大小
-    _kit.winRect = CGRectMake(0.6, 0.6, 0.3, 0.3);
-    _kit.rtcLayer = 4;
-    //设置自定义悬浮view的图层,数值大的图层显示在顶层
-    _kit.customViewRect = CGRectMake(0.5, 0.5, 0.4, 0.4);
-    _kit.customViewLayer = 3;
-    //设置自定义view，加入contentview
+    //设置鉴权信息
+    _kit.rtcSteamer.authString = nil;//设置ak/sk鉴权信息,本demo从testAppServer取，客户请从自己的appserver获取。
+    //设置音频属性
+    _kit.rtcSteamer.sampleRate = 44100;//设置音频采样率，暂时不支持调节
+    //设置视频属性
+    _kit.rtcSteamer.videoFPS = 15; //设置视频帧率
+    _kit.rtcSteamer.videoWidth = 360;//设置视频的宽高，和当前分辨率相关,注意一定要保持16:9
+    _kit.rtcSteamer.videoHeight = 640;
+    _kit.rtcSteamer.MaxBps = 256000;//设置rtc传输的最大码率,如果推流卡顿，可以设置该参数
+    //设置小窗口属性
+    _kit.winRect = CGRectMake(0.6, 0.6, 0.3, 0.3);//设置小窗口属性
+    _kit.rtcLayer = 4;//设置小窗口图层，因为主版本占用了1~3，建议设置为4
+    
+    //特性1：悬浮图层，用户可以在小窗口叠加自己的view，注意customViewLayer >rtcLayer,（option）
+    _kit.customViewRect = CGRectMake(0.6, 0.6, 0.3, 0.3);
+    _kit.customViewLayer = 5;
     UIView * customView = [self createUIView];
     [_kit.contentView addSubview:customView];
     
+    //rtcstreamer的回调，（option）
     __weak KSYRTCKitDemoVC *weak_demo = self;
     __weak KSYRTCStreamerKit *weak_kit = _kit;
     _kit.rtcSteamer.onRegister= ^(int status){
         NSString * message = [NSString stringWithFormat:@"local sip account:%@",weak_kit.rtcSteamer.authUid];
         [weak_demo statString:message];
+        NSLog(@"sdkversion:%@",weak_kit.rtcSteamer.sdkVersion);
         [weak_demo statEvent:@"register callback" result:status];
     };
     _kit.rtcSteamer.onUnRegister= ^(int status){
@@ -211,6 +204,7 @@
         [weak_demo onRtcAnswerCall];
     };
     
+    //kit回调，（option）
     _kit.onCallStart =^(int status){
         if(status == 200)
         {
@@ -221,7 +215,6 @@
         }
         else if(status == 408){
             [weak_demo statEvent:@"对方无应答," result:status];
-            [weak_kit stopRTCView];
         }
         else if(status == 404){
             [weak_demo statEvent:@"呼叫未注册号码,主动停止" result:status];
@@ -239,11 +232,22 @@
         else if(status == 408)
         {
             [weak_demo statEvent:@"408超时" result:status];
-            [weak_kit stopRTCView];
         }
         NSLog(@"oncallstop:%d",status);
+        if(weak_demo.beQuit)
+        {
+            [weak_kit.rtcSteamer unRegisterRTC];
+            weak_demo.kit = nil;
+            [super onQuit];
+        }
     };
-    _ismaster = NO;
+    
+    //sdk日志接口（option）
+    _kit.rtcSteamer.openRtcLog = YES;//是否打开rtc的日志
+    _kit.rtcSteamer.sdkLogBlock = ^(NSString * message){
+        NSLog(@"%@",message);
+    };
+    
 }
 
 
@@ -300,14 +304,14 @@
     TestASString = @"accesskey=D8uDWZ88ZKW48/eZHmRm&expire=1474713034&nonce=CnhQKCkGZ5DnSvYwtz2uhjb0j599E1e7&uid=330&uniqname=apptest&signature=tndMoVqr0nq3fsFM2iEUNwBw1h8%3D";
         _kit.rtcSteamer.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",TestASString];
     }
-
+    
     [_kit.rtcSteamer registerRTC];
 }
 
 - (void)onRtcStartCall:(NSString *)remoteid{
-    
+
     int ret = [_kit.rtcSteamer startCall:remoteid];
-    
+
     NSString * event = [NSString stringWithFormat:@"发起呼叫,remote_id:%@",remoteid];
     [self statEvent:event result:ret];
 }

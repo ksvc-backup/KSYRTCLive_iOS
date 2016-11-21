@@ -52,12 +52,8 @@
  */
 @property (nonatomic, readwrite) BOOL selfInFront;
 
+@property (nonatomic, readonly) BOOL   callstarted;
 #pragma 操作函数
-/**
- @abstract 停止音视频采集和渲染
- */
--(void)stopRTCView;
-
 /**
  @abstract 加入rtc窗口滤镜
  */

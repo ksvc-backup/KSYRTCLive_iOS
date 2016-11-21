@@ -24,6 +24,7 @@
 		F278049C1DB7921C008150F5 /* WID-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F278049B1DB7921C008150F5 /* WID-small.png */; };
 		F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */; };
 		F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F292E0E81D193DFF007D10C8 /* libpthread.tbd */; };
+		F2BA006C1DD5E5D800DB56AF /* KSYRTCStreamerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */; };
 		F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */; };
 		F2C05C471D7420AB00AD3CFD /* KSYPresetCfgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C411D7420AB00AD3CFD /* KSYPresetCfgVC.m */; };
 		F2C05C481D7420AB00AD3CFD /* KSYPresetCfgView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */; };
@@ -44,7 +45,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		F264418E1D88FE930015D841 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -60,7 +61,6 @@
 		064700661C5C8C1600A31FC7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		0647006A1C5C8C2100A31FC7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		064700B41C5C9E1A00A31FC7 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../../../extra/GPUImage/build/GPUImage.framework; sourceTree = "<group>"; };
 		24972554697D413B26939B5C /* Pods_KSYRTCStreamerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KSYRTCStreamerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D1059DCC144D6450AFECB48 /* Pods-KSYRTCStreamerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYRTCStreamerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C94D7D699C3A28C3F3E55F4C /* Pods-KSYRTCStreamerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYRTCStreamerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,12 +83,14 @@
 		F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F25627D61DC881A200877034 /* libksygpulive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpulive.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/KSYRTCStreamerDemo-dacloepivbjdxscpmnmydymmchjr/Build/Products/Debug-iphoneos/libksygpulive.framework"; sourceTree = "<group>"; };
 		F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
-		F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
-		F278049B1DB7921C008150F5 /* WID-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WID-small.png"; sourceTree = "<group>"; };
+		F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F278049B1DB7921C008150F5 /* WID-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WID-small.png"; path = "../WID-small.png"; sourceTree = "<group>"; };
 		F292E0D61D193C8B007D10C8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		F292E0E11D193D23007D10C8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		F292E0E81D193DFF007D10C8 /* libpthread.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libpthread.tbd; path = usr/lib/libpthread.tbd; sourceTree = SDKROOT; };
+		F2BA006A1DD5E5D800DB56AF /* KSYRTCStreamerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYRTCStreamerKit.h; path = ../../source/KSYRTCStreamerKit.h; sourceTree = "<group>"; };
+		F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYRTCStreamerKit.m; path = ../../source/KSYRTCStreamerKit.m; sourceTree = "<group>"; };
 		F2C05C3E1D7420AB00AD3CFD /* KSYMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYMenuView.h; sourceTree = "<group>"; };
 		F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYMenuView.m; sourceTree = "<group>"; };
 		F2C05C401D7420AB00AD3CFD /* KSYPresetCfgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgVC.h; sourceTree = "<group>"; };
@@ -174,12 +176,6 @@
 		064700351C5C8B0900A31FC7 = {
 			isa = PBXGroup;
 			children = (
-				F278049B1DB7921C008150F5 /* WID-small.png */,
-				F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */,
-				F227F5771D82B8AB0008B04D /* GLKit.framework */,
-				F227F56C1D82B87B0008B04D /* libicucore.tbd */,
-				F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */,
-				F2C05CA71D75656900AD3CFD /* Main.storyboard */,
 				064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */,
 				0647003F1C5C8B0900A31FC7 /* Products */,
 				F20B34101D9BAD06001A0910 /* Frameworks */,
@@ -198,9 +194,7 @@
 		064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				F2C05C8E1D755E6600AD3CFD /* Assets.xcassets */,
-				F2C05C7F1D755D7300AD3CFD /* AppDelegate.h */,
-				F2C05C801D755D7300AD3CFD /* AppDelegate.m */,
+				F2BA00691DD5E58700DB56AF /* rtcStreamerKit */,
 				06A5B6091D43BDDF00D9EE31 /* libs */,
 				0626F1181D2DFF0400193DAC /* KSYUIUtils */,
 				0626F0F21D2DFF0400193DAC /* KSYDemoUI */,
@@ -212,6 +206,13 @@
 		064700411C5C8B0900A31FC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F278049B1DB7921C008150F5 /* WID-small.png */,
+				F227F56C1D82B87B0008B04D /* libicucore.tbd */,
+				F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */,
+				F2C05CA71D75656900AD3CFD /* Main.storyboard */,
+				F2C05C8E1D755E6600AD3CFD /* Assets.xcassets */,
+				F2C05C7F1D755D7300AD3CFD /* AppDelegate.h */,
+				F2C05C801D755D7300AD3CFD /* AppDelegate.m */,
 				F2C05C901D755E6600AD3CFD /* Info.plist */,
 				F2C05C861D755DB900AD3CFD /* main.m */,
 			);
@@ -221,6 +222,8 @@
 		06A5B6091D43BDDF00D9EE31 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */,
+				F227F5771D82B8AB0008B04D /* GLKit.framework */,
 				F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */,
 				F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */,
 				F292E0E81D193DFF007D10C8 /* libpthread.tbd */,
@@ -228,7 +231,6 @@
 				F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */,
 				F292E0D61D193C8B007D10C8 /* libc++.tbd */,
 				E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */,
-				064700B41C5C9E1A00A31FC7 /* GPUImage.framework */,
 				0647006A1C5C8C2100A31FC7 /* libz.tbd */,
 				064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */,
 				064700661C5C8C1600A31FC7 /* VideoToolbox.framework */,
@@ -263,6 +265,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F2BA00691DD5E58700DB56AF /* rtcStreamerKit */ = {
+			isa = PBXGroup;
+			children = (
+				F2BA006A1DD5E5D800DB56AF /* KSYRTCStreamerKit.h */,
+				F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */,
+			);
+			name = rtcStreamerKit;
+			sourceTree = "<group>";
+		};
 		F77D1A5794A6D15485F34994 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,13 +290,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 064700551C5C8B0900A31FC7 /* Build configuration list for PBXNativeTarget "KSYRTCStreamerDemo" */;
 			buildPhases = (
-				E9B162E2A633DF5244D73A1C /* Check Pods Manifest.lock */,
+				5274F504ED3EE58EF7BDDCF6 /* [CP] Check Pods Manifest.lock */,
 				0647003A1C5C8B0900A31FC7 /* Sources */,
 				0647003B1C5C8B0900A31FC7 /* Frameworks */,
 				0647003C1C5C8B0900A31FC7 /* Resources */,
 				F264418E1D88FE930015D841 /* Embed Frameworks */,
-				D861BCF99BF55239C2BF069F /* Embed Pods Frameworks */,
-				18D70ABE4CAA05BFAA590E18 /* Copy Pods Resources */,
+				0F35921D697B0C5DA9C119D1 /* [CP] Embed Pods Frameworks */,
+				D2BBAEE94DE1427B5ADE3EBA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -350,29 +361,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18D70ABE4CAA05BFAA590E18 /* Copy Pods Resources */ = {
+		0F35921D697B0C5DA9C119D1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D861BCF99BF55239C2BF069F /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,19 +376,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9B162E2A633DF5244D73A1C /* Check Pods Manifest.lock */ = {
+		5274F504ED3EE58EF7BDDCF6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D2BBAEE94DE1427B5ADE3EBA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -417,6 +428,7 @@
 				E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */,
 				F2C05C811D755D7300AD3CFD /* AppDelegate.m in Sources */,
 				F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */,
+				F2BA006C1DD5E5D800DB56AF /* KSYRTCStreamerKit.m in Sources */,
 				F2C05C4C1D7420B500AD3CFD /* KSYStreamerVC.m in Sources */,
 				F2C05C571D74234000AD3CFD /* KSYCtrlView.m in Sources */,
 			);
@@ -431,6 +443,7 @@
 				F2C05CA61D75656900AD3CFD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F2C05CA71D75656900AD3CFD /* Main.storyboard */ = {
@@ -439,6 +452,7 @@
 				F2C05CA81D75656900AD3CFD /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -540,7 +554,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Kingsoft Cloud Network Technology Corporation Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = ../framework;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					../framework,
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -551,7 +568,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -570,14 +587,20 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Kingsoft Cloud Network Technology Corporation Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = ../framework;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					../framework,
+				);
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = KSYSTREAMER_DEMO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					KSYSTREAMER_DEMO,
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -79,7 +79,6 @@
     return [super shouldAutorotate];
 }
 - (void) dealloc {
-    NSLog(@"dealloc");
     if (_timer) {
         [self rmObservers];
     }
