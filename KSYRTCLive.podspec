@@ -1,6 +1,6 @@
 RTCLivePod::Spec.new do |spec|
   spec.name         = 'KSYRTCLive_iOS'
-  spec.version      = '1.6.0'
+  spec.version      = '1.9.0'
   spec.license      = {
 :type => 'Proprietary',
 :text => <<-LICENSE
@@ -18,9 +18,10 @@ RTCLivePod::Spec.new do |spec|
   spec.requires_arc = true
   spec.frameworks   = 'VideoToolbox'
   spec.dependency 'GPUImage'
-  spec.dependency 'KSYGPULive_iOS'
+  spec.dependency 'libksygpulive/KSYGPUResource','1.8.7'
+  spec.dependency 'libksygpulive/libksygpulive','1.8.7'
   spec.ios.library = 'z', 'iconv', 'stdc++.6'
-  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v1.6.0'}
+  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v1.9.0'}
   spec.vendored_frameworks = 'framework/libksyrtclive.framework'
 end
 
