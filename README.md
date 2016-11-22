@@ -9,9 +9,10 @@
 
 ### 1.3 pod集成
 ```
-// 私有库 (直接指定SDK的github仓库地址和版本号)
-pod 'KSYRTCLive_iOS', :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v1.9.0'
-
+// 私有库 (需要包含rtc库以及主版本库)
+pod 'KSYRTCLive’,:path => '../'
+pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
+pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
 ```
 
 [oschina镜像](https://git.oschina.net/ksvc/KSYRTCLive_iOS)地址：
