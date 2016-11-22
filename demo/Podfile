@@ -3,7 +3,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 target 'KSYRTCStreamerDemo' do
-   pod 'GPUImage'
+   pod 'KSYRTCLive’,:path => '../'
    pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
    pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
 end

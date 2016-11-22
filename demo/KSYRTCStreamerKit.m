@@ -1,5 +1,5 @@
 
-#import <libksygpulive/KSYGPUPicOutput.h>
+#import "KSYGPUPicOutput.h"
 #import <libksygpulive/libksygpuimage.h>
 #import <libksygpulive/KSYGPUStreamerKit.h>
 #import <libksyrtclivedy/KSYRTCAecModule.h>
