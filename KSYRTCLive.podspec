@@ -17,7 +17,6 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, '7.0'
   spec.requires_arc = true
   spec.frameworks   = 'VideoToolbox'
-  spec.dependency 'GPUImage'
   spec.dependency 'libksygpulive/KSYGPUResource','1.8.7'
   spec.dependency 'libksygpulive/libksygpulive','1.8.7'
   spec.ios.library = 'z', 'iconv', 'stdc++.6'
