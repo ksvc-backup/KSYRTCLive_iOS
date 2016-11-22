@@ -28,10 +28,9 @@ pod 'KSYRTCLive_iOS', :git => 'https://git.oschina.net/ksvc/KSYRTCLive_iOS.git',
 - 2016.08.15 支持美颜连麦;
 - 2016.08.26 支持AEC(回音消除);
 - 2016.09.26 音视频质量极致优化,超稳定版本v1.8.5发布。
-- 2016.11.22 和rtc主版本分离，更加易于集成。
+- 2016.11.22 和rtc主版本分离，更加易于集成。开源[KSYRTCStreamerKit.m](https://github.com/ksvc/KSYRTCLive_iOS/blob/master/source/KSYRTCStreamerKit.m)
 
 ### 2.2 近期工作
-
 - 2016.12.xx 多人连麦；
 
 ## 3. 商务合作
