@@ -22,6 +22,6 @@ RTCLivePod::Spec.new do |spec|
   spec.dependency 'libksygpulive/libksygpulive','1.8.7'
   spec.ios.library = 'z', 'iconv', 'stdc++.6'
   spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v1.9.0'}
-  spec.vendored_frameworks = 'framework/libksyrtclive.framework'
+  spec.vendored_frameworks = 'framework/libksyrtclivedy.framework'
 end
 
