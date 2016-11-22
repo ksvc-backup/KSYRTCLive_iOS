@@ -347,7 +347,7 @@
     AudioStreamBasicDescription asbd;
     asbd.mSampleRate       = sampleRate;
     asbd.mFormatID         = kAudioFormatLinearPCM;
-    asbd.mFormatFlags      = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
+    asbd.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
     asbd.mBitsPerChannel   = 8 * bytesPerSample;
     asbd.mBytesPerFrame    = bytesPerSample;
     asbd.mBytesPerPacket   = bytesPerSample;
@@ -361,7 +361,7 @@
     {
         int buflen = [self.aMixer getBufLength:2];
         if (buflen < 8){
-            [self.aMixer processAudioData:&buf nbSample:len/2 withFormat:&asbd timeinfo:pts of:2];
+            [self.aMixer processAudioData:&buf nbSample:len/asbd.mBytesPerFrame withFormat:&asbd timeinfo:pts of:2];
         }
         else {
             NSLog(@"delay >300ms,we will discard some audio");
