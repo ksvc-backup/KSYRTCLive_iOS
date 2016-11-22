@@ -359,8 +359,8 @@
     pts.value = ptsvalue;
     if([self.streamerBase isStreaming])
     {
-        int len = [self.aMixer getBufLength:2];
-        if (len < 8){
+        int buflen = [self.aMixer getBufLength:2];
+        if (buflen < 8){
             [self.aMixer processAudioData:&buf nbSample:len/2 withFormat:&asbd timeinfo:pts of:2];
         }
         else {
