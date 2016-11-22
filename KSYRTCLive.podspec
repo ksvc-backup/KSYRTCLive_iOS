@@ -1,4 +1,4 @@
-RTCLivePod::Spec.new do |spec|
+Pod::Spec.new do |spec|
   spec.name         = 'KSYRTCLive_iOS'
   spec.version      = '1.9.0'
   spec.license      = {
