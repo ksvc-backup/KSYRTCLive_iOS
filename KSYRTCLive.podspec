@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name         = 'KSYRTCLive_iOS'
+  spec.name         = 'KSYRTCLive'
   spec.version      = '1.9.0'
   spec.license      = {
 :type => 'Proprietary',
