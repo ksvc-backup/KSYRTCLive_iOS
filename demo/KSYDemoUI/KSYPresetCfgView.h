@@ -21,6 +21,7 @@
 
 // UI elements
 @property UIButton* btn0;
+@property UIButton* btn1;
 
 // preset settings
 // capture

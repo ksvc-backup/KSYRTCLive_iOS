@@ -2,7 +2,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class KSYGPUStreamerKit;
-@class KSYRTCSteamer;
+@class KSYRTCClient;
 
 @interface KSYRTCStreamerKit: KSYGPUStreamerKit
 /**
@@ -15,7 +15,7 @@
 /**
  @abstract rtc接口类
  */
-@property (nonatomic, strong) KSYRTCSteamer * rtcSteamer;
+@property (nonatomic, strong) KSYRTCClient * rtcClient;
 
 /*
  @abstract start call的回调函数
@@ -53,7 +53,9 @@
 @property (nonatomic, readwrite) BOOL selfInFront;
 
 @property (nonatomic, readonly) BOOL   callstarted;
-#pragma 操作函数
+#pragma 美颜操作函数
+
+@property (nonatomic, readwrite) GPUImageOutput<GPUImageInput>* curfilter;
 /**
  @abstract 加入rtc窗口滤镜
  */

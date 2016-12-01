@@ -7,7 +7,7 @@
 //
 #import "KSYStreamerVC.h"
 #import "KSYRTCStreamerKit.h"
-#import <libksyrtclivedy/KSYRTCStreamer.h>
+#import <libksyrtclivedy/KSYRTCClient.h>
 
 #import <libksygpulive/libksygpuimage.h>
 #import <libksygpulive/KSYGPUStreamerKit.h>
@@ -85,6 +85,7 @@
     if (_kit) {
         // init with default filter
         [_kit setupFilter:self.ksyFilterView.curFilter];
+        _kit.curfilter =self.ksyFilterView.curFilter;
         [_kit startPreview:self.view];
     }
 }
@@ -104,7 +105,7 @@
     if (_seconds%5){ // update label every 5 second
         UIApplicationState appState = [UIApplication sharedApplication].applicationState;
         if(appState == UIApplicationStateActive){
-            NSDate *now = [[NSDate alloc] init];
+           // NSDate *now = [[NSDate alloc] init];
 //            _kit.textLable.text = [_dateFormatter stringFromDate:now];
 //            [_kit updateTextLable];
         }
@@ -145,12 +146,12 @@
 - (void) onQuit{
     if(_kit.callstarted)
     {
-        [_kit.rtcSteamer stopCall];
+        [_kit.rtcClient stopCall];
         _beQuit = YES;
     }
     else
     {
-        [_kit.rtcSteamer unRegisterRTC];
+        [_kit.rtcClient unRegisterRTC];
         _kit = nil;
         [super onQuit];
     }
@@ -160,21 +161,21 @@
 - (void) onFilterChange:(id)sender{
     if (self.ksyFilterView.curFilter != _kit.filter){
         // use a new filter
-        [_kit setupFilter:self.ksyFilterView.curFilter];
+        [_kit setupRtcFilter:self.ksyFilterView.curFilter];
     }
 }
 
 #pragma mark - UIViewController
 - (void) setRtcSteamerCfg {
     //设置鉴权信息
-    _kit.rtcSteamer.authString = nil;//设置ak/sk鉴权信息,本demo从testAppServer取，客户请从自己的appserver获取。
+    _kit.rtcClient.authString = nil;//设置ak/sk鉴权信息,本demo从testAppServer取，客户请从自己的appserver获取。
     //设置音频属性
-    _kit.rtcSteamer.sampleRate = 44100;//设置音频采样率，暂时不支持调节
+    _kit.rtcClient.sampleRate = 44100;//设置音频采样率，暂时不支持调节
     //设置视频属性
-    _kit.rtcSteamer.videoFPS = 15; //设置视频帧率
-    _kit.rtcSteamer.videoWidth = 360;//设置视频的宽高，和当前分辨率相关,注意一定要保持16:9
-    _kit.rtcSteamer.videoHeight = 640;
-    _kit.rtcSteamer.MaxBps = 256000;//设置rtc传输的最大码率,如果推流卡顿，可以设置该参数
+    _kit.rtcClient.videoFPS = 15; //设置视频帧率
+    _kit.rtcClient.videoWidth = 360;//设置视频的宽高，和当前分辨率相关,注意一定要保持16:9
+    _kit.rtcClient.videoHeight = 640;
+    _kit.rtcClient.MaxBps = 256000;//设置rtc传输的最大码率,如果推流卡顿，可以设置该参数
     //设置小窗口属性
     _kit.winRect = CGRectMake(0.6, 0.6, 0.3, 0.3);//设置小窗口属性
     _kit.rtcLayer = 4;//设置小窗口图层，因为主版本占用了1~3，建议设置为4
@@ -185,20 +186,20 @@
     UIView * customView = [self createUIView];
     [_kit.contentView addSubview:customView];
     
-    //rtcstreamer的回调，（option）
+    //rtcClient的回调，（option）
     __weak KSYRTCKitDemoVC *weak_demo = self;
     __weak KSYRTCStreamerKit *weak_kit = _kit;
-    _kit.rtcSteamer.onRegister= ^(int status){
-        NSString * message = [NSString stringWithFormat:@"local sip account:%@",weak_kit.rtcSteamer.authUid];
+    _kit.rtcClient.onRegister= ^(int status){
+        NSString * message = [NSString stringWithFormat:@"local sip account:%@",weak_kit.rtcClient.authUid];
         [weak_demo statString:message];
-        NSLog(@"sdkversion:%@",weak_kit.rtcSteamer.sdkVersion);
+        NSLog(@"sdkversion:%@",weak_kit.rtcClient.sdkVersion);
         [weak_demo statEvent:@"register callback" result:status];
     };
-    _kit.rtcSteamer.onUnRegister= ^(int status){
+    _kit.rtcClient.onUnRegister= ^(int status){
         [weak_demo statEvent:@"unregister callback" result:status];
         NSLog(@"unregister callback");
     };
-    _kit.rtcSteamer.onCallInComing =^(char* remoteURI){
+    _kit.rtcClient.onCallInComing =^(char* remoteURI){
         NSString *text = [NSString stringWithFormat:@"有呼叫到来,id:%s",remoteURI];
         [weak_demo statEvent:text result:0];
         [weak_demo onRtcAnswerCall];
@@ -236,15 +237,15 @@
         NSLog(@"oncallstop:%d",status);
         if(weak_demo.beQuit)
         {
-            [weak_kit.rtcSteamer unRegisterRTC];
+            [weak_kit.rtcClient unRegisterRTC];
             weak_demo.kit = nil;
             [super onQuit];
         }
     };
     
     //sdk日志接口（option）
-    _kit.rtcSteamer.openRtcLog = YES;//是否打开rtc的日志
-    _kit.rtcSteamer.sdkLogBlock = ^(NSString * message){
+    _kit.rtcClient.openRtcLog = YES;//是否打开rtc的日志
+    _kit.rtcClient.sdkLogBlock = ^(NSString * message){
         NSLog(@"%@",message);
     };
     
@@ -290,47 +291,47 @@
 
 - (void)onRtcRegister:(NSString *)localid
 {
-    _kit.rtcSteamer.localId = localid;
+    _kit.rtcClient.localId = localid;
     
     NSString * TestASString;
     if(![self checkNetworkReachability:AF_INET6])
     {
     //获取鉴权串，demo里为testAppServer，请改用自己的appserver
     TestASString = [NSString stringWithFormat:@"http://120.92.10.164:6002/rtcauth?uid=%@",localid];
-    _kit.rtcSteamer.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",
+    _kit.rtcClient.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",
                                     [self AuthFromTestAS:TestASString]];
     }
     else{
     TestASString = @"accesskey=D8uDWZ88ZKW48/eZHmRm&expire=1474713034&nonce=CnhQKCkGZ5DnSvYwtz2uhjb0j599E1e7&uid=330&uniqname=apptest&signature=tndMoVqr0nq3fsFM2iEUNwBw1h8%3D";
-        _kit.rtcSteamer.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",TestASString];
+        _kit.rtcClient.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",TestASString];
     }
     
-    [_kit.rtcSteamer registerRTC];
+    [_kit.rtcClient registerRTC];
 }
 
 - (void)onRtcStartCall:(NSString *)remoteid{
 
-    int ret = [_kit.rtcSteamer startCall:remoteid];
+    int ret = [_kit.rtcClient startCall:remoteid];
 
     NSString * event = [NSString stringWithFormat:@"发起呼叫,remote_id:%@",remoteid];
     [self statEvent:event result:ret];
 }
 - (void)onRtcAnswerCall{
-    int ret = [_kit.rtcSteamer answerCall];
+    int ret = [_kit.rtcClient answerCall];
     [self statEvent:@"应答" result:ret];
 }
 - (void)onRtcUnregister{
-    int ret = [_kit.rtcSteamer unRegisterRTC];
+    int ret = [_kit.rtcClient unRegisterRTC];
     
     [self statEvent:@"unregister" result:ret];
 }
 
 - (void)onRtcRejectCall{
-    int ret = [_kit.rtcSteamer rejectCall];
+    int ret = [_kit.rtcClient rejectCall];
     [self statEvent:@"reject" result:ret];
 }
 - (void)onRtcStopCall{
-    int ret = [_kit.rtcSteamer stopCall];
+    int ret = [_kit.rtcClient stopCall];
     [self statEvent:@"stopcall" result:ret];
    }
 

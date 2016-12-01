@@ -32,6 +32,7 @@
     _hostUrlUI = [self addTextField:url ];
     
     _btn0 =  [self addButton:@"rtcKitDemo"];
+    _btn1 =  [self addButton:@"返回"];
     
     CGRect screenRect = [[UIScreen mainScreen]bounds];
     CGFloat ratio = screenRect.size.width / screenRect.size.height;
@@ -90,7 +91,8 @@
     //剩余空间全部用来放按钮
     CGFloat yPos = self.yPos > self.height ? self.yPos - self.height : self.yPos;
     self.btnH = (self.height - yPos - self.gap*2);
-    [self putRow1:_btn0];
+    [self putRow2:_btn0
+              and:_btn1];
 }
 
 - (NSString*) hostUrl {

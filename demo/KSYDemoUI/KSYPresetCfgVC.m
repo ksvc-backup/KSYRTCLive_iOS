@@ -73,9 +73,10 @@
     UIViewController *vc = nil;
     if ( sender == _cfgView.btn0) {
         vc = [[KSYRTCKitDemoVC alloc] initWithCfg:_cfgView];
-    }
-    if (vc){
         [self presentViewController:vc animated:true completion:nil];
+    }
+    else if(sender == _cfgView.btn1){
+       [self dismissViewControllerAnimated:FALSE completion:nil];
     }
 }
 

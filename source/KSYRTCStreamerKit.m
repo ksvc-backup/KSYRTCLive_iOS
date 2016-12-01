@@ -3,7 +3,7 @@
 #import <libksygpulive/libksygpuimage.h>
 #import <libksygpulive/KSYGPUStreamerKit.h>
 #import <libksyrtclivedy/KSYRTCAecModule.h>
-#import <libksyrtclivedy/KSYRTCStreamer.h>
+#import <libksyrtclivedy/KSYRTCClient.h>
 #import <GPUImage/GPUImage.h>
 #import "KSYRTCStreamerKit.h"
 
@@ -15,7 +15,6 @@
 @property KSYGPUPicOutput *     beautyOutput;
 @property KSYRTCAecModule *     rtcAecModule;
 @property KSYGPUYUVInput  *     rtcYuvInput;
-@property GPUImageOutput<GPUImageInput>* curfilter;
 @property GPUImageUIElement *   uiElementInput;
 
 @property BOOL   firstFrame;
@@ -32,30 +31,32 @@
  */
 - (instancetype) initWithDefaultCfg {
     self = [super initWithDefaultCfg];
-    _rtcSteamer = [[KSYRTCSteamer alloc] init];
+    _rtcClient = [[KSYRTCClient alloc] init];
     _rtcAecModule = [[KSYRTCAecModule alloc] init];
     _beautyOutput = nil;
     _callstarted = NO;
     _firstFrame = NO;
+    _curfilter = self.filter;
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
     _contentView.backgroundColor = [UIColor clearColor];
     
     __weak KSYRTCStreamerKit * weak_kit = self;
-    _rtcSteamer.videoDataBlock=^(CVPixelBufferRef buf){
+    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
         [weak_kit defaultRtcVideoCallback:buf];
     };
-    _rtcSteamer.voiceDataBlock=^(uint8_t* buf,int len,uint64_t ptsvalue,uint32_t channels,
+    _rtcClient.voiceDataBlock=^(uint8_t* buf,int len,uint64_t ptsvalue,uint32_t channels,
                                  uint32_t sampleRate,uint32_t bytesPerSample){
         [weak_kit defaultRtcVoiceCallback:buf len:len pts:ptsvalue channel:channels sampleRate:sampleRate sampleBytes:bytesPerSample];
     };
-    _rtcSteamer.onRtcCallStart= ^(int status){
+    _rtcClient.onRtcCallStart= ^(int status){
         if(status == 200)
         {
             if([UIApplication sharedApplication].applicationState !=UIApplicationStateBackground)
             {
-                [weak_kit defaultOnCallStartCallback];
+                [weak_kit startRtcView];
             }
+            _callstarted = YES;
         }
         else if(status == 404){
             //远端无法连接，主动调用stopcallback
@@ -71,7 +72,7 @@
         }
     };
     
-    _rtcSteamer.onRTCCallStop= ^(int status){
+    _rtcClient.onRTCCallStop= ^(int status){
          if(status == 200 || status == 408)
          {
              //对端stop
@@ -83,7 +84,7 @@
          }
     };
     
-    _rtcSteamer.onEvent =^(int type,void * detail){
+    _rtcClient.onEvent =^(int type,void * detail){
         if(type == 1 || type == 0)
         {
             //网络问题，主动stop
@@ -93,7 +94,7 @@
     };
     
     _rtcAecModule.audioProcessingCallback =^(CMSampleBufferRef buf){
-        [weak_kit.rtcSteamer processAudio:buf];
+        [weak_kit.rtcClient processAudio:buf];
     };
     //注册进入后台的处理
     NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
@@ -141,8 +142,8 @@
 }
 - (void)dealloc {
     NSLog(@"kit dealloc ");
-    if(_rtcSteamer){
-        _rtcSteamer = nil;
+    if(_rtcClient){
+        _rtcClient = nil;
     }
     
     if(_rtcAecModule){
@@ -181,6 +182,7 @@
 
 
 - (void) setupRtcFilter:(GPUImageOutput<GPUImageInput> *) filter {
+    _curfilter = filter;
     if (self.vCapDev  == nil) {
         return;
     }
@@ -192,10 +194,10 @@
         [src addTarget:self.cropfilter];
         src = self.cropfilter;
     }
-    if (self.filter) {
-        [self.filter removeAllTargets];
-        [src addTarget:self.filter];
-        src = self.filter;
+    if (filter) {
+        [filter removeAllTargets];
+        [src addTarget:filter];
+        src = filter;
     }
     
     // 组装图层
@@ -296,8 +298,7 @@
 #pragma mark -rtc
 -(void) defaultOnCallStartCallback
 {
-    [self startRtcView];
-    _callstarted = YES;
+
 }
 
 -(void)startRtcView
@@ -309,13 +310,13 @@
     _beautyOutput  =  [[KSYGPUPicOutput alloc] init];
     __weak KSYRTCStreamerKit * wkit = self;
     _beautyOutput.videoProcessingCallback = ^(CVPixelBufferRef pixelBuffer, CMTime timeInfo ){
-        [wkit.rtcSteamer processVideo:pixelBuffer timeInfo:timeInfo];
+        [wkit.rtcClient processVideo:pixelBuffer timeInfo:timeInfo];
     };
     
     if(_contentView.subviews.count != 0)
         _uiElementInput = [[GPUImageUIElement alloc] initWithView:_contentView];
 
-    [self setupRtcFilter:self.filter];
+    [self setupRtcFilter:_curfilter];
     [_rtcAecModule start];
    
 }
@@ -327,7 +328,7 @@
     _beautyOutput = nil;
     _beautyOutput.videoProcessingCallback = nil;
     _uiElementInput = nil;
-    [self setupRtcFilter:self.filter];
+    [self setupRtcFilter:_curfilter];
     [_rtcAecModule stop];
 }
 
@@ -361,7 +362,7 @@
     {
         int buflen = [self.aMixer getBufLength:2];
         if (buflen < 8){
-            [self.aMixer processAudioData:&buf nbSample:len/asbd.mBytesPerFrame withFormat:&asbd timeinfo:pts of:2];
+            [self.aMixer processAudioData:&buf nbSample:len/bytesPerSample withFormat:&asbd timeinfo:pts of:2];
         }
         else {
             NSLog(@"delay >300ms,we will discard some audio");
@@ -385,28 +386,30 @@
 -(void) setWinRect:(CGRect)rect
 {
     _winRect = rect;
-    [self setupRtcFilter:self.filter];
+    [self setupRtcFilter:_curfilter];
 }
 
 -(void)setSelfInFront:(BOOL)selfInFront{
     _selfInFront = selfInFront;
-    [self setupRtcFilter:self.filter];
+    [self setupRtcFilter:_curfilter];
 }
 
 - (void)enterbg {
     if(_callstarted)
         [self stopRTCView];
+     [self.vPreviewMixer removeAllTargets];
 }
 
 -(void)enterFg{
     if(_callstarted)
         [self startRtcView];
+    [self setupRtcFilter:_curfilter];
 }
 
 -(void)becomeActive
 {
     __weak KSYRTCStreamerKit * weak_kit = self;
-    _rtcSteamer.videoDataBlock=^(CVPixelBufferRef buf){
+    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
         [weak_kit defaultRtcVideoCallback:buf];
     };
 
@@ -419,7 +422,7 @@ NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
 
 -(void)resignActive
 {
-    _rtcSteamer.videoDataBlock = nil;
+    _rtcClient.videoDataBlock = nil;
     NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
     [dc removeObserver:self
                   name:AVAudioSessionInterruptionNotification

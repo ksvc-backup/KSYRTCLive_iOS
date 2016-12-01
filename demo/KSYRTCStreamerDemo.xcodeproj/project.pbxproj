@@ -19,6 +19,9 @@
 		F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125851D9D17C400796C7A /* KSYUIView.m */; };
 		F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F56C1D82B87B0008B04D /* libicucore.tbd */; };
 		F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F5771D82B8AB0008B04D /* GLKit.framework */; };
+		F237136F1DE46F7B0067C99E /* KSYSChatKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F237136E1DE46F7B0067C99E /* KSYSChatKit.m */; };
+		F24A81E11DDAE383003B51F9 /* KSYLiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F24A81E01DDAE383003B51F9 /* KSYLiveVC.m */; };
+		F24A81E41DDAF7DF003B51F9 /* KSYSChatDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */; };
 		F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */; };
 		F26058311DB4A25200E4D688 /* libksyrtclivedy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F278049C1DB7921C008150F5 /* WID-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F278049B1DB7921C008150F5 /* WID-small.png */; };
@@ -80,8 +83,13 @@
 		F22125851D9D17C400796C7A /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
 		F227F56C1D82B87B0008B04D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		F227F5771D82B8AB0008B04D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F237136D1DE46F7B0067C99E /* KSYSChatKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYSChatKit.h; path = ../../source/KSYSChatKit.h; sourceTree = "<group>"; };
+		F237136E1DE46F7B0067C99E /* KSYSChatKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYSChatKit.m; path = ../../source/KSYSChatKit.m; sourceTree = "<group>"; };
 		F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		F25627D61DC881A200877034 /* libksygpulive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksygpulive.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/KSYRTCStreamerDemo-dacloepivbjdxscpmnmydymmchjr/Build/Products/Debug-iphoneos/libksygpulive.framework"; sourceTree = "<group>"; };
+		F24A81DF1DDAE383003B51F9 /* KSYLiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYLiveVC.h; sourceTree = "<group>"; };
+		F24A81E01DDAE383003B51F9 /* KSYLiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYLiveVC.m; sourceTree = "<group>"; };
+		F24A81E21DDAF7DF003B51F9 /* KSYSChatDemoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYSChatDemoVC.h; sourceTree = "<group>"; };
+		F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYSChatDemoVC.m; sourceTree = "<group>"; };
 		F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
 		F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
 		F278049B1DB7921C008150F5 /* WID-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WID-small.png"; path = "../WID-small.png"; sourceTree = "<group>"; };
@@ -141,14 +149,14 @@
 		0626F0F21D2DFF0400193DAC /* KSYDemoUI */ = {
 			isa = PBXGroup;
 			children = (
+				F24A81E21DDAF7DF003B51F9 /* KSYSChatDemoVC.h */,
+				F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */,
+				F24A81DF1DDAE383003B51F9 /* KSYLiveVC.h */,
+				F24A81E01DDAE383003B51F9 /* KSYLiveVC.m */,
 				F2C05C4A1D7420B500AD3CFD /* KSYStreamerVC.h */,
 				F2C05C4B1D7420B500AD3CFD /* KSYStreamerVC.m */,
-				F2C05C3E1D7420AB00AD3CFD /* KSYMenuView.h */,
-				F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */,
 				F2C05C401D7420AB00AD3CFD /* KSYPresetCfgVC.h */,
 				F2C05C411D7420AB00AD3CFD /* KSYPresetCfgVC.m */,
-				F2C05C421D7420AB00AD3CFD /* KSYPresetCfgView.h */,
-				F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */,
 				F2C05C441D7420AB00AD3CFD /* KSYRTCKitDemoVC.h */,
 				F2C05C451D7420AB00AD3CFD /* KSYRTCKitDemoVC.m */,
 				06FBBD8D1D2E21D10065ED55 /* subviews */,
@@ -241,6 +249,10 @@
 		06FBBD8D1D2E21D10065ED55 /* subviews */ = {
 			isa = PBXGroup;
 			children = (
+				F2C05C421D7420AB00AD3CFD /* KSYPresetCfgView.h */,
+				F2C05C431D7420AB00AD3CFD /* KSYPresetCfgView.m */,
+				F2C05C3E1D7420AB00AD3CFD /* KSYMenuView.h */,
+				F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */,
 				F2C05C521D74234000AD3CFD /* KSYCtrlView.h */,
 				F2C05C531D74234000AD3CFD /* KSYCtrlView.m */,
 				F2C05C541D74234000AD3CFD /* KSYFilterView.h */,
@@ -258,7 +270,6 @@
 		F20B34101D9BAD06001A0910 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F25627D61DC881A200877034 /* libksygpulive.framework */,
 				F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */,
 				24972554697D413B26939B5C /* Pods_KSYRTCStreamerDemo.framework */,
 			);
@@ -268,6 +279,8 @@
 		F2BA00691DD5E58700DB56AF /* rtcStreamerKit */ = {
 			isa = PBXGroup;
 			children = (
+				F237136D1DE46F7B0067C99E /* KSYSChatKit.h */,
+				F237136E1DE46F7B0067C99E /* KSYSChatKit.m */,
 				F2BA006A1DD5E5D800DB56AF /* KSYRTCStreamerKit.h */,
 				F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */,
 			);
@@ -290,13 +303,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 064700551C5C8B0900A31FC7 /* Build configuration list for PBXNativeTarget "KSYRTCStreamerDemo" */;
 			buildPhases = (
-				5274F504ED3EE58EF7BDDCF6 /* [CP] Check Pods Manifest.lock */,
+				6C99DDA9B76CA0233D33AE54 /* [CP] Check Pods Manifest.lock */,
 				0647003A1C5C8B0900A31FC7 /* Sources */,
 				0647003B1C5C8B0900A31FC7 /* Frameworks */,
 				0647003C1C5C8B0900A31FC7 /* Resources */,
 				F264418E1D88FE930015D841 /* Embed Frameworks */,
-				0F35921D697B0C5DA9C119D1 /* [CP] Embed Pods Frameworks */,
-				D2BBAEE94DE1427B5ADE3EBA /* [CP] Copy Pods Resources */,
+				DF1AC039D371AFA775255AE4 /* [CP] Embed Pods Frameworks */,
+				E0E39DB463CEAAD5B8D1A0C7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -361,22 +374,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F35921D697B0C5DA9C119D1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5274F504ED3EE58EF7BDDCF6 /* [CP] Check Pods Manifest.lock */ = {
+		6C99DDA9B76CA0233D33AE54 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -391,7 +389,22 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D2BBAEE94DE1427B5ADE3EBA /* [CP] Copy Pods Resources */ = {
+		DF1AC039D371AFA775255AE4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0E39DB463CEAAD5B8D1A0C7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -413,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24A81E11DDAE383003B51F9 /* KSYLiveVC.m in Sources */,
 				F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */,
 				F22125881D9D17C400796C7A /* KSYReachability.m in Sources */,
 				F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */,
@@ -423,8 +437,10 @@
 				F2C05C471D7420AB00AD3CFD /* KSYPresetCfgVC.m in Sources */,
 				F2E193A31D407B4500A384FD /* KSYRtcSlaveView.m in Sources */,
 				F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */,
+				F24A81E41DDAF7DF003B51F9 /* KSYSChatDemoVC.m in Sources */,
 				F2C05C481D7420AB00AD3CFD /* KSYPresetCfgView.m in Sources */,
 				F2C05C871D755DB900AD3CFD /* main.m in Sources */,
+				F237136F1DE46F7B0067C99E /* KSYSChatKit.m in Sources */,
 				E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */,
 				F2C05C811D755D7300AD3CFD /* AppDelegate.m in Sources */,
 				F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */,
@@ -480,7 +496,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../build/;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -525,7 +541,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = ../../../build/;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
