@@ -1,8 +1,9 @@
 具有自主知识产权的连麦内核，欢迎大家试用，并提建议,如果喜欢请star~
+## 效果图
+![效果图](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/xiaoguo.png)
 ## 1. 功能特性
 ### 1.1 连麦功能
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
-
 ### 1.2 文档
 [详情请见wiki](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
 
