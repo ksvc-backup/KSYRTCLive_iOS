@@ -4,6 +4,7 @@
 ## 1. 功能特性
 ### 1.1 连麦功能
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
+
 ### 1.2 文档
 [手把手教你学会如何连麦](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
 
