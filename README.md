@@ -5,7 +5,7 @@
 ### 1.1 连麦功能
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
 ### 1.2 文档
-[详情请见wiki](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
+[手把手教你学会如何连麦](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
 
 ### 1.3 集成方式
 - 需要导入的动态库（pod方式）：
