@@ -7,14 +7,13 @@
 [详情请见wiki](https://github.com/ksvc/KSYRTCLive_iOS/wiki)
 
 ### 1.3 集成方式
-- 需要导入的库（pod方式）：
+- 需要导入的动态库（pod方式）：
 ```
-// 私有库 (需要包含rtc库以及主版本库)
 pod 'KSYRTCLive’,:path => '../'
 pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
 pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
 ```
-- 需要导入的库（手动方式):
+- 需要导入的动态库（手动方式):
 ```
 framework下的libksyrtclivedy.framework库。
 ［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.8.7）
