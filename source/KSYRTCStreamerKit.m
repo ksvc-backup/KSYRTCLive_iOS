@@ -367,7 +367,7 @@
         else {
             NSLog(@"delay >300ms,we will discard some audio");
             [self.aMixer  processAudioData:NULL
-                              nbSample:0
+                              nbSample:len/bytesPerSample
                             withFormat:&asbd
                               timeinfo:pts
                                     of:2];
