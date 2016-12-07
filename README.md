@@ -21,6 +21,7 @@ pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.
 - 需要导入的动态库（手动方式):
 ```
 framework下的libksyrtclivedy.framework库。
+framework下的gpuimage.framework库。
 framework下的libksygpulive.framework库。
 也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.8.7）下载动态库。
 ```
