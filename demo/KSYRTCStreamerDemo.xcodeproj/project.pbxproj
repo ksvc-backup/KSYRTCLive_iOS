@@ -19,7 +19,6 @@
 		F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125851D9D17C400796C7A /* KSYUIView.m */; };
 		F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F56C1D82B87B0008B04D /* libicucore.tbd */; };
 		F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F5771D82B8AB0008B04D /* GLKit.framework */; };
-		F237136F1DE46F7B0067C99E /* KSYSChatKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F237136E1DE46F7B0067C99E /* KSYSChatKit.m */; };
 		F24A81E11DDAE383003B51F9 /* KSYLiveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F24A81E01DDAE383003B51F9 /* KSYLiveVC.m */; };
 		F24A81E41DDAF7DF003B51F9 /* KSYSChatDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */; };
 		F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */; };
@@ -41,8 +40,10 @@
 		F2C05C931D755E6600AD3CFD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2C05C901D755E6600AD3CFD /* Info.plist */; };
 		F2C05CA91D75656900AD3CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */; };
 		F2C05CAA1D75656900AD3CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2C05CA71D75656900AD3CFD /* Main.storyboard */; };
+		F2CB6A6D1DF7B6C900EECB49 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = F2CB6A6C1DF7B6C900EECB49 /* mask.png */; };
 		F2E193A21D407B4500A384FD /* KSYRtcMasterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E1939F1D407B4500A384FD /* KSYRtcMasterView.m */; };
 		F2E193A31D407B4500A384FD /* KSYRtcSlaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E193A11D407B4500A384FD /* KSYRtcSlaveView.m */; };
+		F2E828381E07B35000DC9E9C /* KSYRTCClientKitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E828371E07B35000DC9E9C /* KSYRTCClientKitBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,8 +84,6 @@
 		F22125851D9D17C400796C7A /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
 		F227F56C1D82B87B0008B04D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		F227F5771D82B8AB0008B04D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		F237136D1DE46F7B0067C99E /* KSYSChatKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYSChatKit.h; path = ../../source/KSYSChatKit.h; sourceTree = "<group>"; };
-		F237136E1DE46F7B0067C99E /* KSYSChatKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYSChatKit.m; path = ../../source/KSYSChatKit.m; sourceTree = "<group>"; };
 		F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F24A81DF1DDAE383003B51F9 /* KSYLiveVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYLiveVC.h; sourceTree = "<group>"; };
 		F24A81E01DDAE383003B51F9 /* KSYLiveVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYLiveVC.m; sourceTree = "<group>"; };
@@ -120,10 +119,13 @@
 		F2C05C901D755E6600AD3CFD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KSYRTCStreamerDemo/Info.plist; sourceTree = SOURCE_ROOT; };
 		F2C05CA61D75656900AD3CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = KSYRTCStreamerDemo/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2C05CA81D75656900AD3CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = KSYRTCStreamerDemo/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2CB6A6C1DF7B6C900EECB49 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
 		F2E1939E1D407B4500A384FD /* KSYRtcMasterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcMasterView.h; sourceTree = "<group>"; };
 		F2E1939F1D407B4500A384FD /* KSYRtcMasterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcMasterView.m; sourceTree = "<group>"; };
 		F2E193A01D407B4500A384FD /* KSYRtcSlaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcSlaveView.h; sourceTree = "<group>"; };
 		F2E193A11D407B4500A384FD /* KSYRtcSlaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcSlaveView.m; sourceTree = "<group>"; };
+		F2E828361E07B35000DC9E9C /* KSYRTCClientKitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYRTCClientKitBase.h; path = ../../source/KSYRTCClientKitBase.h; sourceTree = "<group>"; };
+		F2E828371E07B35000DC9E9C /* KSYRTCClientKitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYRTCClientKitBase.m; path = ../../source/KSYRTCClientKitBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				F278049B1DB7921C008150F5 /* WID-small.png */,
+				F2CB6A6C1DF7B6C900EECB49 /* mask.png */,
 				F227F56C1D82B87B0008B04D /* libicucore.tbd */,
 				F2C05CA51D75656900AD3CFD /* LaunchScreen.storyboard */,
 				F2C05CA71D75656900AD3CFD /* Main.storyboard */,
@@ -279,10 +282,10 @@
 		F2BA00691DD5E58700DB56AF /* rtcStreamerKit */ = {
 			isa = PBXGroup;
 			children = (
-				F237136D1DE46F7B0067C99E /* KSYSChatKit.h */,
-				F237136E1DE46F7B0067C99E /* KSYSChatKit.m */,
 				F2BA006A1DD5E5D800DB56AF /* KSYRTCStreamerKit.h */,
 				F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */,
+				F2E828361E07B35000DC9E9C /* KSYRTCClientKitBase.h */,
+				F2E828371E07B35000DC9E9C /* KSYRTCClientKitBase.m */,
 			);
 			name = rtcStreamerKit;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				F2C05C911D755E6600AD3CFD /* Assets.xcassets in Resources */,
 				F2C05CAA1D75656900AD3CFD /* Main.storyboard in Resources */,
 				F278049C1DB7921C008150F5 /* WID-small.png in Resources */,
+				F2CB6A6D1DF7B6C900EECB49 /* mask.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,10 +444,10 @@
 				F24A81E41DDAF7DF003B51F9 /* KSYSChatDemoVC.m in Sources */,
 				F2C05C481D7420AB00AD3CFD /* KSYPresetCfgView.m in Sources */,
 				F2C05C871D755DB900AD3CFD /* main.m in Sources */,
-				F237136F1DE46F7B0067C99E /* KSYSChatKit.m in Sources */,
 				E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */,
 				F2C05C811D755D7300AD3CFD /* AppDelegate.m in Sources */,
 				F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */,
+				F2E828381E07B35000DC9E9C /* KSYRTCClientKitBase.m in Sources */,
 				F2BA006C1DD5E5D800DB56AF /* KSYRTCStreamerKit.m in Sources */,
 				F2C05C4C1D7420B500AD3CFD /* KSYStreamerVC.m in Sources */,
 				F2C05C571D74234000AD3CFD /* KSYCtrlView.m in Sources */,
@@ -511,6 +515,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -550,6 +555,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

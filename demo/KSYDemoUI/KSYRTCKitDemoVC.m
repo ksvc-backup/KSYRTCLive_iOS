@@ -6,11 +6,12 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import "KSYStreamerVC.h"
+#import "KSYRTCClientKitBase.h"
 #import "KSYRTCStreamerKit.h"
+#import "KSYReachability.h"
 #import <libksyrtclivedy/KSYRTCClient.h>
 
 #import <libksygpulive/libksygpuimage.h>
-#import <libksygpulive/KSYGPUStreamerKit.h>
 #import "KSYRTCKitDemoVC.h"
 #import <sys/socket.h>
 #import <netinet/in.h>
@@ -24,6 +25,10 @@
     
     UIPanGestureRecognizer *panGestureRecognizer;
     UIView* _winRtcView;
+    
+    KSYReachability *_reach;
+    NetworkStatus   _preStatue;
+    NSString* _networkStatus;
 }
 @property bool beQuit;
 
@@ -60,9 +65,20 @@
     [self.view bringSubviewToFront:_winRtcView];
     [_winRtcView addGestureRecognizer:panGestureRecognizer];
     
+    //断网检测
+    NSNotificationCenter * dc = [NSNotificationCenter defaultCenter];
+    [dc addObserver:self
+           selector:@selector(netWorkChange)
+               name:kReachabilityChangedNotification
+             object:nil];
+    _reach = [KSYReachability reachabilityWithHostName:@"http://www.kingsoft.com"];
+    [_reach startNotifier];
+    
     //设置logo
     [self setupLogo];
 }
+
+
 
 - (void) setupLogo{
     CGFloat yPos = 0.05;
@@ -94,6 +110,10 @@
     _kit.capPreset = [self.presetCfgView capResolution];
     _kit.videoFPS       = [self.presetCfgView frameRate];
     _kit.cameraPosition = [self.presetCfgView cameraPos];
+    _kit.videoOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    _kit.previewDimension = CGSizeMake(640, 360);
+    _kit.streamDimension  =  CGSizeMake(640, 360);
+    _kit.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA;
     _kit.videoProcessingCallback = ^(CMSampleBufferRef buf){
     };
 }
@@ -183,8 +203,12 @@
     //特性1：悬浮图层，用户可以在小窗口叠加自己的view，注意customViewLayer >rtcLayer,（option）
     _kit.customViewRect = CGRectMake(0.6, 0.6, 0.3, 0.3);
     _kit.customViewLayer = 5;
-    UIView * customView = [self createUIView];
-    [_kit.contentView addSubview:customView];
+//    UIView * customView = [self createUIView];
+//    [_kit.contentView addSubview:customView];
+//    
+    //特性2:圆角小窗口
+    _kit.maskPicture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"mask.png"]];
+
     
     //rtcClient的回调，（option）
     __weak KSYRTCKitDemoVC *weak_demo = self;
@@ -439,6 +463,24 @@
     view.layer.borderWidth = 10;
     view.layer.borderColor = [[UIColor blueColor] CGColor];
     return view;
+}
+
+- (void)netWorkChange{
+    NetworkStatus currentStatus = [_reach currentReachabilityStatus];
+    if (currentStatus == _preStatue) {
+        return;
+    }
+    _preStatue = currentStatus;
+    switch (currentStatus) {
+        case NotReachable:
+            _networkStatus = @"无网络";
+            NSLog(@"无网络");
+            if(_kit.callstarted)
+                [_kit.rtcClient stopCall];
+            break;
+        default:
+            return;
+    }
 }
 
 @end

@@ -1,10 +1,10 @@
 
 #import <libksygpulive/KSYGPUPicOutput.h>
 #import <libksygpulive/libksygpuimage.h>
-#import <libksygpulive/KSYGPUStreamerKit.h>
 #import <libksyrtclivedy/KSYRTCAecModule.h>
 #import <libksyrtclivedy/KSYRTCClient.h>
 #import <GPUImage/GPUImage.h>
+#import "KSYRTCClientKitBase.h"
 #import "KSYRTCStreamerKit.h"
 
 #if __arm__  || __arm64__
@@ -13,9 +13,9 @@
 }
 
 @property KSYGPUPicOutput *     beautyOutput;
-@property KSYRTCAecModule *     rtcAecModule;
 @property KSYGPUYUVInput  *     rtcYuvInput;
 @property GPUImageUIElement *   uiElementInput;
+@property GPUImageMaskFilter *  maskingFilter;
 
 @property BOOL   firstFrame;
 
@@ -32,16 +32,20 @@
 - (instancetype) initWithDefaultCfg {
     self = [super initWithDefaultCfg];
     _rtcClient = [[KSYRTCClient alloc] init];
-    _rtcAecModule = [[KSYRTCAecModule alloc] init];
     _beautyOutput = nil;
     _callstarted = NO;
     _firstFrame = NO;
     _curfilter = self.filter;
+    _maskPicture = nil;
+    _rtcLayer = 4;
+    self.aCapDev.micVolume = 1.0;
+    _maskingFilter = [[GPUImageMaskFilter alloc] init];
     
     _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
     _contentView.backgroundColor = [UIColor clearColor];
     
     __weak KSYRTCStreamerKit * weak_kit = self;
+    __weak KSYRTCClient * weak_client = _rtcClient;
     _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
         [weak_kit defaultRtcVideoCallback:buf];
     };
@@ -56,7 +60,7 @@
             {
                 [weak_kit startRtcView];
             }
-            _callstarted = YES;
+            weak_kit.callstarted = YES;
         }
         else if(status == 404){
             //远端无法连接，主动调用stopcallback
@@ -71,7 +75,6 @@
             weak_kit.onCallStart(status);
         }
     };
-    
     _rtcClient.onRTCCallStop= ^(int status){
          if(status == 200 || status == 408)
          {
@@ -85,16 +88,12 @@
     };
     
     _rtcClient.onEvent =^(int type,void * detail){
-        if(type == 1 || type == 0)
+        if(type == 1 || type == 0 || type == 2)
         {
             //网络问题，主动stop
-            NSLog(@"network break happen");
-            [weak_kit OnCallStopCallback];
+            NSLog(@"network break happen,we will stop the call");
+            [weak_client stopCall];
         }
-    };
-    
-    _rtcAecModule.audioProcessingCallback =^(CMSampleBufferRef buf){
-        [weak_kit.rtcClient processAudio:buf];
     };
     //注册进入后台的处理
     NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
@@ -122,14 +121,16 @@
            selector:@selector(interruptHandler:)
                name:AVAudioSessionInterruptionNotification
              object:nil];
+    
     return self;
 }
 
 - (void)interruptHandler:(NSNotification *)notification {
     UInt32 interruptionState = [notification.userInfo[AVAudioSessionInterruptionTypeKey] unsignedIntValue];
     if (interruptionState == kAudioSessionBeginInterruption){
-        if(_callstarted)
+        if(_callstarted){
             [self stopRTCView];
+        }
     }
     else if (interruptionState == kAudioSessionEndInterruption){
         if(_callstarted)
@@ -144,10 +145,6 @@
     NSLog(@"kit dealloc ");
     if(_rtcClient){
         _rtcClient = nil;
-    }
-    
-    if(_rtcAecModule){
-        _rtcAecModule = nil;
     }
     
     if(_beautyOutput){
@@ -189,71 +186,63 @@
     // 采集的图像先经过前处理
     [self.vCapDev     removeAllTargets];
     GPUImageOutput* src = self.vCapDev;
-    if (self.cropfilter) {
+    if(self.cropfilter)
+    {
         [self.cropfilter removeAllTargets];
         [src addTarget:self.cropfilter];
         src = self.cropfilter;
     }
-    if (filter) {
-        [filter removeAllTargets];
-        [src addTarget:filter];
-        src = filter;
-    }
     
-    // 组装图层
+    if(filter)
+    {
+        [self.filter removeAllTargets];
+        [src addTarget:self.filter];
+        src = self.filter;
+    }
+      // 组装图层
     if(_rtcYuvInput)
     {
-        if(!_selfInFront)
+        [_rtcYuvInput removeAllTargets];
+        if(!_selfInFront)//主播
         {
-            self.vPreviewMixer.masterLayer = self.cameraLayer;
-            self.vStreamMixer.masterLayer = self.cameraLayer;
-            [self addPic:src       ToMixerAt:self.cameraLayer];
-            [self addPic:_rtcYuvInput ToMixerAt:_rtcLayer Rect:_winRect];
+            [self setMixerMasterLayer:self.cameraLayer];
+            [self addInput:src ToMixerAt:self.cameraLayer];
+            if(_maskPicture){
+                [self Maskwith:_rtcYuvInput];
+                [self addInput:_maskingFilter ToMixerAt:_rtcLayer Rect:_winRect];
+            }else{
+                 [self addInput:_rtcYuvInput ToMixerAt:_rtcLayer Rect:_winRect];
+            }
         }
-        else{
-            self.vPreviewMixer.masterLayer = self.rtcLayer;
-            self.vStreamMixer.masterLayer = self.rtcLayer;
-            [self addPic:_rtcYuvInput  ToMixerAt:self.cameraLayer];
-            [self addPic:src ToMixerAt:_rtcLayer Rect:_winRect];
+        else{//辅播
+            [self setMixerMasterLayer:self.rtcLayer];
+            [self addInput:_rtcYuvInput  ToMixerAt:self.cameraLayer];
+            if(_maskPicture){
+                [self Maskwith:src];
+                [self addInput:_maskingFilter ToMixerAt:_rtcLayer Rect:_winRect];
+            }else{
+                [self addInput:src ToMixerAt:_rtcLayer Rect:_winRect];
+            }
         }
     }else{
-        [self.vPreviewMixer clearPicOfLayer:_rtcLayer];
-        [self.vStreamMixer clearPicOfLayer:_rtcLayer];
-        self.vPreviewMixer.masterLayer = self.cameraLayer;
-        self.vStreamMixer.masterLayer = self.cameraLayer;
-        [self addPic:src       ToMixerAt:self.cameraLayer];
+        [self clearMixerLayer:self.rtcLayer];
+        [self clearMixerLayer:self.cameraLayer];
+        [self setMixerMasterLayer:self.cameraLayer];
+        [self addInput:src       ToMixerAt:self.cameraLayer];
     }
     
-    //组装自定义view
-    if(_uiElementInput)
-    {
-        __weak GPUImageUIElement *weakUIEle = self.uiElementInput;
-        [src setFrameProcessingCompletionBlock:^(GPUImageOutput * f, CMTime fT){
-            NSArray* subviews = [_contentView subviews];
-            for(int i = 0;i<subviews.count;i++)
-            {
-                UIView* subview = (UIView*)[subviews objectAtIndex:i];
-                if(subview)
-                    subview.hidden = NO;
-            }
-            if(subviews.count > 0)
-            {
-               [weakUIEle update];
-            }
-        }];
-        [self addPic:_uiElementInput ToMixerAt:_customViewLayer Rect:_customViewRect];
-    }
-    else{
-        [self.vPreviewMixer clearPicOfLayer:_customViewLayer];
-        [self.vStreamMixer clearPicOfLayer:_customViewLayer];
-        [src setFrameProcessingCompletionBlock:nil];
-    }
     //美颜后的图像，用于rtc发送
     if(_beautyOutput)
     {
-      
-        [src addTarget:_beautyOutput atTextureLocation:2];
-       
+        [src addTarget:_beautyOutput];
+    }
+    
+    //组装自定义view
+    if(_uiElementInput){
+        [self addElementInput:_uiElementInput callbackOutput:src];
+    }
+    else{
+        [self removeElementInput:_uiElementInput callbackOutput:src];
     }
     
     // 混合后的图像输出到预览和推流
@@ -267,7 +256,64 @@
     [self setStreamerMirrored:self.streamerMirrored];
 }
 
-- (void) addPic:(GPUImageOutput*)pic ToMixerAt: (NSInteger)idx{
+-(void)Maskwith:(GPUImageOutput *)input
+{
+    [input removeAllTargets];
+    [_maskPicture removeAllTargets];
+    [_maskingFilter removeAllTargets];
+    
+    [input addTarget:_maskingFilter];
+    [_maskPicture addTarget:_maskingFilter];
+    
+    [_maskingFilter useNextFrameForImageCapture];
+    [_maskPicture processImage];
+}
+
+-(void) addElementInput:(GPUImageUIElement *)input
+         callbackOutput:(GPUImageOutput*)callbackOutput
+{
+    __weak GPUImageUIElement *weakUIEle = self.uiElementInput;
+    [callbackOutput setFrameProcessingCompletionBlock:^(GPUImageOutput * f, CMTime fT){
+        NSArray* subviews = [_contentView subviews];
+        for(int i = 0;i<subviews.count;i++)
+        {
+            UIView* subview = (UIView*)[subviews objectAtIndex:i];
+            if(subview)
+                subview.hidden = NO;
+        }
+        if(subviews.count > 0)
+        {
+            [weakUIEle update];
+        }
+    }];
+    [self addInput:_uiElementInput ToMixerAt:_customViewLayer Rect:_customViewRect];
+}
+
+-(void) removeElementInput:(GPUImageUIElement *)input
+            callbackOutput:(GPUImageOutput *)callbackOutput
+{
+    [self clearMixerLayer:_customViewLayer];
+    [callbackOutput setFrameProcessingCompletionBlock:nil];
+}
+
+-(void) clearMixerLayer:(NSInteger)idx
+{
+    KSYGPUPicMixer * vMixer[2] = {self.vPreviewMixer, self.vStreamMixer};
+    for (int i = 0; i<2; ++i) {
+        [vMixer[i]  clearPicOfLayer:idx];
+    }
+}
+
+-(void) setMixerMasterLayer:(NSInteger)idx
+{
+    KSYGPUPicMixer * vMixer[2] = {self.vPreviewMixer, self.vStreamMixer};
+    for (int i = 0; i<2; ++i) {
+        [vMixer[i]  setMasterLayer:idx];
+    }
+}
+
+- (void) addInput:(GPUImageOutput*)pic
+        ToMixerAt:(NSInteger)idx{
     if (pic == nil){
         return;
     }
@@ -279,21 +325,19 @@
     }
 }
 
-- (void) addPic:(GPUImageOutput*)pic
-      ToMixerAt: (NSInteger)idx
-           Rect:(CGRect)rect{
-    if (pic == nil){
-        return;
-    }
-    [pic removeAllTargets];
+- (void) addInput:(GPUImageOutput*)pic
+        ToMixerAt:(NSInteger)idx
+             Rect:(CGRect)rect{
+    
+    [self addInput:pic ToMixerAt:idx];
     KSYGPUPicMixer * vMixer[2] = {self.vPreviewMixer, self.vStreamMixer};
     for (int i = 0; i<2; ++i) {
-        [vMixer[i]  clearPicOfLayer:idx];
-        [pic addTarget:vMixer[i] atTextureLocation:idx];
         [vMixer[i] setPicRect:rect ofLayer:idx];
         [vMixer[i] setPicAlpha:1.0f ofLayer:idx];
     }
 }
+
+
 
 #pragma mark -rtc
 -(void) defaultOnCallStartCallback
@@ -303,38 +347,53 @@
 
 -(void)startRtcView
 {
-    [self.aMixer setTrack:2 enable:YES];
-    [self.aMixer setMixVolume:1 of:2];
-    
-    _rtcYuvInput =    [[KSYGPUYUVInput alloc] init];
-    _beautyOutput  =  [[KSYGPUPicOutput alloc] init];
+    //设置视频通道
     __weak KSYRTCStreamerKit * wkit = self;
+    _rtcYuvInput =    [[KSYGPUYUVInput alloc] init];   //对端视频流
+    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
+        [wkit defaultRtcVideoCallback:buf];
+    };
+    _beautyOutput  =  [[KSYGPUPicOutput alloc] init]; //本端视频流
     _beautyOutput.videoProcessingCallback = ^(CVPixelBufferRef pixelBuffer, CMTime timeInfo ){
         [wkit.rtcClient processVideo:pixelBuffer timeInfo:timeInfo];
     };
-    
-    if(_contentView.subviews.count != 0)
+    if(_contentView.subviews.count != 0)  //个性化窗口
         _uiElementInput = [[GPUImageUIElement alloc] initWithView:_contentView];
-
+    
     [self setupRtcFilter:_curfilter];
-    [_rtcAecModule start];
-   
+    
+    //设置音频通道
+    [self.aMixer setTrack:2 enable:YES];
+    [self.aMixer setMixVolume:1 of:2];
+    self.aCapDev.audioProcessingCallback =^(CMSampleBufferRef buf){
+        [wkit.rtcClient processAudio:buf];
+        [wkit.aMixer processAudioSampleBuffer:buf of:wkit.micTrack];
+    };
+    [self.aCapDev startSpeaker];
 }
 
 -(void)stopRTCView
 {
-    [self.aMixer setTrack:2 enable:NO];
-    _rtcYuvInput = nil;
-    _beautyOutput = nil;
+    //拆除视频通道
+    _rtcYuvInput = nil; //对端视频流
+    _rtcClient.videoDataBlock = nil;
+    _beautyOutput = nil;//本端视频流
     _beautyOutput.videoProcessingCallback = nil;
-    _uiElementInput = nil;
+    _uiElementInput = nil; //个性化小窗口
     [self setupRtcFilter:_curfilter];
-    [_rtcAecModule stop];
+    
+    //拆除音频通道
+    [self.aMixer setTrack:2 enable:NO];
+    __weak KSYRTCStreamerKit * wkit = self;
+    self.aCapDev.audioProcessingCallback =^(CMSampleBufferRef buf){
+        [wkit.aMixer processAudioSampleBuffer:buf of:wkit.micTrack];
+    };
+    [self.aCapDev stopSpeaker];
 }
+
 
 -(void) defaultRtcVideoCallback:(CVPixelBufferRef)buf
 {
-
     [self.rtcYuvInput processPixelBuffer:buf time:CMTimeMake(2, 10)];
 }
 -(void) defaultRtcVoiceCallback:(uint8_t*)buf
@@ -344,6 +403,8 @@
                      sampleRate:(uint32_t)sampleRate
                     sampleBytes:(uint32_t)bytesPerSample
 {
+    if(!_callstarted)
+        return;
     
     AudioStreamBasicDescription asbd;
     asbd.mSampleRate       = sampleRate;
@@ -355,24 +416,12 @@
     asbd.mFramesPerPacket  = channels;
     asbd.mChannelsPerFrame = channels;
     
-    [_rtcAecModule putVoiceTobuffer:(void*)buf size:len];
+    [self.aCapDev putVoiceTobuffer:(void*)buf size:len];
     CMTime pts;
     pts.value = ptsvalue;
     if([self.streamerBase isStreaming])
     {
-        int buflen = [self.aMixer getBufLength:2];
-        if (buflen < 8){
-            [self.aMixer processAudioData:&buf nbSample:len/bytesPerSample withFormat:&asbd timeinfo:pts of:2];
-        }
-        else {
-            NSLog(@"delay >300ms,we will discard some audio");
-            [self.aMixer  processAudioData:NULL
-                              nbSample:len/bytesPerSample
-                            withFormat:&asbd
-                              timeinfo:pts
-                                    of:2];
-        }
-        
+        [self.aMixer processAudioData:&buf nbSample:len/bytesPerSample withFormat:&asbd timeinfo:pts of:2];
     }
 }
 
@@ -386,24 +435,32 @@
 -(void) setWinRect:(CGRect)rect
 {
     _winRect = rect;
-    [self setupRtcFilter:_curfilter];
+    if(_callstarted)
+    {
+        KSYGPUPicMixer * vMixer[2] = {self.vPreviewMixer, self.vStreamMixer};
+        for (int i = 0; i<2; ++i) {
+            [vMixer[i]  removeAllTargets];
+            [vMixer[i] setPicRect:rect ofLayer:self.rtcLayer];
+        }
+        [self.vPreviewMixer addTarget:self.preview];
+        [self.vStreamMixer  addTarget:self.gpuToStr];
+    }
 }
 
 -(void)setSelfInFront:(BOOL)selfInFront{
     _selfInFront = selfInFront;
+    _curfilter = self.filter;
     [self setupRtcFilter:_curfilter];
 }
 
 - (void)enterbg {
     if(_callstarted)
         [self stopRTCView];
-     [self.vPreviewMixer removeAllTargets];
 }
 
 -(void)enterFg{
     if(_callstarted)
         [self startRtcView];
-    [self setupRtcFilter:_curfilter];
 }
 
 -(void)becomeActive
@@ -428,8 +485,9 @@ NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
                   name:AVAudioSessionInterruptionNotification
                 object:nil];
 }
-
 @end
+
+
 #else
 @implementation KSYRTCStreamerKit
 

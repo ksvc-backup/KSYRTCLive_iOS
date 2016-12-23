@@ -7,10 +7,11 @@
 //
 #import <libksyrtclivedy/KSYRTCClient.h>
 #import <libksygpulive/libksygpuimage.h>
-#import <libksygpulive/KSYGPUStreamerKit.h>
+#import "KSYRTCClientKitBase.h"
 #import "KSYStreamerVC.h"
 #import "KSYSChatDemoVC.h"
-#import "KSYSChatKit.h"
+#import "KSYRTCStreamerKit.h"
+
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -63,7 +64,7 @@
     //UI初始化
     [self initUI];
     
-    _kit = [[KSYSChatKit alloc] initWithDefaultCfg];
+    _kit = [[KSYRTCStreamerKit alloc] initWithDefaultCfg];
     // 采集相关设置初始化
     [self setCaptureCfg];
     //设置rtc参数
@@ -275,6 +276,9 @@
     _kit.customViewLayer = 5;
 //    UIView * customView = [self createUIView];
 //    [_kit.contentView addSubview:customView];
+    //特性2:圆角小窗口
+    _kit.maskPicture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"mask.png"]];
+
 //    
     //设置回调
     [self setupCallBack];
@@ -313,7 +317,7 @@
 {
     //rtcstreamer的回调，（option）
     __weak KSYSChatDemoVC *weak_demo = self;
-    __weak KSYSChatKit *weak_kit = _kit;
+    __weak KSYRTCStreamerKit *weak_kit = _kit;
     _kit.rtcClient.onRegister= ^(int status){
         NSString * message = [NSString stringWithFormat:@"local sip account:%@",weak_kit.rtcClient.authUid];
         [weak_demo statString:message];

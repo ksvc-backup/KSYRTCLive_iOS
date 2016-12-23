@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class KSYGPUStreamerKit;
+@class KSYRTCClientKitBase;
 @class KSYRTCClient;
 
-@interface KSYRTCStreamerKit: KSYGPUStreamerKit
+@interface KSYRTCStreamerKit: KSYRTCClientKitBase
 /**
  @abstract 初始化方法
  @discussion 创建带有默认参数的 kit
@@ -52,7 +52,21 @@
  */
 @property (nonatomic, readwrite) BOOL selfInFront;
 
-@property (nonatomic, readonly) BOOL   callstarted;
+/**
+ @abstract 当前连麦是否已经开始
+ */
+@property (nonatomic, readwrite) BOOL   callstarted;
+
+/**
+ @abstract 圆角的图片
+ */
+@property GPUImagePicture *  maskPicture;
+
+/**
+ @abstract 停止图层渲染
+ */
+-(void)stopRTCView;
+
 #pragma 美颜操作函数
 
 @property (nonatomic, readwrite) GPUImageOutput<GPUImageInput>* curfilter;
