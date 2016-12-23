@@ -32,13 +32,10 @@ framework下的gpuimage.framework库。
 framework下的libksygpulive.framework库。
 也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.8.7）下载动态库。
 ```
-- 需要导入的文件（连麦）：
+- 需要导入的文件：
 ```
 source目录下 KSYRTCStreamerKit.h/m
-```
-- 需要导入的文件（私聊）：
-```
-source目录下 KSYSChatKit.h／m
+            KSYRTCClientKitBase.h/m
 ```
 
 
@@ -51,9 +48,10 @@ source目录下 KSYSChatKit.h／m
 - 2016.09.26 音视频质量极致优化,超稳定版本v1.8.5发布。
 - 2016.11.22 和rtc主版本分离，更加易于集成。开源[KSYRTCStreamerKit.m]
 - 2016.12.01 发布私聊版本。
+- 2016.12.22 发布圆角版本+音频极致优化版本。
 
 ### 2.2 近期工作
-- 2016.12.xx 多人连麦；
+- 2016.1.xx 多人连麦；
 
 ## 3. 商务合作
 demo中有测试评估账号，可以直接实现一对一连麦。  
