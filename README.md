@@ -8,6 +8,10 @@
 
 [![ScreenShot](https://raw.githubusercontent.com/wiki/ksvc/KSYRTCLive_iOS/images/rtc_bi.jpg)](http://www.bilibili.com/video/av7410838/)
 
+* ipa下载地址
+
+![download](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/download.png)
+
 ## 1. 功能特性
 ### 1.1 连麦功能
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
