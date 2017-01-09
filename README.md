@@ -2,7 +2,7 @@
 ## 连麦效果
 * 效果如下：
 
-![screenshot](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/Screenshot.jpg)
+![screenshot](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/Screenshot.png)
 
 * 连麦效果视频请见：
 
