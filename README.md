@@ -26,15 +26,15 @@
 ```
 use_frameworks!
 pod 'KSYRTCLive’,:path => '../'
-pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
-pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.8.7’
+pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3’
+pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3'
 ```
 - 需要导入的动态库（手动方式):
 ```
 framework下的libksyrtclivedy.framework库。
 framework下的gpuimage.framework库。
 framework下的libksygpulive.framework库。
-也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.8.7）下载动态库。
+也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.9.3）下载动态库。
 ```
 - 需要导入的文件：
 ```
@@ -53,9 +53,11 @@ source目录下 KSYRTCStreamerKit.h/m
 - 2016.11.22 和rtc主版本分离，更加易于集成。开源[KSYRTCStreamerKit.m]
 - 2016.12.01 发布私聊版本。
 - 2016.12.22 发布圆角版本+音频极致优化版本。
+- 2016.1.20 发布faceunity贴纸版本。
 
 ### 2.2 近期工作
-- 2016.1.xx 多人连麦；
+- 2016.2.xx  集成商汤贴纸版本。
+- 2016.2.xx 多人连麦；
 
 ## 3. 商务合作
 demo中有测试评估账号，可以直接实现一对一连麦。  
