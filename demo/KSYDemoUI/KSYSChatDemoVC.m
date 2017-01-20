@@ -419,7 +419,7 @@
     if(![self checkNetworkReachability:AF_INET6])
     {
     //获取鉴权串，demo里为testAppServer，请改用自己的appserver
-    TestASString = [NSString stringWithFormat:@"http://120.92.10.164:6002/rtcauth?uid=%@",localid];
+    TestASString = [NSString stringWithFormat:@"http://rtc.vcloud.ks-live.com:6002/rtcauth?uid=%@",localid];
     _kit.rtcClient.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",
                                     [self AuthFromTestAS:TestASString]];
     }

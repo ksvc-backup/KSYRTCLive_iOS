@@ -9,7 +9,6 @@
 
 #if __arm__  || __arm64__
 @interface KSYRTCStreamerKit (){
-    
 }
 
 @property KSYGPUPicOutput *     beautyOutput;
@@ -31,97 +30,99 @@
  */
 - (instancetype) initWithDefaultCfg {
     self = [super initWithDefaultCfg];
-    _rtcClient = [[KSYRTCClient alloc] init];
-    _beautyOutput = nil;
-    _callstarted = NO;
-    _firstFrame = NO;
-    _curfilter = self.filter;
-    _maskPicture = nil;
-    _rtcLayer = 4;
-    self.aCapDev.micVolume = 1.0;
-    _maskingFilter = [[GPUImageMaskFilter alloc] init];
-    
-    _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
-    _contentView.backgroundColor = [UIColor clearColor];
-    
-    __weak KSYRTCStreamerKit * weak_kit = self;
-    __weak KSYRTCClient * weak_client = _rtcClient;
-    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
-        [weak_kit defaultRtcVideoCallback:buf];
-    };
-    _rtcClient.voiceDataBlock=^(uint8_t* buf,int len,uint64_t ptsvalue,uint32_t channels,
-                                 uint32_t sampleRate,uint32_t bytesPerSample){
-        [weak_kit defaultRtcVoiceCallback:buf len:len pts:ptsvalue channel:channels sampleRate:sampleRate sampleBytes:bytesPerSample];
-    };
-    _rtcClient.onRtcCallStart= ^(int status){
-        if(status == 200)
-        {
-            if([UIApplication sharedApplication].applicationState !=UIApplicationStateBackground)
+    if(self)
+    {
+        _rtcClient = [[KSYRTCClient alloc] init];
+        _beautyOutput = nil;
+        _callstarted = NO;
+        _firstFrame = NO;
+        _curfilter = self.filter;
+        _maskPicture = nil;
+        _rtcLayer = 4;
+        self.aCapDev.micVolume = 1.0;
+        
+        _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
+        _contentView.backgroundColor = [UIColor clearColor];
+        
+        __weak KSYRTCClient * weak_client = _rtcClient;
+        __weak KSYRTCStreamerKit * weak_kit = self;
+        
+        _rtcClient.videoDataBlock=^(void** pData,size_t width,size_t height,size_t* strides){
+            [weak_kit defaultRtcVideoCallback:pData width:width height:height stride:strides];
+        };
+        _rtcClient.voiceDataBlock=^(uint8_t* buf,int len,uint64_t ptsvalue,uint32_t channels,
+                                    uint32_t sampleRate,uint32_t bytesPerSample){
+            [weak_kit defaultRtcVoiceCallback:buf len:len pts:ptsvalue channel:channels sampleRate:sampleRate sampleBytes:bytesPerSample];
+        };
+        _rtcClient.onRtcCallStart= ^(int status){
+            if(status == 200)
             {
-                [weak_kit startRtcView];
+                if([UIApplication sharedApplication].applicationState !=UIApplicationStateBackground)
+                {
+                    [weak_kit startRtcView];
+                }
+                weak_kit.callstarted = YES;
             }
-            weak_kit.callstarted = YES;
-        }
-        else if(status == 404){
-            //远端无法连接，主动调用stopcallback
-            [weak_kit OnCallStopCallback];
-            if(weak_kit.onCallStop)
+            else if(status == 404){
+                //远端无法连接，主动调用stopcallback
+                [weak_kit OnCallStopCallback];
+                if(weak_kit.onCallStop)
+                {
+                    weak_kit.onCallStop(status);
+                }
+            }
+            if(weak_kit.onCallStart)
             {
-                weak_kit.onCallStop(status);
+                weak_kit.onCallStart(status);
             }
-        }
-        if(weak_kit.onCallStart)
-        {
-            weak_kit.onCallStart(status);
-        }
-    };
-    _rtcClient.onRTCCallStop= ^(int status){
-         if(status == 200 || status == 408)
-         {
-             //对端stop
-             [weak_kit OnCallStopCallback];
-             if(weak_kit.onCallStop)
-             {
-                 weak_kit.onCallStop(status);
-             }
-         }
-    };
-    
-    _rtcClient.onEvent =^(int type,void * detail){
-        if(type == 1 || type == 0 || type == 2)
-        {
-            //网络问题，主动stop
-            NSLog(@"network break happen,we will stop the call");
-            [weak_client stopCall];
-        }
-    };
-    //注册进入后台的处理
-    NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self
-           selector:@selector(enterbg)
-               name:UIApplicationDidEnterBackgroundNotification
-             object:nil];
-    
-    [dc addObserver:self
-           selector:@selector(becomeActive)
-               name:UIApplicationDidBecomeActiveNotification
-             object:nil];
-    
-    [dc addObserver:self
-           selector:@selector(resignActive)
-               name:UIApplicationWillResignActiveNotification
-             object:nil];
-    
-    [dc addObserver:self
-           selector:@selector(enterFg)
-               name:UIApplicationWillEnterForegroundNotification
-             object:nil];
-    
-    [dc addObserver:self
-           selector:@selector(interruptHandler:)
-               name:AVAudioSessionInterruptionNotification
-             object:nil];
-    
+        };
+        _rtcClient.onRTCCallStop= ^(int status){
+            if(status == 200 || status == 408)
+            {
+                //对端stop
+                [weak_kit OnCallStopCallback];
+                if(weak_kit.onCallStop)
+                {
+                    weak_kit.onCallStop(status);
+                }
+            }
+        };
+        
+        _rtcClient.onEvent =^(int type,void * detail){
+            if(type == 1 || type == 0 || type == 2)
+            {
+                //网络问题，主动stop
+                NSLog(@"network break happen,we will stop the call");
+                [weak_client stopCall];
+            }
+        };
+        //注册进入后台的处理
+        NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
+        [dc addObserver:self
+               selector:@selector(enterbg)
+                   name:UIApplicationDidEnterBackgroundNotification
+                 object:nil];
+        
+        [dc addObserver:self
+               selector:@selector(becomeActive)
+                   name:UIApplicationDidBecomeActiveNotification
+                 object:nil];
+        
+        [dc addObserver:self
+               selector:@selector(resignActive)
+                   name:UIApplicationWillResignActiveNotification
+                 object:nil];
+        
+        [dc addObserver:self
+               selector:@selector(enterFg)
+                   name:UIApplicationWillEnterForegroundNotification
+                 object:nil];
+        
+        [dc addObserver:self
+               selector:@selector(interruptHandler:)
+                   name:AVAudioSessionInterruptionNotification
+                 object:nil];
+    }
     return self;
 }
 
@@ -264,9 +265,6 @@
     
     [input addTarget:_maskingFilter];
     [_maskPicture addTarget:_maskingFilter];
-    
-    [_maskingFilter useNextFrameForImageCapture];
-    [_maskPicture processImage];
 }
 
 -(void) addElementInput:(GPUImageUIElement *)input
@@ -349,14 +347,18 @@
 {
     //设置视频通道
     __weak KSYRTCStreamerKit * wkit = self;
-    _rtcYuvInput =    [[KSYGPUYUVInput alloc] init];   //对端视频流
-    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
-        [wkit defaultRtcVideoCallback:buf];
+    _rtcYuvInput =    [[KSYGPUYUVInput alloc] initWithFmt:kCVPixelFormatType_420YpCbCr8Planar];   //对端视频流
+    __weak KSYRTCStreamerKit * weak_kit = self;
+    _rtcClient.videoDataBlock=^(void** pData,size_t width,size_t height,size_t* strides){
+        [weak_kit defaultRtcVideoCallback:pData width:width height:height stride:strides];
     };
-    _beautyOutput  =  [[KSYGPUPicOutput alloc] init]; //本端视频流
+    _beautyOutput  =  [[KSYGPUPicOutput alloc] initWithOutFmt:kCVPixelFormatType_420YpCbCr8Planar]; //本端视频流
     _beautyOutput.videoProcessingCallback = ^(CVPixelBufferRef pixelBuffer, CMTime timeInfo ){
         [wkit.rtcClient processVideo:pixelBuffer timeInfo:timeInfo];
     };
+    
+    _maskingFilter = [[GPUImageMaskFilter alloc] init];
+    
     if(_contentView.subviews.count != 0)  //个性化窗口
         _uiElementInput = [[GPUImageUIElement alloc] initWithView:_contentView];
     
@@ -380,6 +382,8 @@
     _beautyOutput = nil;//本端视频流
     _beautyOutput.videoProcessingCallback = nil;
     _uiElementInput = nil; //个性化小窗口
+    _maskingFilter = nil;
+    _firstFrame = NO;
     [self setupRtcFilter:_curfilter];
     
     //拆除音频通道
@@ -392,9 +396,19 @@
 }
 
 
--(void) defaultRtcVideoCallback:(CVPixelBufferRef)buf
+-(void) defaultRtcVideoCallback:(void**)  pData
+                          width:(size_t)  width
+                         height:(size_t)  height
+                         stride:(size_t*) strides
 {
-    [self.rtcYuvInput processPixelBuffer:buf time:CMTimeMake(2, 10)];
+    [_rtcYuvInput processPixelData:pData format:kCVPixelFormatType_420YpCbCr8Planar width:width height:height stride:strides time:CMTimeMake(2, 10)];
+
+    if(_firstFrame && _maskPicture)
+        [_maskPicture processImage];
+    
+    if(!_firstFrame)
+        _firstFrame = YES;
+
 }
 -(void) defaultRtcVoiceCallback:(uint8_t*)buf
                             len:(int)len
@@ -448,9 +462,13 @@
 }
 
 -(void)setSelfInFront:(BOOL)selfInFront{
-    _selfInFront = selfInFront;
-    _curfilter = self.filter;
-    [self setupRtcFilter:_curfilter];
+    if(_callstarted)
+    {
+        [self stopRTCView];
+        _selfInFront = selfInFront;
+        _curfilter = self.filter;
+        [self startRtcView];
+    }
 }
 
 - (void)enterbg {
@@ -466,8 +484,8 @@
 -(void)becomeActive
 {
     __weak KSYRTCStreamerKit * weak_kit = self;
-    _rtcClient.videoDataBlock=^(CVPixelBufferRef buf){
-        [weak_kit defaultRtcVideoCallback:buf];
+    _rtcClient.videoDataBlock=^(void** pData,size_t width,size_t height,size_t* strides){
+        [weak_kit defaultRtcVideoCallback:pData width:width height:height stride:strides];
     };
 
 NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];

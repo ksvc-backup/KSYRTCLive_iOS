@@ -23,6 +23,31 @@
 		F24A81E41DDAF7DF003B51F9 /* KSYSChatDemoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */; };
 		F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */; };
 		F26058311DB4A25200E4D688 /* libksyrtclivedy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F276E7611E152F1500664E74 /* ar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7491E152F1500664E74 /* ar.bundle */; };
+		F276E7621E152F1500664E74 /* BeagleDog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74A1E152F1500664E74 /* BeagleDog.bundle */; };
+		F276E7631E152F1500664E74 /* cat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74B1E152F1500664E74 /* cat.bundle */; };
+		F276E7641E152F1500664E74 /* ColorCrown.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74C1E152F1500664E74 /* ColorCrown.bundle */; };
+		F276E7651E152F1500664E74 /* Deer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74D1E152F1500664E74 /* Deer.bundle */; };
+		F276E7661E152F1500664E74 /* evil.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74E1E152F1500664E74 /* evil.bundle */; };
+		F276E7671E152F1500664E74 /* eyeballs.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E74F1E152F1500664E74 /* eyeballs.bundle */; };
+		F276E7681E152F1500664E74 /* face_beautification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7501E152F1500664E74 /* face_beautification.bundle */; };
+		F276E7691E152F1500664E74 /* fox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7511E152F1500664E74 /* fox.bundle */; };
+		F276E76A1E152F1500664E74 /* HappyRabbi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7521E152F1500664E74 /* HappyRabbi.bundle */; };
+		F276E76B1E152F1500664E74 /* hartshorn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7531E152F1500664E74 /* hartshorn.bundle */; };
+		F276E76C1E152F1500664E74 /* item0204.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7541E152F1500664E74 /* item0204.bundle */; };
+		F276E76D1E152F1500664E74 /* item0208.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7551E152F1500664E74 /* item0208.bundle */; };
+		F276E76E1E152F1500664E74 /* item0210.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7561E152F1500664E74 /* item0210.bundle */; };
+		F276E76F1E152F1500664E74 /* item0501.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7571E152F1500664E74 /* item0501.bundle */; };
+		F276E7701E152F1500664E74 /* kitty.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7581E152F1500664E74 /* kitty.bundle */; };
+		F276E7711E152F1500664E74 /* libnama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F276E7591E152F1500664E74 /* libnama.a */; };
+		F276E7721E152F1500664E74 /* mood.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75A1E152F1500664E74 /* mood.bundle */; };
+		F276E7731E152F1500664E74 /* PrincessCrown.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75B1E152F1500664E74 /* PrincessCrown.bundle */; };
+		F276E7741E152F1500664E74 /* rabbit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75C1E152F1500664E74 /* rabbit.bundle */; };
+		F276E7751E152F1500664E74 /* tears.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75D1E152F1500664E74 /* tears.bundle */; };
+		F276E7761E152F1500664E74 /* tiara.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75E1E152F1500664E74 /* tiara.bundle */; };
+		F276E7771E152F1500664E74 /* v2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E75F1E152F1500664E74 /* v2.bundle */; };
+		F276E7781E152F1500664E74 /* YellowEar.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F276E7601E152F1500664E74 /* YellowEar.bundle */; };
+		F276E7931E152FB600664E74 /* KSYFaceunityFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F276E7921E152FB600664E74 /* KSYFaceunityFilter.m */; };
 		F278049C1DB7921C008150F5 /* WID-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F278049B1DB7921C008150F5 /* WID-small.png */; };
 		F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */; };
 		F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F292E0E81D193DFF007D10C8 /* libpthread.tbd */; };
@@ -91,6 +116,32 @@
 		F24A81E31DDAF7DF003B51F9 /* KSYSChatDemoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYSChatDemoVC.m; sourceTree = "<group>"; };
 		F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
 		F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libksyrtclivedy.framework; path = ../../framework/libksyrtclivedy.framework; sourceTree = "<group>"; };
+		F276E7491E152F1500664E74 /* ar.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar.bundle; path = ../../framework/faceunity/ar.bundle; sourceTree = "<group>"; };
+		F276E74A1E152F1500664E74 /* BeagleDog.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = BeagleDog.bundle; path = ../../framework/faceunity/BeagleDog.bundle; sourceTree = "<group>"; };
+		F276E74B1E152F1500664E74 /* cat.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = cat.bundle; path = ../../framework/faceunity/cat.bundle; sourceTree = "<group>"; };
+		F276E74C1E152F1500664E74 /* ColorCrown.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = ColorCrown.bundle; path = ../../framework/faceunity/ColorCrown.bundle; sourceTree = "<group>"; };
+		F276E74D1E152F1500664E74 /* Deer.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = Deer.bundle; path = ../../framework/faceunity/Deer.bundle; sourceTree = "<group>"; };
+		F276E74E1E152F1500664E74 /* evil.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = evil.bundle; path = ../../framework/faceunity/evil.bundle; sourceTree = "<group>"; };
+		F276E74F1E152F1500664E74 /* eyeballs.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = eyeballs.bundle; path = ../../framework/faceunity/eyeballs.bundle; sourceTree = "<group>"; };
+		F276E7501E152F1500664E74 /* face_beautification.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = face_beautification.bundle; path = ../../framework/faceunity/face_beautification.bundle; sourceTree = "<group>"; };
+		F276E7511E152F1500664E74 /* fox.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = fox.bundle; path = ../../framework/faceunity/fox.bundle; sourceTree = "<group>"; };
+		F276E7521E152F1500664E74 /* HappyRabbi.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = HappyRabbi.bundle; path = ../../framework/faceunity/HappyRabbi.bundle; sourceTree = "<group>"; };
+		F276E7531E152F1500664E74 /* hartshorn.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = hartshorn.bundle; path = ../../framework/faceunity/hartshorn.bundle; sourceTree = "<group>"; };
+		F276E7541E152F1500664E74 /* item0204.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = item0204.bundle; path = ../../framework/faceunity/item0204.bundle; sourceTree = "<group>"; };
+		F276E7551E152F1500664E74 /* item0208.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = item0208.bundle; path = ../../framework/faceunity/item0208.bundle; sourceTree = "<group>"; };
+		F276E7561E152F1500664E74 /* item0210.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = item0210.bundle; path = ../../framework/faceunity/item0210.bundle; sourceTree = "<group>"; };
+		F276E7571E152F1500664E74 /* item0501.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = item0501.bundle; path = ../../framework/faceunity/item0501.bundle; sourceTree = "<group>"; };
+		F276E7581E152F1500664E74 /* kitty.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = kitty.bundle; path = ../../framework/faceunity/kitty.bundle; sourceTree = "<group>"; };
+		F276E7591E152F1500664E74 /* libnama.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnama.a; path = ../../framework/faceunity/libnama.a; sourceTree = "<group>"; };
+		F276E75A1E152F1500664E74 /* mood.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = mood.bundle; path = ../../framework/faceunity/mood.bundle; sourceTree = "<group>"; };
+		F276E75B1E152F1500664E74 /* PrincessCrown.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = PrincessCrown.bundle; path = ../../framework/faceunity/PrincessCrown.bundle; sourceTree = "<group>"; };
+		F276E75C1E152F1500664E74 /* rabbit.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = rabbit.bundle; path = ../../framework/faceunity/rabbit.bundle; sourceTree = "<group>"; };
+		F276E75D1E152F1500664E74 /* tears.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = tears.bundle; path = ../../framework/faceunity/tears.bundle; sourceTree = "<group>"; };
+		F276E75E1E152F1500664E74 /* tiara.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = tiara.bundle; path = ../../framework/faceunity/tiara.bundle; sourceTree = "<group>"; };
+		F276E75F1E152F1500664E74 /* v2.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = v2.bundle; path = ../../framework/faceunity/v2.bundle; sourceTree = "<group>"; };
+		F276E7601E152F1500664E74 /* YellowEar.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; name = YellowEar.bundle; path = ../../framework/faceunity/YellowEar.bundle; sourceTree = "<group>"; };
+		F276E7911E152FB600664E74 /* KSYFaceunityFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYFaceunityFilter.h; path = ../../source/KSYFaceunityFilter.h; sourceTree = "<group>"; };
+		F276E7921E152FB600664E74 /* KSYFaceunityFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYFaceunityFilter.m; path = ../../source/KSYFaceunityFilter.m; sourceTree = "<group>"; };
 		F278049B1DB7921C008150F5 /* WID-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WID-small.png"; path = "../WID-small.png"; sourceTree = "<group>"; };
 		F292E0D61D193C8B007D10C8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F292E0DF1D193D14007D10C8 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -133,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F276E7711E152F1500664E74 /* libnama.a in Frameworks */,
 				F260582B1DB4A23700E4D688 /* libksyrtclivedy.framework in Frameworks */,
 				F227F5781D82B8AB0008B04D /* GLKit.framework in Frameworks */,
 				F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */,
@@ -204,6 +256,7 @@
 		064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F276E7901E152FA400664E74 /* faceunityFilter */,
 				F2BA00691DD5E58700DB56AF /* rtcStreamerKit */,
 				06A5B6091D43BDDF00D9EE31 /* libs */,
 				0626F1181D2DFF0400193DAC /* KSYUIUtils */,
@@ -233,6 +286,7 @@
 		06A5B6091D43BDDF00D9EE31 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				F276E7481E152EE500664E74 /* faceunity */,
 				F260582D1DB4A25200E4D688 /* libksyrtclivedy.framework */,
 				F227F5771D82B8AB0008B04D /* GLKit.framework */,
 				F243BB0A1D3DF0E100906CD9 /* SystemConfiguration.framework */,
@@ -277,6 +331,46 @@
 				24972554697D413B26939B5C /* Pods_KSYRTCStreamerDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F276E7481E152EE500664E74 /* faceunity */ = {
+			isa = PBXGroup;
+			children = (
+				F276E7491E152F1500664E74 /* ar.bundle */,
+				F276E74A1E152F1500664E74 /* BeagleDog.bundle */,
+				F276E74B1E152F1500664E74 /* cat.bundle */,
+				F276E74C1E152F1500664E74 /* ColorCrown.bundle */,
+				F276E74D1E152F1500664E74 /* Deer.bundle */,
+				F276E74E1E152F1500664E74 /* evil.bundle */,
+				F276E74F1E152F1500664E74 /* eyeballs.bundle */,
+				F276E7501E152F1500664E74 /* face_beautification.bundle */,
+				F276E7511E152F1500664E74 /* fox.bundle */,
+				F276E7521E152F1500664E74 /* HappyRabbi.bundle */,
+				F276E7531E152F1500664E74 /* hartshorn.bundle */,
+				F276E7541E152F1500664E74 /* item0204.bundle */,
+				F276E7551E152F1500664E74 /* item0208.bundle */,
+				F276E7561E152F1500664E74 /* item0210.bundle */,
+				F276E7571E152F1500664E74 /* item0501.bundle */,
+				F276E7581E152F1500664E74 /* kitty.bundle */,
+				F276E7591E152F1500664E74 /* libnama.a */,
+				F276E75A1E152F1500664E74 /* mood.bundle */,
+				F276E75B1E152F1500664E74 /* PrincessCrown.bundle */,
+				F276E75C1E152F1500664E74 /* rabbit.bundle */,
+				F276E75D1E152F1500664E74 /* tears.bundle */,
+				F276E75E1E152F1500664E74 /* tiara.bundle */,
+				F276E75F1E152F1500664E74 /* v2.bundle */,
+				F276E7601E152F1500664E74 /* YellowEar.bundle */,
+			);
+			name = faceunity;
+			sourceTree = "<group>";
+		};
+		F276E7901E152FA400664E74 /* faceunityFilter */ = {
+			isa = PBXGroup;
+			children = (
+				F276E7911E152FB600664E74 /* KSYFaceunityFilter.h */,
+				F276E7921E152FB600664E74 /* KSYFaceunityFilter.m */,
+			);
+			name = faceunityFilter;
 			sourceTree = "<group>";
 		};
 		F2BA00691DD5E58700DB56AF /* rtcStreamerKit */ = {
@@ -367,10 +461,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2C05CA91D75656900AD3CFD /* LaunchScreen.storyboard in Resources */,
+				F276E7641E152F1500664E74 /* ColorCrown.bundle in Resources */,
+				F276E7671E152F1500664E74 /* eyeballs.bundle in Resources */,
+				F276E7631E152F1500664E74 /* cat.bundle in Resources */,
+				F276E76C1E152F1500664E74 /* item0204.bundle in Resources */,
+				F276E7661E152F1500664E74 /* evil.bundle in Resources */,
+				F276E7681E152F1500664E74 /* face_beautification.bundle in Resources */,
 				F2C05C931D755E6600AD3CFD /* Info.plist in Resources */,
+				F276E7781E152F1500664E74 /* YellowEar.bundle in Resources */,
+				F276E76B1E152F1500664E74 /* hartshorn.bundle in Resources */,
+				F276E7721E152F1500664E74 /* mood.bundle in Resources */,
+				F276E7621E152F1500664E74 /* BeagleDog.bundle in Resources */,
+				F276E7691E152F1500664E74 /* fox.bundle in Resources */,
 				F2C05C911D755E6600AD3CFD /* Assets.xcassets in Resources */,
 				F2C05CAA1D75656900AD3CFD /* Main.storyboard in Resources */,
+				F276E76E1E152F1500664E74 /* item0210.bundle in Resources */,
+				F276E76D1E152F1500664E74 /* item0208.bundle in Resources */,
+				F276E7741E152F1500664E74 /* rabbit.bundle in Resources */,
+				F276E7701E152F1500664E74 /* kitty.bundle in Resources */,
+				F276E76A1E152F1500664E74 /* HappyRabbi.bundle in Resources */,
+				F276E7751E152F1500664E74 /* tears.bundle in Resources */,
+				F276E7761E152F1500664E74 /* tiara.bundle in Resources */,
+				F276E7651E152F1500664E74 /* Deer.bundle in Resources */,
 				F278049C1DB7921C008150F5 /* WID-small.png in Resources */,
+				F276E7731E152F1500664E74 /* PrincessCrown.bundle in Resources */,
+				F276E76F1E152F1500664E74 /* item0501.bundle in Resources */,
+				F276E7771E152F1500664E74 /* v2.bundle in Resources */,
+				F276E7611E152F1500664E74 /* ar.bundle in Resources */,
 				F2CB6A6D1DF7B6C900EECB49 /* mask.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,6 +549,7 @@
 			files = (
 				F24A81E11DDAE383003B51F9 /* KSYLiveVC.m in Sources */,
 				F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */,
+				F276E7931E152FB600664E74 /* KSYFaceunityFilter.m in Sources */,
 				F22125881D9D17C400796C7A /* KSYReachability.m in Sources */,
 				F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */,
 				F2C05C581D74234000AD3CFD /* KSYFilterView.m in Sources */,
@@ -579,6 +697,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../framework,
+					../framwork/faceunity,
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -586,10 +705,14 @@
 					"$(inherited)",
 					KSYSTREAMER_DEMO,
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../framework/faceunity,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../framework/faceunity;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -612,16 +735,21 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					../framework,
+					../framwork/faceunity,
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					KSYSTREAMER_DEMO,
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../framework/faceunity,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/KSYRTCStreamerDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../framework/faceunity;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYRTCStreamerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

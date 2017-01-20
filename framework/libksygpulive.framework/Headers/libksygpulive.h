@@ -8,15 +8,13 @@
 #import <UIKit/UIKit.h>
 
 #import "KSYTypeDef.h"
+#import "KSYAVAudioSession.h"
 
 // sources (player & capture)
 #import "KSYBgmPlayer.h"
-#import "KSYMicMonitor.h"
 #import "KSYAUAudioCapture.h"
-#import "KSYAVAudioSession.h"
-
-// filters (for video and audio)
-#import "KSYAudioReverb.h"
+#import "KSYDummyAudioSource.h"
+#import "KSYAVFCapture.h"
 
 // mixer
 #import "KSYAudioMixer.h"

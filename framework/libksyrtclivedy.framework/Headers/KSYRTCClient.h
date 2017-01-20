@@ -51,7 +51,7 @@ typedef enum KSYRTCResult{
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-typedef void (^RTCVideoDataBlock)(CVPixelBufferRef pixelBuffer);
+typedef void (^RTCVideoDataBlock)(void** pData,size_t width,size_t height,size_t* strides);
 
 typedef void (^RTCVoiceDataBlock)(uint8_t* pData,int blockBufSize,uint64_t pts,uint32_t channels,
 uint32_t sampleRate,uint32_t bytesPerSample);
@@ -109,11 +109,6 @@ uint32_t sampleRate,uint32_t bytesPerSample);
  @abstract 视频数据高度
  */
 @property (nonatomic, assign) int videoHeight;
-/*
- @abstract 视频发送缩放比例,从0～1
- */
-@property (nonatomic, assign) float sendVideoRatio;
-
 /*
  @abstract 辅播可以通过这个接口不发送视频数据
  */

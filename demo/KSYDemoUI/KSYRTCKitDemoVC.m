@@ -16,6 +16,8 @@
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import "KSYFaceunityFilter.h"
+
 @interface KSYRTCKitDemoVC () {
     id _filterBtn;
     UILabel* label;
@@ -100,8 +102,6 @@
     [self.ksyMenuView.rtcBtn setHidden:NO];
     if (_kit) {
         // init with default filter
-        [_kit setupFilter:self.ksyFilterView.curFilter];
-        _kit.curfilter =self.ksyFilterView.curFilter;
         [_kit startPreview:self.view];
     }
 }
@@ -209,7 +209,13 @@
     //特性2:圆角小窗口
     _kit.maskPicture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"mask.png"]];
 
-    
+    //设置美颜效果
+    [_kit setupFilter:self.ksyFilterView.curFilter];
+    _kit.curfilter =self.ksyFilterView.curFilter;
+
+    //特性3：faceunity动态贴纸,本demo只示例15s，客户请自己申请faceunity正式版本
+    [self setupFaceUnity];
+
     //rtcClient的回调，（option）
     __weak KSYRTCKitDemoVC *weak_demo = self;
     __weak KSYRTCStreamerKit *weak_kit = _kit;
@@ -275,6 +281,51 @@
     
 }
 
+-(void)setupFaceUnity
+{
+//    NSArray * g_item_names = @[
+//                               @"kitty.bundle",
+//                               @"fox.bundle",
+//                               @"evil.bundle",
+//                               @"eyeballs.bundle",
+//                               @"mood.bundle",
+//                               @"tears.bundle",
+//                               @"rabbit.bundle",
+//                               @"cat.bundle",
+//                               @"tiara.bundle",
+//                               @"item0208.bundle",
+//                               @"YellowEar.bundle",
+//                               @"PrincessCrown.bundle",
+//                               @"Mood.bundle" ,
+//                               @"Deer.bundle" ,
+//                               @"BeagleDog.bundle",
+//                               @"item0501.bundle",
+//                               @"ColorCrown.bundle",
+//                               @"item0210.bundle",
+//                               @"HappyRabbi.bundle",
+//                               @"item0204.bundle",
+//                               @"hartshorn.bundle"];
+NSArray * g_item_names = @[@"kitty.bundle",
+                           @"fox.bundle"];
+
+    KSYFaceunityFilter *faceUnityFilter = [[KSYFaceunityFilter alloc]initWithArray:g_item_names];
+    faceUnityFilter.choosedIndex = 1;
+    
+    GPUImageOutput<GPUImageInput>* beautifilter = [[KSYGPUBeautifyPlusFilter alloc]init];
+    
+    [beautifilter addTarget:faceUnityFilter];
+    
+    // 用滤镜组 将 滤镜 串联成整体
+    GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
+    [fg addFilter:faceUnityFilter];
+    [fg addFilter:beautifilter];
+    
+    [fg setInitialFilters:[NSArray arrayWithObject:beautifilter]];
+    [fg setTerminalFilter:faceUnityFilter];
+    
+    [_kit setupFilter:fg];
+    _kit.curfilter = fg;
+}
 
 -(void)statEvent:(NSString *)event
           result:(int)ret
@@ -321,7 +372,7 @@
     if(![self checkNetworkReachability:AF_INET6])
     {
     //获取鉴权串，demo里为testAppServer，请改用自己的appserver
-    TestASString = [NSString stringWithFormat:@"http://120.92.10.164:6002/rtcauth?uid=%@",localid];
+    TestASString = [NSString stringWithFormat:@"http://rtc.vcloud.ks-live.com:6002/rtcauth?uid=%@",localid];
     _kit.rtcClient.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",
                                     [self AuthFromTestAS:TestASString]];
     }

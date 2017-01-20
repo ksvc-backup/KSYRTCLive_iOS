@@ -84,7 +84,6 @@ typedef void (^KSYPlyTextureBlock)(GLuint texId, int width, int height, double p
  @warning 必须调用该方法进行初始化，不能调用init方法。
  @since Available in KSYMoviePlayerController 1.0 and later.
  @return 返回KSYMoviePlayerController 实例
- @warning KSYMoviePlayerController 当前版本只支持单实例的KSYMoviePlayerController对象，多实例将导致播放异常。
  */
 - (instancetype)initWithContentURL:(NSURL *)url;
 
@@ -614,6 +613,16 @@ typedef void (^KSYPlyTextureBlock)(GLuint texId, int width, int height, double p
  @since Available in KSYMoviePlayerController 1.6.2 and later.
  */
 - (void)reset:(BOOL)holdLastPic;
+
+/**
+ @abstract 跳转到指定位置播放
+ @param pos 跳转到的位置，单位秒
+ @param isAccurate 是否精确跳转，NO时等同于currentPlaybackTime, YES时为精确跳转
+ @discussion 媒体文件总时长较小且关键帧间隔较大时，需要使用精确跳转， 总时长较大或者不需要精确定位时可以使用currentPlaybackTime或者将isAccurate设置为NO进行跳转
+ @warning 该方法由金山云引入，不是原生系统接口
+ @since Available in KSYMoviePlayerController 1.9.1 and later.
+ */
+- (void)seekTo:(double)pos accurate:(BOOL)isAccurate;
 
 @end
 

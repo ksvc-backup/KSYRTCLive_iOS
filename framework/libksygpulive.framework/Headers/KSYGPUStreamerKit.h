@@ -1,16 +1,13 @@
+//
+//  KSYGPUStreamerKit.h
+//  KSYStreamer
+//
+//  Created by pengbin on 09/01/16.
+//  Copyright © 2016 ksyun. All rights reserved.
+//
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-
-@class KSYGPUCamera;
-@class KSYAUAudioCapture;
-@class KSYBgmPlayer;
-@class GPUImagePicture;
-@class GPUImageCropFilter;
-@class GPUImageFilter;
-@class GPUImageView;
-@class KSYAudioMixer;
-@class KSYGPUPicOutput;
-@class GPUImageOutput;
+#import "libksygpuimage.h"
 
 /** KSY 直播推流工具类
  
@@ -58,12 +55,7 @@
  @abstract   视频采集设备
  @discussion 通过该指针可以对摄像头进行操作 (操作接口参见GPUImage)
  */
-@property (nonatomic, readonly) KSYGPUCamera       *vCapDev;
-
-/**
- @abstract 采集图像裁剪(用于修正宽高比)
- */
-@property (nonatomic, readonly)GPUImageCropFilter  *cropfilter;
+@property (nonatomic, readonly) KSYAVFCapture      *vCapDev;
 
 /**
  @abstract   获取当前使用的滤镜
@@ -91,10 +83,17 @@
 @property (nonatomic, readonly) GPUImageView          *preview;
 
 /**
+ @abstract   采集到的图像上传GPU
+ @discussion 用于衔接GPU和capture
+ */
+@property (nonatomic, readonly)KSYGPUPicInput          *capToGpu;
+
+/**
  @abstract   获取渲染的图像
  @discussion 用于衔接GPU和streamer
  */
 @property (nonatomic, readonly)KSYGPUPicOutput         *gpuToStr;
+
 
 #pragma mark - sub modules - audio
 /**
@@ -181,12 +180,27 @@ FOUNDATION_EXPORT NSString *const KSYCaptureStateDidChangeNotification NS_AVAILA
  */
 - (void) stopPreview;
 
+/**
+ @abstract   进入后台: 暂停图像采集
+ @discussion 暂停图像采集和预览
+ @discussion 如果需要释放mic资源请直接调用停止采集
+ @see aCapDev
+ */
+- (void) appEnterBackground;
+
+/**
+ @abstract   回到前台: 恢复采集
+ @discussion 恢复图像采集和预览
+ @discussion 恢复音频采集
+ */
+- (void) appBecomeActive;
+
 #pragma mark - capture & preview & stream settings
 
 /**
  @abstract   采集分辨率 (仅在开始采集前设置有效)
  @discussion 参见iOS的 AVCaptureSessionPresetXXX的定义
- @discussion https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVCaptureSession_Class/#//apple_ref/doc/constant_group/Video_Input_Presets
+ @discussion https://developer.apple.com/reference/avfoundation/avcapturesession/1669314-video_input_presets?language=objc
  @discussion 透传到 KSYGPUCamera. 默认值为AVCaptureSessionPreset640x480
  @discussion 不同设备支持的预设分辨率可能不同, 请尽量与预览分辨率一致
  */
@@ -214,7 +228,7 @@ FOUNDATION_EXPORT NSString *const KSYCaptureStateDidChangeNotification NS_AVAILA
  @abstract   用户定义的视频 **推流** 分辨率
  @discussion 有效范围: 宽度[160, 1280] 高度[ 90,  720], 超出范围会取边界有效值
  @discussion 其他与previewDimension限定一致,
- @discussion 当与previewDimension不一致时, 仅仅进行缩放
+ @discussion 当与previewDimension不一致时, 同样先裁剪到相同宽高比, 再进行缩放
  @discussion 默认值为(640, 360)
  @see previewDimension
  */
@@ -311,11 +325,27 @@ FOUNDATION_EXPORT NSString *const KSYCaptureStateDidChangeNotification NS_AVAILA
 /**
  @abstract   视频处理回调接口
  @param      sampleBuffer 原始采集到的视频数据
+ @discussion 对sampleBuffer内的图像数据的修改将传递到观众端
  @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
- 
- @see CMSampleBufferRef
+ @discussion 请参考 CMSampleBufferRef
  */
 @property(nonatomic, copy) void(^videoProcessingCallback)(CMSampleBufferRef sampleBuffer);
+
+/**
+ @abstract   音频处理回调接口
+ @discussion sampleBuffer 原始采集到的音频数据
+ @discussion 对sampleBuffer内的pcm数据的修改将传递到观众端
+ @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
+ @discussion 请参考 CMSampleBufferRef
+ */
+@property(nonatomic, copy) void(^audioProcessingCallback)(CMSampleBufferRef sampleBuffer);
+
+/**
+ @abstract   摄像头采集被打断的消息通知
+ @discussion bInterrupt 为YES, 表明被打断, 摄像头采集暂停
+ @discussion bInterrupt 为NO, 表明恢复采集
+ */
+@property(nonatomic, copy) void(^interruptCallback)(BOOL bInterrupt);
 
 #pragma mark -  filters
 /**
@@ -402,5 +432,26 @@ FOUNDATION_EXPORT NSString *const KSYCaptureStateDidChangeNotification NS_AVAILA
  @see textLable
  */
 - (void) updateTextLabel;
+
+/**
+ @abstract   当前采集设备是否支持自动变焦
+ @param      point相机对焦的位置
+ @return     YES / NO
+ @discussion 通常只有后置摄像头支持自动变焦
+  */
+- (BOOL)focusAtPoint:(CGPoint )point;
+
+/**
+ @abstract   当前采集设备是否支持自动曝光
+ @param      point相机曝光的位置
+ @return     YES / NO
+ @discussion 通常前后置摄像头都支持自动曝光
+ */
+- (BOOL)exposureAtPoint:(CGPoint )point;
+
+/**
+ @abstract 触摸缩放因子
+ */
+@property (nonatomic, assign)   CGFloat pinchZoomFactor;
 
 @end
