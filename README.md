@@ -53,7 +53,7 @@ source目录下 KSYRTCStreamerKit.h/m
 - 2016.11.22 和rtc主版本分离，更加易于集成。开源[KSYRTCStreamerKit.m]
 - 2016.12.01 发布私聊版本。
 - 2016.12.22 发布圆角版本+音频极致优化版本。
-- 2016.1.20 发布faceunity贴纸版本。
+- 2016.1.20 发布faceunity贴纸版本。[使用指南](https://github.com/ksvc/KSYRTCLive_iOS/wiki/feature)
 
 ### 2.2 近期工作
 - 2016.2.xx  集成商汤贴纸版本。
