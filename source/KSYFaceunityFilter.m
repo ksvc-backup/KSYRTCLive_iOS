@@ -2,7 +2,6 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #import "FURenderer.h"
-#import "authpack.h"
 
 static int g_frame_id = 0;
 
@@ -115,7 +114,7 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
     intptr_t size = 0;
     void* v2data = mmap_bundle(@"v2.bundle", &size);
     void* ardata = mmap_bundle(@"ar.bundle", &size);
-    [[FURenderer shareRenderer] setupWithData:v2data ardata:ardata authPackage:g_auth_package authSize:sizeof(g_auth_package)];
+    [[FURenderer shareRenderer] setupWithData:v2data ardata:ardata authPackage:NULL authSize:0];
 }
 
 #pragma GPUImageInput
