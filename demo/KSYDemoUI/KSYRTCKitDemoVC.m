@@ -6,17 +6,18 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import "KSYStreamerVC.h"
-#import "KSYRTCClientKitBase.h"
+#import <libksygpulive/KSYGPUStreamerKit.h>
 #import "KSYRTCStreamerKit.h"
 #import "KSYReachability.h"
 #import <libksyrtclivedy/KSYRTCClient.h>
 
-#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/libksystreamerengine.h>
 #import "KSYRTCKitDemoVC.h"
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "KSYFaceunityFilter.h"
+#import "KSYSTFilter.h"
 
 @interface KSYRTCKitDemoVC () {
     id _filterBtn;
@@ -31,8 +32,10 @@
     KSYReachability *_reach;
     NetworkStatus   _preStatue;
     NSString* _networkStatus;
+   
 }
 @property bool beQuit;
+@property KSYSTFilter* ksySTFitler;
 
 @end
 
@@ -42,10 +45,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _kit = [[KSYRTCStreamerKit alloc] initWithDefaultCfg];
+
     // 获取streamerBase, 方便进行推流相关操作, 也可以直接 _kit.streamerBase.xxx
     self.streamerBase = _kit.streamerBase;
     // 采集相关设置初始化
     [self setCaptureCfg];
+ 
     //推流相关设置初始化
     [self setStreamerCfg];
     //设置rtc参数
@@ -213,8 +218,11 @@
     [_kit setupFilter:self.ksyFilterView.curFilter];
     _kit.curfilter =self.ksyFilterView.curFilter;
 
-    //特性3：faceunity动态贴纸,本demo只示例15s，客户请自己申请faceunity正式版本
-    [self setupFaceUnity];
+    //贴纸faceunity：faceunity动态贴纸,本demo只示例15s，客户请自己申请faceunity正式版本
+    //[self setupFaceUnity];
+    
+    //贴纸sense
+    //[self setupSense];
 
     //rtcClient的回调，（option）
     __weak KSYRTCKitDemoVC *weak_demo = self;
@@ -279,6 +287,29 @@
         NSLog(@"%@",message);
     };
     
+}
+
+-(void)setupSense
+{
+    //请填入自己的appid和appkey
+    _ksySTFitler = [[KSYSTFilter alloc]initWithAppid:@"your appid" appKey:@"your appkey"];
+    __weak KSYRTCKitDemoVC *wVC = self;
+    void (^completeCallback)(SenseArMaterial *) = ^(SenseArMaterial * m){
+        NSLog(@"download SenseArMaterial finish");
+    };
+    void (^failCallback)(SenseArMaterial *, int, NSString *)= ^(SenseArMaterial * m , int error, NSString * errorMessage){
+        NSLog(@"download SenseArMaterial failed,error:%d,errorMessage:%@",error,errorMessage);
+    };
+    void (^processCallback)(SenseArMaterial *material , float fProgress , int64_t iSize) = ^(SenseArMaterial *material , float fProgress , int64_t iSize){
+         NSLog(@"downloading SenseArMaterial,fProgress:%f,iSize:%lld",fProgress,iSize);
+    };
+    
+    _ksySTFitler.fetchListFinishCallback=^(NSUInteger count){
+        [wVC.ksySTFitler changeSticker:60 onSuccess:completeCallback onFailure:failCallback onProgress:processCallback];
+    };
+
+    [_kit setupFilter:_ksySTFitler];
+    _kit.curfilter = _ksySTFitler;
 }
 
 -(void)setupFaceUnity
@@ -381,7 +412,8 @@ NSArray * g_item_names = @[@"kitty.bundle",
         _kit.rtcClient.authString=[NSString stringWithFormat:@"https://rtc.vcloud.ks-live.com:6001/auth?%@",TestASString];
     }
     
-    [_kit.rtcClient registerRTC];
+    int ret = [_kit.rtcClient registerRTC];
+    if(ret != 0) [self statEvent:@"注册错误,错误码" result:ret];
 }
 
 - (void)onRtcStartCall:(NSString *)remoteid{
@@ -532,6 +564,12 @@ NSArray * g_item_names = @[@"kitty.bundle",
         default:
             return;
     }
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    _ksySTFitler = nil;
 }
 
 @end

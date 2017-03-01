@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <GPUImage/GPUImage.h>
-#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/libksystreamerengine.h>
 
 @interface KSYFaceunityFilter : KSYGPUPicInput <GPUImageInput>
 /**

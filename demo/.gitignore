@@ -30,8 +30,13 @@ Temporary Items
 lib/
 *.ipa
 xcuserdata
-
-
+project.xcworkspace/
 KSYLiveDemo.xcworkspace/
 Podfile.lock
 Pods/
+debug/Pods/
+debug/Podfile.lock
+debug/KSYLive_iOS/
+debug/ksyios_rtc/
+debug/libksylivedep/
+debug/KSYRTCStreamerDemo.xcworkspace

@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class KSYRTCClientKitBase;
+@class KSYGPUStreamerKit;
 @class KSYRTCClient;
 
-@interface KSYRTCStreamerKit: KSYRTCClientKitBase
+@interface KSYRTCStreamerKit: KSYGPUStreamerKit
 /**
  @abstract 初始化方法
  @discussion 创建带有默认参数的 kit

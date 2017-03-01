@@ -9,8 +9,9 @@
 #import "KSYFilterView.h"
 #import "KSYNameSlider.h"
 #import <GPUImage/GPUImage.h>
-#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/libksystreamerengine.h>
 #import <libksygpulive/libksygpulive.h>
+#import <libksygpulive/KSYGPUBeautifyExtFilter.h>
 
 @interface KSYFilterView() {
     UILabel * _lblSeg;

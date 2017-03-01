@@ -1,20 +1,28 @@
 
 #import <libksygpulive/KSYGPUPicOutput.h>
-#import <libksygpulive/libksygpuimage.h>
-#import <libksyrtclivedy/KSYRTCAecModule.h>
+#import <libksygpulive/libksystreamerengine.h>
 #import <libksyrtclivedy/KSYRTCClient.h>
 #import <GPUImage/GPUImage.h>
-#import "KSYRTCClientKitBase.h"
+#import <libksygpulive/KSYGPUStreamerKit.h>
 #import "KSYRTCStreamerKit.h"
+#import  <libksyrtclivedy/TPCircularBuffer.h>
+
+#define FRAME_SIZE  1024
+// Frame bytes (assume S16)
+#define MIN_SIZE_PER_FRAME (sizeof(int16_t)*FRAME_SIZE)
+#define QUEUE_BUFFER_SIZE 8
+#define BUFFER_COUNT 15
 
 #if __arm__  || __arm64__
 @interface KSYRTCStreamerKit (){
+    TPCircularBuffer _inputPCMBuf;//音频播放缓冲区
 }
 
 @property KSYGPUPicOutput *     beautyOutput;
 @property KSYGPUYUVInput  *     rtcYuvInput;
 @property GPUImageUIElement *   uiElementInput;
 @property GPUImageMaskFilter *  maskingFilter;
+@property GPUImageFilter *  maskingShieldFilter;//用于mask隔离，防止残影发生
 
 @property BOOL   firstFrame;
 
@@ -38,9 +46,12 @@
         _firstFrame = NO;
         _curfilter = self.filter;
         _maskPicture = nil;
+        _maskingShieldFilter = [[GPUImageFilter alloc]init];
         _rtcLayer = 4;
         self.aCapDev.micVolume = 1.0;
-        
+        //self.aCapDev.reverbType = 4;
+        TPCircularBufferInit(&_inputPCMBuf, MIN_SIZE_PER_FRAME*QUEUE_BUFFER_SIZE);
+
         _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)];
         _contentView.backgroundColor = [UIColor clearColor];
         
@@ -176,6 +187,8 @@
     [dc removeObserver:self
                   name:UIApplicationWillResignActiveNotification
                 object:nil];
+    
+    _curfilter = nil;
 }
 
 
@@ -185,14 +198,8 @@
         return;
     }
     // 采集的图像先经过前处理
-    [self.vCapDev     removeAllTargets];
-    GPUImageOutput* src = self.vCapDev;
-    if(self.cropfilter)
-    {
-        [self.cropfilter removeAllTargets];
-        [src addTarget:self.cropfilter];
-        src = self.cropfilter;
-    }
+    [self.capToGpu     removeAllTargets];
+    GPUImageOutput* src = self.capToGpu;
     
     if(filter)
     {
@@ -262,9 +269,12 @@
     [input removeAllTargets];
     [_maskPicture removeAllTargets];
     [_maskingFilter removeAllTargets];
+    [_maskingShieldFilter removeAllTargets];
     
-    [input addTarget:_maskingFilter];
+    [input addTarget:_maskingShieldFilter];
+    [_maskingShieldFilter addTarget:_maskingFilter];
     [_maskPicture addTarget:_maskingFilter];
+    [_maskPicture processImage];
 }
 
 -(void) addElementInput:(GPUImageUIElement *)input
@@ -335,8 +345,6 @@
     }
 }
 
-
-
 #pragma mark -rtc
 -(void) defaultOnCallStartCallback
 {
@@ -364,14 +372,20 @@
     
     [self setupRtcFilter:_curfilter];
     
-    //设置音频通道
-    [self.aMixer setTrack:2 enable:YES];
+    //设置音频发送
     [self.aMixer setMixVolume:1 of:2];
-    self.aCapDev.audioProcessingCallback =^(CMSampleBufferRef buf){
+    self.audioProcessingCallback =^(CMSampleBufferRef buf){
         [wkit.rtcClient processAudio:buf];
-        [wkit.aMixer processAudioSampleBuffer:buf of:wkit.micTrack];
     };
-    [self.aCapDev startSpeaker];
+    //设置音频播放
+    [self.aMixer setTrack:2 enable:YES];
+    [self clearBuffer];
+    [self setSpeakerAudioSession];
+    self.aCapDev.enableVoiceProcess = YES;
+    self.aCapDev.bPlayCapturedAudio = NO;
+    self.aCapDev.customPlayCallback = ^(AudioBufferList * iodata,UInt32 inumberFrame){
+        [wkit fillIoData:iodata inNumber:inumberFrame];
+    };
 }
 
 -(void)stopRTCView
@@ -386,13 +400,14 @@
     _firstFrame = NO;
     [self setupRtcFilter:_curfilter];
     
-    //拆除音频通道
+    //还原音频发送
+    self.audioProcessingCallback = nil;
+    //还原音频接收
     [self.aMixer setTrack:2 enable:NO];
-    __weak KSYRTCStreamerKit * wkit = self;
-    self.aCapDev.audioProcessingCallback =^(CMSampleBufferRef buf){
-        [wkit.aMixer processAudioSampleBuffer:buf of:wkit.micTrack];
-    };
-    [self.aCapDev stopSpeaker];
+    [self clearBuffer];
+    
+    self.aCapDev.enableVoiceProcess = NO;
+    self.aCapDev.customPlayCallback = nil;
 }
 
 
@@ -402,9 +417,6 @@
                          stride:(size_t*) strides
 {
     [_rtcYuvInput processPixelData:pData format:kCVPixelFormatType_420YpCbCr8Planar width:width height:height stride:strides time:CMTimeMake(2, 10)];
-
-    if(_firstFrame && _maskPicture)
-        [_maskPicture processImage];
     
     if(!_firstFrame)
         _firstFrame = YES;
@@ -421,16 +433,17 @@
         return;
     
     AudioStreamBasicDescription asbd;
+    bzero(&asbd, sizeof(asbd));
     asbd.mSampleRate       = sampleRate;
     asbd.mFormatID         = kAudioFormatLinearPCM;
-    asbd.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+    asbd.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;;
     asbd.mBitsPerChannel   = 8 * bytesPerSample;
     asbd.mBytesPerFrame    = bytesPerSample;
     asbd.mBytesPerPacket   = bytesPerSample;
-    asbd.mFramesPerPacket  = channels;
-    asbd.mChannelsPerFrame = channels;
+    asbd.mFramesPerPacket  = 1;
+    asbd.mChannelsPerFrame = 1;
     
-    [self.aCapDev putVoiceTobuffer:(void*)buf size:len];
+    [self putVoiceTobuffer:buf size:len];
     CMTime pts;
     pts.value = ptsvalue;
     if([self.streamerBase isStreaming])
@@ -462,6 +475,7 @@
 }
 
 -(void)setSelfInFront:(BOOL)selfInFront{
+    _selfInFront = selfInFront;
     if(_callstarted)
     {
         [self stopRTCView];
@@ -472,6 +486,7 @@
 }
 
 - (void)enterbg {
+    [self appEnterBackground];
     if(_callstarted)
         [self stopRTCView];
 }
@@ -483,16 +498,11 @@
 
 -(void)becomeActive
 {
+    [self appBecomeActive];
     __weak KSYRTCStreamerKit * weak_kit = self;
     _rtcClient.videoDataBlock=^(void** pData,size_t width,size_t height,size_t* strides){
         [weak_kit defaultRtcVideoCallback:pData width:width height:height stride:strides];
     };
-
-NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
-[dc addObserver:self
-       selector:@selector(interruptHandler:)
-           name:AVAudioSessionInterruptionNotification
-         object:nil];
 }
 
 -(void)resignActive
@@ -503,6 +513,74 @@ NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
                   name:AVAudioSessionInterruptionNotification
                 object:nil];
 }
+
+#pragma input buffer
+-(void)clearBuffer
+{
+    TPCircularBufferClear(&_inputPCMBuf);
+}
+
+-(void) putVoiceTobuffer:(void* )buffer
+                    size:(int)blockBufSize
+{
+    int freeByte = 0;
+    void* TPbuffer = TPCircularBufferHead( &_inputPCMBuf, &freeByte);
+    
+    if(!TPbuffer)
+    {
+        NSLog(@"TPbuffer is NULL");
+        return;
+    }
+    if ( freeByte < blockBufSize ){
+        TPCircularBufferConsume(&_inputPCMBuf,blockBufSize);
+        TPCircularBufferClear(&_inputPCMBuf);
+    }
+    memcpy(TPbuffer, buffer, blockBufSize);
+    TPCircularBufferProduce(&_inputPCMBuf , blockBufSize);
+}
+
+-(void) fillIoData:(AudioBufferList* )ioData
+          inNumber:(UInt32)inNumberFrames
+{
+    int availableBytes   = 0;
+    int16_t *outPcm = (int16_t *)TPCircularBufferTail(&_inputPCMBuf, &availableBytes);
+    if(availableBytes > inNumberFrames*2)
+    {
+        memcpy(ioData->mBuffers[0].mData,outPcm,inNumberFrames*2);
+        TPCircularBufferConsume(&_inputPCMBuf,inNumberFrames*2);
+    }
+}
+
+-(void) setSpeakerAudioSession {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    AVAudioSessionCategoryOptions opts = [session categoryOptions];
+    
+    opts |= AVAudioSessionCategoryOptionMixWithOthers;
+    
+    if(![self isHeadsetPluggedIn])
+    {
+        [session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
+        [session setActive:YES error:nil];
+        opts |= AVAudioSessionCategoryOptionDefaultToSpeaker;
+    }
+    // skip settings if no need
+    if ( ![[session category] isEqualToString: AVAudioSessionCategoryPlayAndRecord] ||
+        (opts != [session categoryOptions]) ){
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord
+                 withOptions:opts
+                       error:nil];
+    }
+}
+
+-(BOOL) isHeadsetPluggedIn {
+    AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
+    for (AVAudioSessionPortDescription* desc in [route outputs]) {
+        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
+            return YES;
+    }
+    return NO;
+}
+
 @end
 
 

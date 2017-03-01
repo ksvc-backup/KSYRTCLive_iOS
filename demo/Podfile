@@ -3,9 +3,9 @@ inhibit_all_warnings!
 use_frameworks!
 
 target 'KSYRTCStreamerDemo' do
-   pod 'KSYRTCLive’,:path => '../'
-   pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3’
-   pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3’
+   pod 'KSYRTCLive',:path => '../'
+   pod 'libksygpulive/KSYGPUResource'
+   pod 'libksygpulive/libksygpulive'
 end
 
 post_install do |installer|

@@ -6,8 +6,8 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import <libksyrtclivedy/KSYRTCClient.h>
-#import <libksygpulive/libksygpuimage.h>
-#import "KSYRTCClientKitBase.h"
+#import <libksygpulive/libksystreamerengine.h>
+#import <libksygpulive/KSYGPUStreamerKit.h>
 #import "KSYStreamerVC.h"
 #import "KSYSChatDemoVC.h"
 #import "KSYRTCStreamerKit.h"

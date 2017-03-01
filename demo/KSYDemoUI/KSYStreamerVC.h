@@ -18,7 +18,7 @@
 #import "KSYRtcMasterView.h"
 #import "KSYRtcSlaveView.h"
 
-#import <libksygpulive/libksygpuimage.h>
+#import <libksygpulive/libksystreamerengine.h>
 #import <libksygpulive/KSYGPUStreamerKit.h>
 #import "libksygpulive/KSYMoviePlayerController.h"
 
