@@ -10,7 +10,7 @@
 
 * ipa下载地址
 
-![download](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/download.png)
+![download](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/qrCode.png)
 
 ## 1. 功能特性
 ### 1.1 连麦功能
