@@ -34,7 +34,7 @@ pod 'libksygpulive/libksygpulive'
 framework下的libksyrtclivedy.framework库。
 framework下的gpuimage.framework库。
 framework下的libksygpulive.framework库。(2.0.0版本以后不再提供）
-也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.9.3）下载动态库。
+也可以去［ksylive_ios主版本］下载动态库。
 ```
 - 需要导入的文件：
 ```
