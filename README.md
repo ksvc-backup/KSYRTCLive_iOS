@@ -26,20 +26,19 @@
 ```
 use_frameworks!
 pod 'KSYRTCLive’,:path => '../'
-pod 'libksygpulive/KSYGPUResource', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3’
-pod 'libksygpulive/libksygpulive', :git => 'https://github.com/ksvc/KSYLive_iOS.git', :tag => 'v1.9.3'
+pod 'libksygpulive/KSYGPUResource'
+pod 'libksygpulive/libksygpulive'
 ```
 - 需要导入的动态库（手动方式):
 ```
 framework下的libksyrtclivedy.framework库。
 framework下的gpuimage.framework库。
-framework下的libksygpulive.framework库。
+framework下的libksygpulive.framework库。(2.0.0版本以后不再提供）
 也可以去［ksylive_ios主版本］（https://github.com/ksvc/KSYLive_iOS/releases/tag/v1.9.3）下载动态库。
 ```
 - 需要导入的文件：
 ```
 source目录下 KSYRTCStreamerKit.h/m
-            KSYRTCClientKitBase.h/m
 ```
 
 
@@ -54,9 +53,9 @@ source目录下 KSYRTCStreamerKit.h/m
 - 2016.12.01 发布私聊版本。
 - 2016.12.22 发布圆角版本+音频极致优化版本。
 - 2016.1.20 发布faceunity贴纸版本。[使用指南](https://github.com/ksvc/KSYRTCLive_iOS/wiki/feature)
+- 2016.3.1  集成商汤贴纸版本。
 
 ### 2.2 近期工作
-- 2016.2.xx  集成商汤贴纸版本。
 - 2016.2.xx 多人连麦；
 
 ## 3. 商务合作
