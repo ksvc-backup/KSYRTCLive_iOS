@@ -53,7 +53,6 @@
 		F292E0E91D193DFF007D10C8 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F292E0E81D193DFF007D10C8 /* libpthread.tbd */; };
 		F29FAA3B1E530A46005AECFD /* action3.1.0.model in Resources */ = {isa = PBXBuildFile; fileRef = F29FAA2C1E530A46005AECFD /* action3.1.0.model */; };
 		F29FAA3C1E530A47005AECFD /* libSenseAr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F29FAA2D1E530A46005AECFD /* libSenseAr.a */; };
-		F29FAA3E1E530A47005AECFD /* SENSEME.lic in Resources */ = {isa = PBXBuildFile; fileRef = F29FAA3A1E530A46005AECFD /* SENSEME.lic */; };
 		F29FAA411E530B2A005AECFD /* KSYSTFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = F29FAA401E530B2A005AECFD /* KSYSTFilter.m */; };
 		F2BA006C1DD5E5D800DB56AF /* KSYRTCStreamerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BA006B1DD5E5D800DB56AF /* KSYRTCStreamerKit.m */; };
 		F2C05C461D7420AB00AD3CFD /* KSYMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C05C3F1D7420AB00AD3CFD /* KSYMenuView.m */; };
@@ -164,7 +163,6 @@
 		F29FAA371E530A46005AECFD /* SenseArMaterialRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SenseArMaterialRender.h; path = ../../framework/sense/SenseArMaterialRender.h; sourceTree = "<group>"; };
 		F29FAA381E530A46005AECFD /* SenseArMaterialService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SenseArMaterialService.h; path = ../../framework/sense/SenseArMaterialService.h; sourceTree = "<group>"; };
 		F29FAA391E530A46005AECFD /* SenseArShortVideoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SenseArShortVideoClient.h; path = ../../framework/sense/SenseArShortVideoClient.h; sourceTree = "<group>"; };
-		F29FAA3A1E530A46005AECFD /* SENSEME.lic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SENSEME.lic; path = ../../framework/sense/SENSEME.lic; sourceTree = "<group>"; };
 		F29FAA3F1E530B2A005AECFD /* KSYSTFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYSTFilter.h; path = ../../source/KSYSTFilter.h; sourceTree = "<group>"; };
 		F29FAA401E530B2A005AECFD /* KSYSTFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYSTFilter.m; path = ../../source/KSYSTFilter.m; sourceTree = "<group>"; };
 		F2BA006A1DD5E5D800DB56AF /* KSYRTCStreamerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYRTCStreamerKit.h; path = ../../source/KSYRTCStreamerKit.h; sourceTree = "<group>"; };
@@ -388,7 +386,6 @@
 				F29FAA371E530A46005AECFD /* SenseArMaterialRender.h */,
 				F29FAA381E530A46005AECFD /* SenseArMaterialService.h */,
 				F29FAA391E530A46005AECFD /* SenseArShortVideoClient.h */,
-				F29FAA3A1E530A46005AECFD /* SENSEME.lic */,
 			);
 			name = sense;
 			sourceTree = "<group>";
@@ -520,7 +517,6 @@
 				F2C05C931D755E6600AD3CFD /* Info.plist in Resources */,
 				F276E7781E152F1500664E74 /* YellowEar.bundle in Resources */,
 				F276E76B1E152F1500664E74 /* hartshorn.bundle in Resources */,
-				F29FAA3E1E530A47005AECFD /* SENSEME.lic in Resources */,
 				F276E7721E152F1500664E74 /* mood.bundle in Resources */,
 				F276E7621E152F1500664E74 /* BeagleDog.bundle in Resources */,
 				F276E7691E152F1500664E74 /* fox.bundle in Resources */,
