@@ -31,8 +31,9 @@ pod 'libksygpulive/libksygpulive'
 ```
 - 需要导入的动态库（手动方式):
 
-* [KSYLive_iOS](https://github.com/ksvc/KSYLive_iOS/releases)下载最新动态库包framework_dy_xxx.zip。
-* Embedded Binary的方式嵌入2个动态库GPUImage.framework和libksygpulive.framework。
+[KSYLive_iOS](https://github.com/ksvc/KSYLive_iOS/releases)下载最新动态库包framework_dy_xxx.zip。
+
+Embedded Binary的方式嵌入2个动态库GPUImage.framework和libksygpulive.framework。
 
 - 需要导入的文件：
 ```
