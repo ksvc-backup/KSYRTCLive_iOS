@@ -172,7 +172,7 @@ uint32_t sampleRate,uint32_t bytesPerSample);
 @property (nonatomic, copy)void (^onCallInComing)(char* remoteURI);
 /*
  @abstract 事件通知
- @param type =1  网络中断
+ @param type =2  网络中断
  */
 @property (nonatomic, copy)void (^onEvent)(int type, void* detail);
 
