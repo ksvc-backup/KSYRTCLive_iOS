@@ -13,6 +13,11 @@
 ![download](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/qrCode.png)
 
 ## 1. 功能特性
+
+> 超清连麦，不错过每一个细节!
+
+金山云提供高效H.265编解码内核，提供低码率下高质量连麦体验。欢迎试用！
+
 ### 1.1 连麦功能
 * 基于 [KSYLiveSDK](https://github.com/ksvc/KSYLive_iOS/)的 连麦功能。
 
