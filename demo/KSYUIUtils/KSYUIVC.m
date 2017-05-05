@@ -8,11 +8,11 @@
 
 #import "KSYUIVC.h"
 #import <mach/mach.h>
-#import "KSYReachability.h"
+#import "libksygpulive/KSYReachability.h"
 
 @interface KSYUIVC() {
     KSYReachability *_reach;
-    NetworkStatus   _preStatue;
+    KSYNetworkStatus   _preStatue;
 }
 
 @end
@@ -36,25 +36,25 @@
     NSNotificationCenter * dc = [NSNotificationCenter defaultCenter];
     [dc addObserver:self
            selector:@selector(netWorkChange)
-               name:kReachabilityChangedNotification
+               name:kKSYReachabilityChangedNotification
              object:nil];
     _reach = [KSYReachability reachabilityWithHostName:@"http://www.kingsoft.com"];
     [_reach startNotifier];
 }
 - (void)netWorkChange{
-    NetworkStatus currentStatus = [_reach currentReachabilityStatus];
+    KSYNetworkStatus currentStatus = [_reach currentReachabilityStatus];
     if (currentStatus == _preStatue) {
         return;
     }
     _preStatue = currentStatus;
     switch (currentStatus) {
-        case NotReachable:
+        case KSYNotReachable:
             _networkStatus = @"无网络";
             break;
-        case ReachableViaWWAN:
+        case KSYReachableViaWWAN:
             _networkStatus = @"移动网络";
             break;
-        case ReachableViaWiFi:
+        case KSYReachableViaWiFi:
             _networkStatus = @"WIFI";
             break;
         default:

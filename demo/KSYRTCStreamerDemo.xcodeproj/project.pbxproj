@@ -14,7 +14,6 @@
 		F21B3E951D1AB7DA00B26EB5 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21B3E941D1AB7DA00B26EB5 /* libc++.1.dylib */; };
 		F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257D1D9D17C400796C7A /* KSYFileSelector.m */; };
 		F22125871D9D17C400796C7A /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = F221257F1D9D17C400796C7A /* KSYNameSlider.m */; };
-		F22125881D9D17C400796C7A /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125811D9D17C400796C7A /* KSYReachability.m */; };
 		F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125831D9D17C400796C7A /* KSYUIVC.m */; };
 		F221258A1D9D17C400796C7A /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F22125851D9D17C400796C7A /* KSYUIView.m */; };
 		F227F56D1D82B87B0008B04D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F227F56C1D82B87B0008B04D /* libicucore.tbd */; };
@@ -103,8 +102,6 @@
 		F221257D1D9D17C400796C7A /* KSYFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYFileSelector.m; sourceTree = "<group>"; };
 		F221257E1D9D17C400796C7A /* KSYNameSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYNameSlider.h; sourceTree = "<group>"; };
 		F221257F1D9D17C400796C7A /* KSYNameSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNameSlider.m; sourceTree = "<group>"; };
-		F22125801D9D17C400796C7A /* KSYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYReachability.h; sourceTree = "<group>"; };
-		F22125811D9D17C400796C7A /* KSYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYReachability.m; sourceTree = "<group>"; };
 		F22125821D9D17C400796C7A /* KSYUIVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIVC.h; sourceTree = "<group>"; };
 		F22125831D9D17C400796C7A /* KSYUIVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIVC.m; sourceTree = "<group>"; };
 		F22125841D9D17C400796C7A /* KSYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIView.h; sourceTree = "<group>"; };
@@ -242,8 +239,6 @@
 				F221257D1D9D17C400796C7A /* KSYFileSelector.m */,
 				F221257E1D9D17C400796C7A /* KSYNameSlider.h */,
 				F221257F1D9D17C400796C7A /* KSYNameSlider.m */,
-				F22125801D9D17C400796C7A /* KSYReachability.h */,
-				F22125811D9D17C400796C7A /* KSYReachability.m */,
 				F22125821D9D17C400796C7A /* KSYUIVC.h */,
 				F22125831D9D17C400796C7A /* KSYUIVC.m */,
 				F22125841D9D17C400796C7A /* KSYUIView.h */,
@@ -585,7 +580,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -598,7 +593,6 @@
 				F24A81E11DDAE383003B51F9 /* KSYLiveVC.m in Sources */,
 				F22125861D9D17C400796C7A /* KSYFileSelector.m in Sources */,
 				F276E7931E152FB600664E74 /* KSYFaceunityFilter.m in Sources */,
-				F22125881D9D17C400796C7A /* KSYReachability.m in Sources */,
 				F22125891D9D17C400796C7A /* KSYUIVC.m in Sources */,
 				F2C05C581D74234000AD3CFD /* KSYFilterView.m in Sources */,
 				F2C05C491D7420AB00AD3CFD /* KSYRTCKitDemoVC.m in Sources */,

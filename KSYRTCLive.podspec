@@ -14,11 +14,11 @@ Pod::Spec.new do |spec|
       KSYRTCLiveSDK 是 金山云的连麦SDK.
       需要依赖KSYGPULive, 在直播的基础上添加实时通信的功能, 达到连麦直播的目的.
   DESC
-  spec.platform     = :ios, '7.0'
+  spec.platform     = :ios, '8.0'
   spec.requires_arc = true
   spec.frameworks   = 'VideoToolbox'
   spec.ios.library = 'z', 'iconv', 'stdc++.6'
-  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v2.0.2'}
+  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git',:tag => 'v'+spec.version.to_s}
   spec.vendored_frameworks = 'framework/libksyrtclivedy.framework'
 end
 

@@ -30,7 +30,7 @@
     UIView* _winRtcView;
     
     KSYReachability *_reach;
-    NetworkStatus   _preStatue;
+    KSYNetworkStatus   _preStatue;
     NSString* _networkStatus;
    
 }
@@ -76,7 +76,7 @@
     NSNotificationCenter * dc = [NSNotificationCenter defaultCenter];
     [dc addObserver:self
            selector:@selector(netWorkChange)
-               name:kReachabilityChangedNotification
+               name:kKSYReachabilityChangedNotification
              object:nil];
     _reach = [KSYReachability reachabilityWithHostName:@"http://www.kingsoft.com"];
     [_reach startNotifier];
@@ -549,13 +549,13 @@ NSArray * g_item_names = @[@"kitty.bundle",
 }
 
 - (void)netWorkChange{
-    NetworkStatus currentStatus = [_reach currentReachabilityStatus];
+    KSYNetworkStatus currentStatus = [_reach currentReachabilityStatus];
     if (currentStatus == _preStatue) {
         return;
     }
     _preStatue = currentStatus;
     switch (currentStatus) {
-        case NotReachable:
+        case KSYNotReachable:
             _networkStatus = @"无网络";
             NSLog(@"无网络");
             if(_kit.callstarted)
