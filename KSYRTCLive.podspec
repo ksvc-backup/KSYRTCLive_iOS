@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'KSYRTCLive'
-  spec.version      = '1.9.0'
+  spec.version      = '2.0.2'
   spec.license      = {
 :type => 'Proprietary',
 :text => <<-LICENSE
@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.frameworks   = 'VideoToolbox'
   spec.ios.library = 'z', 'iconv', 'stdc++.6'
-  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v1.9.0'}
+  spec.source = { :git => 'https://github.com/ksvc/KSYRTCLive_iOS.git', :tag => 'v2.0.2'}
   spec.vendored_frameworks = 'framework/libksyrtclivedy.framework'
 end
 
