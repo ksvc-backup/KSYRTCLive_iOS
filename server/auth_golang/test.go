@@ -37,8 +37,8 @@ func main() {
 	ReqAuth(qstr)
 
 	fmt.Println("=====================test2=======================")
-	//用法一：需要传入expire nonce，返回签名signature
-	expire := time.Now().Unix()
+	//用法二：需要传入expire nonce，返回签名signature
+	expire := time.Now().Unix() + 600
 	nonce := signature.GetRandomString(16)
 	duration := "600"
 	params := map[string]string{

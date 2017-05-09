@@ -30,7 +30,7 @@ func GetRandomString(length int) string {
 
 //生成鉴权url，无需传入过期时间expire和随机字符串nonce
 func GenAuthParams(accesskey string, secretkey string, uniqname string, uid string) (string, error) {
-	expire := time.Now().Unix()
+	expire := time.Now().Unix() + 600
 	nonce := GetRandomString(16)
 	params := map[string]string{
 		"nonce":    nonce,
