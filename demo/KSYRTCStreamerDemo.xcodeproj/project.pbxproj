@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01A0937C1180C720DC3E9317 /* Pods_KSYRTCStreamerDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F936117613AB3C10D1C440 /* Pods_KSYRTCStreamerDemo.framework */; };
 		0647006B1C5C8C2100A31FC7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0647006A1C5C8C2100A31FC7 /* libz.tbd */; };
 		E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */; };
 		E3F877851D38CBCB004FDB25 /* KSYRtcView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F877841D38CBCB004FDB25 /* KSYRtcView.m */; };
@@ -91,9 +90,6 @@
 		064700661C5C8C1600A31FC7 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		064700681C5C8C1A00A31FC7 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		0647006A1C5C8C2100A31FC7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		217549A0248DB135CACCC10B /* Pods-KSYRTCStreamerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYRTCStreamerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		407D51CEEB6531C8279C27A6 /* Pods-KSYRTCStreamerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYRTCStreamerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo.release.xcconfig"; sourceTree = "<group>"; };
-		88F936117613AB3C10D1C440 /* Pods_KSYRTCStreamerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KSYRTCStreamerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3993F891C96961E00782FE6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		E3F877831D38CBCB004FDB25 /* KSYRtcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYRtcView.h; sourceTree = "<group>"; };
 		E3F877841D38CBCB004FDB25 /* KSYRtcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYRtcView.m; sourceTree = "<group>"; };
@@ -207,7 +203,6 @@
 				F292E0E51D193D50007D10C8 /* libstdc++.6.tbd in Frameworks */,
 				E3993F8A1C96961E00782FE6 /* libsqlite3.0.tbd in Frameworks */,
 				0647006B1C5C8C2100A31FC7 /* libz.tbd in Frameworks */,
-				01A0937C1180C720DC3E9317 /* Pods_KSYRTCStreamerDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +248,6 @@
 				064700401C5C8B0900A31FC7 /* KSYRTCStreamerDemo */,
 				0647003F1C5C8B0900A31FC7 /* Products */,
 				F20B34101D9BAD06001A0910 /* Frameworks */,
-				CE073FF6302129F8071988D3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,20 +332,10 @@
 			name = subviews;
 			sourceTree = "<group>";
 		};
-		CE073FF6302129F8071988D3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				217549A0248DB135CACCC10B /* Pods-KSYRTCStreamerDemo.debug.xcconfig */,
-				407D51CEEB6531C8279C27A6 /* Pods-KSYRTCStreamerDemo.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F20B34101D9BAD06001A0910 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				F26058291DB4A23700E4D688 /* libksyrtclivedy.framework */,
-				88F936117613AB3C10D1C440 /* Pods_KSYRTCStreamerDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -442,13 +426,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 064700551C5C8B0900A31FC7 /* Build configuration list for PBXNativeTarget "KSYRTCStreamerDemo" */;
 			buildPhases = (
-				B256B082F280D2EE30B2DC01 /* [CP] Check Pods Manifest.lock */,
 				0647003A1C5C8B0900A31FC7 /* Sources */,
 				0647003B1C5C8B0900A31FC7 /* Frameworks */,
 				0647003C1C5C8B0900A31FC7 /* Resources */,
 				F264418E1D88FE930015D841 /* Embed Frameworks */,
-				2EA7226FE995499080558151 /* [CP] Embed Pods Frameworks */,
-				78F4A4276120844B9C22722B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -536,54 +517,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2EA7226FE995499080558151 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		78F4A4276120844B9C22722B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYRTCStreamerDemo/Pods-KSYRTCStreamerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B256B082F280D2EE30B2DC01 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0647003A1C5C8B0900A31FC7 /* Sources */ = {
@@ -726,7 +659,6 @@
 		};
 		064700561C5C8B0900A31FC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 217549A0248DB135CACCC10B /* Pods-KSYRTCStreamerDemo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -770,7 +702,6 @@
 		};
 		064700571C5C8B0900A31FC7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 407D51CEEB6531C8279C27A6 /* Pods-KSYRTCStreamerDemo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

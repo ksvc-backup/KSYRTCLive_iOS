@@ -116,8 +116,6 @@
     _kit.videoFPS       = [self.presetCfgView frameRate];
     _kit.cameraPosition = [self.presetCfgView cameraPos];
     _kit.videoOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    _kit.previewDimension = CGSizeMake(640, 360);
-    _kit.streamDimension  =  CGSizeMake(640, 360);
     _kit.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA;
     _kit.videoProcessingCallback = ^(CMSampleBufferRef buf){
     };
@@ -194,12 +192,8 @@
 - (void) setRtcSteamerCfg {
     //设置鉴权信息
     _kit.rtcClient.authString = nil;//设置ak/sk鉴权信息,本demo从testAppServer取，客户请从自己的appserver获取。
-    //设置音频属性
-    _kit.rtcClient.sampleRate = 44100;//设置音频采样率，暂时不支持调节
     //设置视频属性
-    _kit.rtcClient.videoFPS = 15; //设置视频帧率
-    _kit.rtcClient.videoWidth = 360;//设置视频的宽高，和当前分辨率相关,注意一定要保持16:9
-    _kit.rtcClient.videoHeight = 640;
+    _kit.rtcClient.videoFPS = 15; //设置视频帧率,注意必须和采集的fps一致
     _kit.rtcClient.MaxBps = 256000;//设置rtc传输的最大码率,如果推流卡顿，可以设置该参数
     //设置小窗口属性
     _kit.winRect = CGRectMake(0.6, 0.6, 0.3, 0.3);//设置小窗口属性
@@ -291,8 +285,7 @@
 
 -(void)setupSense
 {
-    //请填入自己的appid和appkey
-    _ksySTFitler = [[KSYSTFilter alloc]initWithAppid:@"your appid" appKey:@"your appkey"];
+    _ksySTFitler = [[KSYSTFilter alloc]initWithAppid:@"7f76ce6bd292444b9368a7ba436c39fd" appKey:@"fa8e3603044c41ff8dbbd5531624ab0d"];
     __weak KSYRTCKitDemoVC *wVC = self;
     void (^completeCallback)(SenseArMaterial *) = ^(SenseArMaterial * m){
         NSLog(@"download SenseArMaterial finish");

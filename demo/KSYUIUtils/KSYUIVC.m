@@ -8,7 +8,7 @@
 
 #import "KSYUIVC.h"
 #import <mach/mach.h>
-#import "libksygpulive/KSYReachability.h"
+#import "KSYReachability.h"
 
 @interface KSYUIVC() {
     KSYReachability *_reach;
