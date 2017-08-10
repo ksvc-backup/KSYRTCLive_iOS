@@ -16,10 +16,6 @@
 
 [![ScreenShot](https://raw.githubusercontent.com/wiki/ksvc/KSYRTCLive_iOS/images/rtc_bi.jpg)](http://www.bilibili.com/video/av7410838/)
 
-* ipa下载地址
-
-![download](https://github.com/ksvc/KSYRTCLive_iOS/wiki/images/qrCode.png)
-
 ## 1. 功能特性
 
 > 超清连麦，不错过每一个细节!
